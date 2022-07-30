@@ -1,13 +1,15 @@
 <template>
   <h1>App组件---{{num}}</h1>
-  <button @click="add">点击+1</button>
+  <button @click="increment">点击+1</button>
 </template>
 <script setup>
-import {ref} from 'vue'
+import {ref,computed} from 'vue'
+import {useStore} from 'vuex'
+const store = useStore();
+let num = computed(()=>store.state.num);
 
-let num = ref(0);
-function add(){
-  num.value+=1;
+function increment(){
+  store.commit('increment',num)
 }
 </script>
 <style lang="scss">
