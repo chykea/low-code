@@ -3,7 +3,7 @@
         <div class="introduce-use">
             <div class="introduce-use-header">
                 <div class="introduce-use-logo">
-                    <div class="logo"><span>LC</span><span class="logo-color-siliver">design</span></div>
+                    <div class="logo"><span>LC</span><span class="color-siliver">design</span></div>
                 </div>
                 <div class="introduce-use-nav">
                     <div class="introduce-use-nav-box">
@@ -17,7 +17,20 @@
                 </div>
             </div>
             <div class="introduce-use-container">
-
+                <div class="introduce-use-go">
+                    <div class="introduce-use-title">
+                        <p>LowCode</p>
+                        <p class="color-siliver">design</p>
+                    </div>
+                    <div class="introduce-use-intro">
+                        <h3>零代码实现网页界面</h3>
+                        <h3>10分钟搭建完成</h3>
+                        <h3>方便快捷</h3>
+                    </div>
+                    <div class="introduce-use-gotouse">
+                        <button><span>开始使用</span><span >→</span></button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="introduce-guide"></div>
@@ -32,9 +45,14 @@
         font-family: 'BerlinSansFBDemi-Bold';
         src: url('../../assets/font/Berlin Sans FB Demi Bold.ttf');
     }
+   
     .introduce-container{
+         .color-siliver{
+            color: #AAAAAA;
+        }
         .introduce-use{
             height: 936px;
+            // 导航栏
             .introduce-use-header{
                 margin: 0 30px;
                 height: 100px;
@@ -61,9 +79,7 @@
                         font-family: 'BerlinSansFBDemi-Bold';
                         font-weight: bold;
                         font-size: 32px;
-                        .logo-color-siliver{
-                            color: #AAAAAA;
-                        }
+                        
                     }
                 }
                 .introduce-use-nav{
@@ -83,7 +99,7 @@
                             }
                         }
                         .login{
-                            width: 297px;
+                            width: 280px;
                             // text-align: right;
                             display: flex;
                             flex-direction: row-reverse;
@@ -106,9 +122,47 @@
                 }
                
             }
+            // 内容
             .introduce-use-container{
+                position: relative;
                 height: 836px;
-                background-color: #333;
+                // background-color: #333;
+                .introduce-use-go{
+                    position: absolute;
+                    left: 168px;
+                    top: 242px;
+                    height: 340px;
+                    width: 293px;
+                    // background-color: #bfa;
+                    .introduce-use-title{
+                        &>p{
+                            font-size: 72px;
+                            font-family: 'BerlinSansFBDemi-Bold';
+                        }
+                    }
+                    .introduce-use-intro{
+                        margin-top: 10px;
+                    }
+                    .introduce-use-gotouse{
+                        margin-top: 30px;
+                        // display: flex;
+                        // justify-content: center;
+                        &>button{
+                            border: none;
+                            cursor: pointer;
+                            width: 186px;
+                            height: 62px;
+                            background: #F7D94C;
+                            transition: all .3s;
+                            border-radius: 31px;
+                            font-size: 20px;
+                            font-weight: bold;
+                        }
+                        &>button:hover{
+                            box-shadow: 1px 6px 51px 0px rgba(247,215,64,0.8800);
+                        }
+                    }
+                }
             }
         }
     }
