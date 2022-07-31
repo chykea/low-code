@@ -1,19 +1,15 @@
 <template>
-  <h1>App组件---{{num}}</h1>
-  <button @click="increment">点击+1</button>
-  <router-link to="/Introduce">介绍</router-link>
-  <router-view></router-view>
+  <div class="app-container">
+    <router-view></router-view>
+  </div>
 </template>
 <script setup>
-import {ref,computed} from 'vue'
-import {useStore} from 'vuex'
-const store = useStore();
-let num = computed(()=>store.state.num);
 
-function increment(){
-  store.commit('increment',num)
-}
 </script>
-<style lang="scss">
-
+<style lang="scss" scoped>
+  
+  .app-container{
+    width: 1536px;
+    margin: 0 auto;
+  }
 </style>
