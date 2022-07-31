@@ -16,6 +16,9 @@
                     </div>
                 </div>
             </div>
+            <div class="introduce-use-container">
+
+            </div>
         </div>
         <div class="introduce-guide"></div>
         <div class="introduce-module"></div>
@@ -31,10 +34,9 @@
     }
     .introduce-container{
         .introduce-use{
-            // background-color: #333;
             height: 936px;
             .introduce-use-header{
-                margin: 0 15px;
+                margin: 0 30px;
                 height: 100px;
                 display: flex;
                 justify-content: space-between;
@@ -82,16 +84,21 @@
                         }
                         .login{
                             width: 297px;
-                            text-align: center;
-                            justify-content: center;
+                            // text-align: right;
+                            display: flex;
+                            flex-direction: row-reverse;
                             &>button{
+                                cursor: pointer;
                                 width: 96px;
                                 height: 42px;
                                 background: #17191A;
-                                box-shadow: 1px 6px 51px 0px rgba(19,20,21,0.7000);
                                 border-radius: 21px;
                                 color: #fff;
                                 font-size: 16px;
+                                transition: all .5s;
+                            }
+                            &>button:hover{
+                                box-shadow: 1px 6px 51px 0px rgba(19,20,21,0.7000);
                             }
                         }
                     }
@@ -99,7 +106,10 @@
                 }
                
             }
-
+            .introduce-use-container{
+                height: 836px;
+                background-color: #333;
+            }
         }
     }
 </style>
