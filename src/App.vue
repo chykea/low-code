@@ -9,7 +9,7 @@
 <style lang="scss" scoped>
   
   .app-container{
-    width: 1536px;
+    
     margin: 0 auto;
   }
 </style>
