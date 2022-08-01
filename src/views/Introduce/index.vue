@@ -3,12 +3,14 @@
         <Use/>
         <Guide/>
         <Module/>
+        <Footer/>
     </div>
 </template>
 <script setup>
 import Use from './component/Use/index.vue';
 import Guide from './component/Guide/index.vue';
 import Module from './component/Module/index.vue'
+import Footer from './component/Footer/index.vue';
 </script>
 <style lang='scss' scoped>
     @font-face{
