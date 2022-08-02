@@ -42,8 +42,9 @@
 import { ref } from 'vue';
 import ImgItem from './component/ImgItem.vue';
 
+     
     let imglist = ref([{
-        imgSrc:require('@/assets/images/introduce/0.png'),
+        imgSrc:require('@/assets/images/introduce/0.png'), // 通过数组遍历来引入图片,但不能直接是地址,需要用require来引入图片地址
         left:'567px',
         top:'190px',
         zIndex:'0'

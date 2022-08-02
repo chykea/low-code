@@ -29,11 +29,9 @@ const prop = defineProps({
         // margin-bottom: 51px;
         padding: 26px 0;
         transition: all .5s;
-        background: #fff radial-gradient(circle,rgba(255,255,255,.1) 20px,rgba(255,255,255,1) 75px);
+        background: #fff radial-gradient(circle,rgba(255,255,255,.1) 20px,rgba(255,255,255,1) 75px); // 由于背景渐变无法结合transition
         &:hover{
-            // background: radial-gradient(circle,#FCF1BF, rgba(255,255,255,0));
-            // background-position: 100% 0;
-                background-color: #FCF1BF;
+            background-color: #FCF1BF;  // 就只能通过改变背景颜色来实现过渡
         }
     }
     .introduce-module-item-title{
