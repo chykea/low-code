@@ -1,5 +1,5 @@
 <template>
-    <div class="login"><button><router-link to="/login">登录</router-link></button></div>
+    <div class="login"><button><router-link to="/toForm">登录</router-link></button></div>
 </template>
 <script setup>
 </script>

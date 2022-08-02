@@ -7,9 +7,20 @@ const routes = [
     component: () => import('../views/Introduce/index.vue'),
   },
   {
-    path: '/login',
-    component: () => import('../views/Login/index.vue'),
+    path: '/toForm',
+    component: () => import('../views/Form/index.vue'),
+    children:[
+      {
+        path: 'login',
+        component: () => import('../views/Form/component/Login/index.vue'),
+      },
+      {
+        path: 'register',
+        component: () => import('../views/Form/component/Register/index.vue'),
+      },
+    ]
   },
+  
 ]
 
 const router = createRouter({

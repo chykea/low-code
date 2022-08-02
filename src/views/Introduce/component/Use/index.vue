@@ -83,6 +83,7 @@ import ImgItem from './component/ImgItem.vue';
             width: 1536px;
             margin: 0 auto;
             height: 936px;
+            // font-family: ;
             // 导航栏
             .introduce-use-header{
                 margin: 0 30px;
