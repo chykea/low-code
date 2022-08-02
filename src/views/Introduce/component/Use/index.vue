@@ -11,32 +11,70 @@
                             <li><router-link to="">项目管理</router-link> </li>
                             <li><router-link to="">素材库</router-link> </li>
                         </ul>
-                        <div class="login"><button>登录</button></div>
+                        <slot name="user_login"></slot>
                     </div>
                 </div>
             </div>
             <div class="introduce-use-container">
-                <div class="introduce-use-go">
-                    <div class="introduce-use-title">
-                        <p>LowCode</p>
-                        <p class="color-siliver">design</p>
-                    </div>
-                    <div class="introduce-use-intro">
-                        <h3>零代码实现网页界面</h3>
-                        <h3>10分钟搭建完成</h3>
-                        <h3>方便快捷</h3>
-                    </div>
-                    <div class="introduce-use-gotouse">
-                        <button><span>开始使用</span><span >→</span></button>
-                    </div>
-                </div>
+                <slot name="container"></slot>
                 <div class="introduce-use-imgbg">
-                    
+                    <ImgItem v-for="item in imglist" :key="item" :imgSrc="item.imgSrc" :left="item.left" :top="item.top" :zIndex="item.zIndex"/>
+                     <!-- <div class="introduce-use-imgbg-box introduce-use-imgbg1">
+                        <img src="@/assets/images/introduce/1.png">
+                    </div> -->
+                     <!--<div class="introduce-use-imgbg-box introduce-use-imgbg2">
+                        <img src="@/assets/images/introduce/2.png">
+                    </div>
+                    <div class="introduce-use-imgbg-box introduce-use-imgbg3">
+                        <img src="@/assets/images/introduce/3.png">
+                    </div>
+                    <div class="introduce-use-imgbg-box introduce-use-imgbg4">
+                        <img src="@/assets/images/introduce/4.png">
+                    </div>
+                    <div class="introduce-use-imgbg-box introduce-use-imgbg5">
+                        <img src="@/assets/images/introduce/5.png">
+                    </div> -->
                 </div>
             </div>
         </div>
 </template>
 <script setup>
+import { ref } from 'vue';
+import ImgItem from './component/ImgItem.vue';
+
+    let imglist = ref([{
+        imgSrc:require('@/assets/images/introduce/0.png'),
+        left:'567px',
+        top:'190px',
+        zIndex:'0'
+    },{
+        imgSrc:require('@/assets/images/introduce/1.png'),
+        left:'0',
+        top:'0',
+        zIndex:'0'
+    },
+    {
+        imgSrc:require('@/assets/images/introduce/2.png'),
+        left:'512px',
+        top:'501px',
+        zIndex:'0'
+    },{
+        imgSrc:require('@/assets/images/introduce/3.png'),
+        left:'128px',
+        top:'227px',
+        zIndex:'0'
+    },{
+        imgSrc:require('@/assets/images/introduce/4.png'),
+        left:'45px',
+        top:'50px',
+        zIndex:'-1'
+    },{
+        imgSrc:require('@/assets/images/introduce/5.png'),
+        left:'212px',
+        top:'285px',
+        zIndex:'-1'
+    }
+    ])
 </script>
 <style lang='scss' scoped>
         
@@ -90,25 +128,7 @@
                                 font-size: 18px;
                             }
                         }
-                        .login{
-                            width: 280px;
-                            // text-align: right;
-                            display: flex;
-                            flex-direction: row-reverse;
-                            &>button{
-                                cursor: pointer;
-                                width: 96px;
-                                height: 42px;
-                                background: #17191A;
-                                border-radius: 21px;
-                                color: #fff;
-                                font-size: 16px;
-                                transition: all .5s;
-                            }
-                            &>button:hover{
-                                box-shadow: 1px 6px 51px 0px rgba(19,20,21,0.7000);
-                            }
-                        }
+                        
                     }
                     
                 }
@@ -119,46 +139,12 @@
                 position: relative;
                 height: 836px;
                 // background-color: #333;
-                .introduce-use-go{
-                    position: absolute;
-                    left: 168px;
-                    top: 142px;
-                    height: 340px;
-                    width: 293px;
-                    // background-color: #bfa;
-                    .introduce-use-title{
-                        &>p{
-                            font-size: 72px;
-                            font-family: 'BerlinSansFBDemi-Bold';
-                        }
-                    }
-                    .introduce-use-intro{
-                        margin-top: 10px;
-                    }
-                    .introduce-use-gotouse{
-                        margin-top: 30px;
-                        // display: flex;
-                        // justify-content: center;
-                        &>button{
-                            border: none;
-                            cursor: pointer;
-                            width: 186px;
-                            height: 62px;
-                            background: #F7D94C;
-                            transition: all .3s;
-                            border-radius: 31px;
-                            font-size: 20px;
-                            font-weight: bold;
-                        }
-                        &>button:hover{
-                            box-shadow: 1px 6px 51px 0px rgba(247,215,64,0.8800);
-                        }
-                    }
-                }
                 .introduce-use-imgbg{
                     position: absolute;
                     top: 31px;
-                    left: 578px;
+                    left: 700px;
+                    width: 735px;
+                    height: 560px;
                 }
             }
         }
