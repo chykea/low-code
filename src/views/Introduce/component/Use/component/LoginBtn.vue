@@ -1,5 +1,5 @@
 <template>
-    <div class="login"><button><router-link to="/toForm">登录</router-link></button></div>
+    <div class="login"><div><router-link to="/toForm">登录</router-link></div></div>
 </template>
 <script setup>
 </script>
@@ -9,11 +9,12 @@
     // text-align: right;
     display: flex;
     flex-direction: row-reverse;
-    &>button{
-        cursor: pointer;
+    &>div{
         &>a{
             color: #fff;
         }
+        text-align: center;
+        line-height: 42px;
         width: 96px;
         height: 42px;
         background: #17191A;

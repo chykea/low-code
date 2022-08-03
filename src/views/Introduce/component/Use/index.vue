@@ -1,42 +1,27 @@
 <template>
 <div class="introduce-use">
-            <div class="introduce-use-header">
-                <div class="introduce-use-logo">
-                    <div class="logo"><span>LC</span><span class="color-siliver">design</span></div>
-                </div>
-                <div class="introduce-use-nav">
-                    <div class="introduce-use-nav-box">
-                        <ul class="introduce-use-nav-list">
-                            <li><router-link to="">新手教程</router-link> </li>
-                            <li><router-link to="">项目管理</router-link> </li>
-                            <li><router-link to="">素材库</router-link> </li>
-                        </ul>
-                        <slot name="user_login"></slot>
-                    </div>
-                </div>
-            </div>
-            <div class="introduce-use-container">
-                <slot name="container"></slot>
-                <div class="introduce-use-imgbg">
-                    <ImgItem v-for="item in imglist" :key="item" :imgSrc="item.imgSrc" :left="item.left" :top="item.top" :zIndex="item.zIndex"/>
-                     <!-- <div class="introduce-use-imgbg-box introduce-use-imgbg1">
-                        <img src="@/assets/images/introduce/1.png">
-                    </div> -->
-                     <!--<div class="introduce-use-imgbg-box introduce-use-imgbg2">
-                        <img src="@/assets/images/introduce/2.png">
-                    </div>
-                    <div class="introduce-use-imgbg-box introduce-use-imgbg3">
-                        <img src="@/assets/images/introduce/3.png">
-                    </div>
-                    <div class="introduce-use-imgbg-box introduce-use-imgbg4">
-                        <img src="@/assets/images/introduce/4.png">
-                    </div>
-                    <div class="introduce-use-imgbg-box introduce-use-imgbg5">
-                        <img src="@/assets/images/introduce/5.png">
-                    </div> -->
-                </div>
+    <div class="introduce-use-header">
+        <div class="introduce-use-logo">
+            <div class="logo"><span>LC</span><span class="color-siliver">design</span></div>
+        </div>
+        <div class="introduce-use-nav">
+            <div class="introduce-use-nav-box">
+                <ul class="introduce-use-nav-list">
+                    <li><router-link to="">新手教程</router-link> </li>
+                    <li><router-link to="">项目管理</router-link> </li>
+                    <li><router-link to="">素材库</router-link> </li>
+                </ul>
+                <slot name="user_login"></slot>
             </div>
         </div>
+    </div>
+    <div class="introduce-use-container">
+        <slot name="container"></slot>
+        <div class="introduce-use-imgbg">
+            <ImgItem v-for="item in imglist" :key="item" :imgSrc="item.imgSrc" :left="item.left" :top="item.top" :zIndex="item.zIndex"/>
+        </div>
+    </div>
+</div>
 </template>
 <script setup>
 import { ref } from 'vue';

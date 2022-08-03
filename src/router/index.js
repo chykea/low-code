@@ -8,6 +8,7 @@ const routes = [
   },
   {
     path: '/toForm',
+    redirect:'/toForm/login',
     component: () => import('../views/Form/index.vue'),
     children:[
       {
