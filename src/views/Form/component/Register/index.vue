@@ -4,7 +4,7 @@
         <div class="register-form-box">
             <div>
                 <h3>用户名</h3>
-                <input type="text" placeholder="请输入8-20位以内的数字或字母" />
+                <input type="text"  placeholder="请输入8-20位以内的数字或字母" />
             </div>
             <div>
                 <h3>密码</h3>
@@ -18,8 +18,10 @@
 </div>
 </template>
 <script setup>
+// import axios from 'axios'
 function register(){
-    alert('注册按钮点击')
+    alert('注册按钮点击');
+    // axios
 }
 </script>
 <style lang='scss' scoped>

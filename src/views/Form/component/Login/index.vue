@@ -1,25 +1,38 @@
 <template>
 <div class="login-form">
-    <form>
+    <form enctype="application/x-www-form-urlencoded">
         <div class="login-form-box">
             <div>
                 <h3>用户名</h3>
-                <input type="text" placeholder="请输入8-20位以内的数字或字母" />
+                <input type="text" v-model="username" placeholder="请输入8-20位以内的数字或字母" />
             </div>
             <div>
                 <h3>密码</h3>
-                <input type="password" placeholder='请输入您的密码'/>
+                <input type="password" v-model="password" placeholder='请输入您的密码'/>
             </div>
             <div class="login-form-btn">
-                <button type="submit" @click="login">登录</button>
+                <button @click="login">登录</button>
             </div>
         </div>
     </form>
 </div>
 </template>
 <script setup>
+
+import { ref } from 'vue';
+import axios from 'axios';
+
+let username = ref('');
+let password = ref('');
+
 function login(){
-    alert("登录按钮点击")
+    
+    axios.post('/api/login',{username:username.value,password:password.value},{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then(
+    res=>{
+        console.log(res.data);
+    },err=>{
+        console.log(err.message);
+    })
 }
 </script>
 <style lang='scss' scoped>
