@@ -26,7 +26,7 @@ let username = ref('');
 let password = ref('');
 
 function login(){
-    
+    // 在本地服务器测试
     axios.post('/api/login',{username:username.value,password:password.value},{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then(
     res=>{
         console.log(res.data);
