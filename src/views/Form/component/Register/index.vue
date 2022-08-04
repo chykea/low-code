@@ -1,27 +1,42 @@
 <template>
 <div class="register-form">
-    <form>
+    <form enctype="application/x-www-form-urlencoded">
         <div class="register-form-box">
             <div>
                 <h3>用户名</h3>
-                <input type="text"  placeholder="请输入8-20位以内的数字或字母" />
+                <input type="text" v-model="username" placeholder="请输入8-20位以内的数字或字母" />
             </div>
             <div>
                 <h3>密码</h3>
-                <input type="password" placeholder='请输入您的密码'/>
+                <input type="password" v-model="password" placeholder='请输入您的密码'/>
             </div>
             <div class="register-form-btn">
-                <button type="submit" @click="register">注册</button>
+                <button @click="register">注册</button>
             </div>
         </div>
     </form>
 </div>
 </template>
 <script setup>
-// import axios from 'axios'
+
+import axios from 'axios'
+import { ref } from 'vue';
+let username = ref('')
+let password = ref('')
 function register(){
-    alert('注册按钮点击');
-    // axios
+    
+    axios({
+        method:'post',
+        url:'/api/register',
+        data:{
+            userName:username.value,
+            passWord:password.value
+        },
+    }).then(res=>{
+        console.log(res.data);
+    },err=>{
+        console.log(err.message);
+    })
 }
 </script>
 <style lang='scss' scoped>
