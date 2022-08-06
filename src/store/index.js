@@ -3,20 +3,16 @@ import { createStore } from 'vuex'
 export default createStore({
   state(){
     return{
-      num:0
+      token:'',// 用于保存后端返回的token
     }
   },
   getters: {
   },
   mutations: {
-    increment(state){
-      state.num++;
-    }
+    
   },
   actions: {
-    increment(){
-
-    }
+    
   },
   modules: {
   }
