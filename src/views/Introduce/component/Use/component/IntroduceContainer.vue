@@ -10,13 +10,22 @@
         <h3>方便快捷</h3>
     </div>
     <div class="introduce-use-gotouse">
-        <button><span>开始使用</span><span >→</span></button>
+        <button><span>开始使用</span><span class="arrow">→</span></button>
     </div>
 </div>
 </template>
 <script setup>
 </script>
 <style lang='scss' scoped>
+@keyframes arrowSlide{
+    0%{
+        transform: translateX(5px);
+    }50%{
+        transform: translateX(10px);
+    }100%{
+        transform: translateX(5px);
+    }
+}
 .introduce-use-go{
     position: absolute;
     left: 168px;
@@ -35,8 +44,6 @@
     }
     .introduce-use-gotouse{
         margin-top: 30px;
-        // display: flex;
-        // justify-content: center;
         &>button{
             border: none;
             cursor: pointer;
@@ -47,10 +54,19 @@
             border-radius: 31px;
             font-size: 20px;
             font-weight: bold;
+            .arrow{
+                display: inline-block;
+                transform: translateX(5px);
+            }
         }
+
         &>button:hover{
             box-shadow: 1px 6px 51px 0px rgba(247,215,64,0.8800);
+            & .arrow{
+                animation: arrowSlide .7s infinite;
+            }
         }
+        
     }
 }
 </style>

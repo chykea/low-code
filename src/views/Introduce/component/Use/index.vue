@@ -30,7 +30,7 @@ import ImgItem from './component/ImgItem.vue';
      
     let imglist = ref([{
         imgSrc:require('@/assets/images/introduce/0.png'), // 通过数组遍历来引入图片,但不能直接是地址,需要用require来引入图片地址
-        left:'567px',
+        left:'567px', // 这些都是静态资源,为了不一个个手动引入,就直接弄成数组来 遍历渲染出来
         top:'190px',
         zIndex:'0'
     },{

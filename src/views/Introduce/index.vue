@@ -1,5 +1,6 @@
 <template>
     <div class="introduce-container">
+        <!-- 登录和介绍页面有一部分是相同的,所以就弄成插槽 -->
         <Use>
             <template v-slot:user_login>
                 <LoginBtn/>
