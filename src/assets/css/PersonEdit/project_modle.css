@@ -1,0 +1,22 @@
+.project{
+    width: 1000px;
+    margin-bottom:100px;
+}
+.project-title{
+    width: inherit;
+    height: 50px;
+    line-height: 50px;
+}
+.project-title img{
+    width: 30px;
+    height: 30px;
+    margin-right: 25px;
+    vertical-align: middle;
+}
+.project-title span{
+    font-size: 18px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: #17191A;
+    vertical-align: middle;
+}

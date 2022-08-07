@@ -1,6 +1,6 @@
 <template>
 <div class="login-form">
-    <form enctype="application/x-www-form-urlencoded">
+    <form enctype="multipart/form-data">
         <div class="login-form-box">
             <div>
                 <h3>用户名</h3>
@@ -11,7 +11,7 @@
                 <input type="password" v-model="password" placeholder='请输入您的密码'/>
             </div>
             <div class="login-form-btn">
-                <button @click="login">登录</button>
+                <button type="button" @click="login">登录</button>
             </div>
         </div>
     </form>
@@ -27,14 +27,15 @@ let password = ref('');
 
 function login(){
     let data = {
-            userName:username.value,
-            passWord:password.value
+            name:username.value,
+            password:password.value
         };
         console.log(data);
     axios({
         method:'post',
-        url:'/api/login',
+        url:'/api/lowcode/user/login',
         data:data,
+        headers:{"Content-Type":"multipart/form-data"}
     }).then(res=>{
         console.log(res.data);
     },err=>{

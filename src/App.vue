@@ -9,7 +9,6 @@
 <style lang="scss" scoped>
   
   .app-container{
-    
     margin: 0 auto;
   }
 </style>

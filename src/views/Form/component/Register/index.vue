@@ -1,6 +1,6 @@
 <template>
 <div class="register-form">
-    <form enctype="application/x-www-form-urlencoded">
+    <form enctype="multipart/form-data">
         <div class="register-form-box">
             <div>
                 <h3>用户名</h3>
@@ -11,7 +11,7 @@
                 <input type="password" v-model="password" placeholder='请输入您的密码'/>
             </div>
             <div class="register-form-btn">
-                <button @click="register">注册</button>
+                <button type="button" @click="register">注册</button>
             </div>
         </div>
     </form>
@@ -27,11 +27,12 @@ function register(){
     
     axios({
         method:'post',
-        url:'/api/register',
+        url:'/api/user/register',
         data:{
-            userName:username.value,
-            passWord:password.value
+            name:username.value,
+            password:password.value
         },
+        headers:{"Content-type":"multipart/form-data"}
     }).then(res=>{
         console.log(res.data);
     },err=>{

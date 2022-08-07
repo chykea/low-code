@@ -21,6 +21,10 @@ const routes = [
       },
     ]
   },
+  {
+      path: '/personedit',
+      component: () => import('../views/PersonEdit/index.vue'),
+  }
   
 ]
 

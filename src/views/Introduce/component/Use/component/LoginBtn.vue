@@ -22,6 +22,7 @@
         color: #fff;
         font-size: 16px;
         transition: all .5s;
+        transform: translateX(-20px);
     }
     &>div:hover{
         box-shadow: 1px 6px 51px 0px rgba(19,20,21,0.7000);
