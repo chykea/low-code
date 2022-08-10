@@ -25,7 +25,6 @@ import { ElMessage } from 'element-plus';
 let username = ref('')
 let password = ref('')
 function register(){
-    
     axios({
         method:'post',
         url:'/api/user/register',
