@@ -18,9 +18,10 @@
 </div>
 </template>
 <script setup>
-
-import axios from 'axios'
 import { ref } from 'vue';
+import axios from 'axios'
+import { ElMessage } from 'element-plus';
+
 let username = ref('')
 let password = ref('')
 function register(){
@@ -34,7 +35,20 @@ function register(){
         },
         headers:{"Content-type":"multipart/form-data"}
     }).then(res=>{
-        // console.log(res.data);
+        const {data} = res;
+        console.log(data);
+        console.log(data.code);
+        if(data.code===200){
+            ElMessage({
+                message:"注册成功",
+                type:"success"
+            })
+        }else{
+            ElMessage({
+                message:data.msg,
+                type:"error"
+            })
+        }
     },err=>{
         console.log(err.message);
     })

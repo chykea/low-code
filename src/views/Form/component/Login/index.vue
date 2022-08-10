@@ -20,10 +20,17 @@
 <script setup>
 
 import { ref } from 'vue';
+import {useStore} from 'vuex';
+import {useRouter} from 'vue-router'
 import axios from 'axios';
+import { ElMessage } from 'element-plus'
+
 
 let username = ref('');
 let password = ref('');
+// 引入store 用于保存登录成功后的token 
+const store = useStore()
+const router = useRouter()
 
 function login(){
     let data = {
@@ -36,13 +43,27 @@ function login(){
         data:data,
         headers:{"Content-Type":"multipart/form-data"}
     }).then(res=>{
-        console.log(res.data);
+        const {data} = res;
+        console.log(data);
+        if(data.code===200){  // 登录成功,将 token存到store和localStorage中
+            store.commit('setToken',{token:data.token})
+            sessionStorage.setItem("token",data.token);
+            router.push('/personedit')  // 跳转到个人首页
+        }else{
+            ElMessage({  // 登录失败,提示
+                message:data.msg,
+                type:'error'
+            })
+        }
     },err=>{
         console.log(err.message);
     })
 }
 </script>
 <style lang='scss' scoped>
+.form-container{
+    font-family: 'BerlinSansFBDemi-Bold';
+}
 .login-form {
     width: 350px;
     display: flex;

@@ -9,7 +9,9 @@ export default createStore({
   getters: {
   },
   mutations: {
-    
+    setToken(state,context){
+      state.token = context.token;
+    }
   },
   actions: {
     
