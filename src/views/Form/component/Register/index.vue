@@ -34,7 +34,7 @@ function register(){
         },
         headers:{"Content-type":"multipart/form-data"}
     }).then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
     },err=>{
         console.log(err.message);
     })

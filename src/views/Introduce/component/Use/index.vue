@@ -16,8 +16,8 @@
 <script setup>
 import { ref } from 'vue';
 import Header from './component/Header/index.vue'
-import ImgItem from './component/ImgItem.vue';
-import LoginBtn from './component/LoginBtn.vue'
+import ImgItem from './component/ImgItem/index.vue';
+import LoginBtn from './component/LoginBtn/index.vue'
 
      
     let imglist = ref([{

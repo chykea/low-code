@@ -30,10 +30,9 @@ function login(){
             name:username.value,
             password:password.value
         };
-        console.log(data);
     axios({
         method:'post',
-        url:'/api/lowcode/user/login',
+        url:'/api/user/login',
         data:data,
         headers:{"Content-Type":"multipart/form-data"}
     }).then(res=>{

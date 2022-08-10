@@ -1,10 +1,6 @@
 <template>
     <div class="form-container">
         <Use>
-            <!-- 头像插槽 -->
-            <template v-slot:user_login>
-                
-            </template>
             <!-- 登录与注册 -->
             <template v-slot:container>
                 <FormContainer/>
