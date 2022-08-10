@@ -19,6 +19,7 @@ import Footer from './component/Footer/index.vue';
 import IntroduceContainer from './component/Use/component/IntroduceContainer.vue';
 </script>
 <style lang='scss' scoped>
+    // 自定义字体
     @font-face{
         font-family: 'BerlinSansFBDemi-Bold';
         src: url('../../assets/font/Berlin Sans FB Demi Bold.ttf');
