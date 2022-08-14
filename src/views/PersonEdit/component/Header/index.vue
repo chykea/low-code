@@ -5,7 +5,6 @@
     <span class="design">design</span>
   </div>
   <div class="header-list">
-    <button @click="logout" style="cursor: pointer;">退出登录</button>
     <ul>
       <Item
         v-for="(item, index) in arr"
@@ -22,7 +21,7 @@
 import { onMounted, reactive, ref } from "vue";
 import Item from "./Item";
 import axios from "axios";
-import { getAdvator } from "@/utils/request.js";
+import {getAdvator} from '@/api/getAdvator'
 const arr = ref([
   {
     url: "/introduce",
@@ -37,9 +36,7 @@ const arr = ref([
     title: "素材库",
   },
 ]);
-// const prop = defineProps({
-//   imgavatar: String,
-// });
+
 const imgavatar = ref("");
 axios({
   method: "get",
@@ -60,6 +57,14 @@ axios({
     console.log(err.message);
   }
 );
+// 封装了请求,不需要再自己手动添加token 和 /api 前缀了
+// onMounted(()=>{
+//   getAdvator('/UserInfo/getAdvator').then(res=>{
+//     console.log(res);
+//   })
+// })
+
+
 </script>
 
 <style scoped>

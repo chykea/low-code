@@ -8,15 +8,16 @@ const service = axios.create({
     timeout:10000,
 })
 
+// 请求拦截
 service.interceptors.request.use(config=>{
     // 请求时带上token
     config.headers.token = sessionStorage.getItem('token');
     return config;
 })
 
+
 service.interceptors.response.use(response=>{
-    // console.log(response.data);
-    console.log("响应拦截成功");
+    return response.data;
 },err=>{
     console.log(err.message);
 })
