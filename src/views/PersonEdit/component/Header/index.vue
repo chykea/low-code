@@ -5,16 +5,21 @@
     <span class="design">design</span>
   </div>
   <div class="header-list">
+    <button @click="logout" style="cursor: pointer;">退出登录</button>
     <ul>
       <Item v-for="(item,index) in arr" :key="index" :title="item.title" :url="item.url"></Item>
     </ul>
     <el-avatar :size="45" style="vertical-align: middle" />
+    
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import {useRouter} from 'vue-router'
+import axios from "axios";
 import Item from "./Item";
+
 const arr =ref([
       {
         url:'',
@@ -29,6 +34,25 @@ const arr =ref([
         title:'素材库'
       }
     ]);
+
+  const router = useRouter()
+  // 退出登录
+  const token = sessionStorage.getItem('token'); //从sessionStorage取出token
+  function logout(){
+    axios({
+      method:"post",
+      url:'/api/user/logout',
+      headers:{token:token,"Content-Type":"multipart/form-data"}
+    }).then(res=>{
+      const {data} = res
+      if(data.code===200){
+        sessionStorage.removeItem('token'); // 退出登录成功后,退会到登录页面
+        router.push('/toForm/login');
+      }
+    },err=>{
+      console.log(err.message);
+    })
+  }
 </script>
 
 <style scoped>
