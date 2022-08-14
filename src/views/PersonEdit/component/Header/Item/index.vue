@@ -6,12 +6,14 @@
 </template>
 
 <script setup>
+// -----
 import { defineProps } from "vue";
 const prop = defineProps({
   title: String,
   url: String,
 });
 </script>
+
 
 <style scoped>
 li {

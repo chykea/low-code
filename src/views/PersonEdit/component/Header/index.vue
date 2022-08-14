@@ -39,26 +39,26 @@ const arr = ref([
 // const prop = defineProps({
 //   imgavatar: String,
 // });
-const imgavatar = ref("");  
- axios({
-        method: "get",
-        url: "api/UserInfo/getAdvator",
-        headers: {
-            "Content-Type": "multipart/form-data",
-            token:
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsaWQiOjIwMjIwODAzMSwiaXNzIjoiUml2ZW5ubiIsInVzZXJuYW1lIjoiUml2ZW42NiJ9.aadsQxU6mxk2gE3ivfDLW7EXuDJVODUgd0b-4gd3AMk",
-        },
-    }).then(
-        (res) => {
-            // console.log(res.data);
-            if (res.data.code == 200) {
-                imgavatar.value = "http://" + res.data.advator;
-            }
-        },
-        (err) => {
-            console.log(err.message);
-        }
-    );
+const imgavatar = ref("");
+axios({
+  method: "get",
+  url: "api/UserInfo/getAdvator",
+  headers: {
+    "Content-Type": "multipart/form-data",
+    token:
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsaWQiOjIwMjIwODAzMSwiaXNzIjoiUml2ZW5ubiIsInVzZXJuYW1lIjoiUml2ZW42NiJ9.aadsQxU6mxk2gE3ivfDLW7EXuDJVODUgd0b-4gd3AMk",
+  },
+}).then(
+  (res) => {
+    // console.log(res.data);
+    if (res.data.code == 200) {
+      imgavatar.value = "http://" + res.data.advator;
+    }
+  },
+  (err) => {
+    console.log(err.message);
+  }
+);
 </script>
 
 <style scoped>
