@@ -43,8 +43,8 @@ function login(){
             store.commit('setToken',{token:data.token})
             sessionStorage.setItem("token",data.token);
             setTimeout(()=>{
-                router.push('/personedit')  // 3秒跳转到个人首页
-            },3000)
+                router.push('/personedit')  // 1秒跳转到个人首页
+            },1000)
         }else{
             ElMessage({  // 登录失败,提示
                 message:data.msg,

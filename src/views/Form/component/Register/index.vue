@@ -19,8 +19,10 @@
 </template>
 <script setup>
 import { ref } from 'vue';
+import { useRouter} from 'vue-router'
 import { ElMessage } from 'element-plus';
 import {RegisterRequest} from '@/api/register'
+const router = useRouter()
 
 let username = ref('')
 let password = ref('')
@@ -34,8 +36,18 @@ function register(){
         if(data.code!==200){
             ElMessage({
                 message:data.msg,
-                type:"error"
+                type:"error",
+                duration:1000
             })
+        }else{
+            ElMessage({
+                message:"注册成功",
+                type:"success",
+                duration:1000
+            })
+            setTimeout(()=>{
+                router.push('/toForm/login')
+            },1500)
         }
     },err=>{
         console.log(err.message);

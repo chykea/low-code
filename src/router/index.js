@@ -1,3 +1,4 @@
+import { ElMessage } from 'element-plus'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
@@ -38,7 +39,10 @@ router.beforeEach((to,from,next)=>{
   let token = sessionStorage.getItem('token')
   if(to.path === '/toForm/login'){ // 跳转到登录页
     if(token){
-      alert('请先退出登录')
+      ElMessage({
+        type:"error",
+        message:'请先退出登录哟'
+      })
       next(from.path) // 重定向当前页
       return
     }
