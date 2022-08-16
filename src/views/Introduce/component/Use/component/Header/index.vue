@@ -22,13 +22,13 @@
         color: #AAAAAA;
     }
 .introduce-use-header{
-    margin: 0 30px;
-    height: 100px;
+    width: 100%;
+    min-height: 100px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    
     .introduce-use-logo{
-        flex: 1;
         .logo{
             position: relative;
             &::before{
@@ -50,7 +50,6 @@
         }
     }
     .introduce-use-nav{
-        flex:1;
         .introduce-use-nav-box{
             display: flex;
             width: 100%;
@@ -63,6 +62,11 @@
                     font-family: 'Microsoft YaHei';
                     width: 72px;
                     font-size: 18px;
+                }
+            }
+            @media (max-width:960px) {
+                .introduce-use-nav-list{
+                    display: none;
                 }
             }    
         }    

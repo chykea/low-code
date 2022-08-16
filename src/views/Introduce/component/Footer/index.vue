@@ -28,24 +28,24 @@ let list = ref([
 </script>
 <style lang='scss' scoped>
 .introduce-footer{
-    height: 265px;
-    background-color: #16191E;
     
+    background-color: #16191E;
+    display: flex;
     .introduce-footer-box{
-        width: 1536px;
-        margin: 0 auto;
-        height: 100%;
-        
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
+        width: 100%;
+        height: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: space-around;
         .introduce-footer-title{
-            padding: 69px 0 42px 0;
+            
             &>p{
                 text-align: center;
                 color: #fff;
                 font-size: 24px;
             }
+            height: 30px;
         }
 
         .introduce-footer-list{

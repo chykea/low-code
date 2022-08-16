@@ -1,10 +1,12 @@
 <template>
 <div class="introduce-use">
-    <Header>
+    <div class="introduce-use-header-box">
+        <Header>
         <template v-slot:user_login>
             <LoginBtn/>
         </template>
     </Header>
+    </div>
     <div class="introduce-use-container">
         <slot name="container"></slot>
         <div class="introduce-use-imgbg">
@@ -55,22 +57,32 @@ import LoginBtn from './component/LoginBtn/index.vue'
     ])
 </script>
 <style lang='scss' scoped>
-        
         .introduce-use{
-            width: 1536px;
-            margin: 0 auto;
-            height: 936px;
+            min-height: 936px;
+            &>div {
+                display: flex;
+            }
+            
+            .introduce-use-header-box{
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+            }
             // 内容
             .introduce-use-container{
-                position: relative;
-                height: 836px;
-                // background-color: #333;
+                min-height: 836px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
                 .introduce-use-imgbg{
-                    position: absolute;
-                    top: 31px;
-                    left: 700px;
+                    position: relative;
                     width: 735px;
                     height: 560px;
+                }
+                @media (max-width:960px) {
+                    .introduce-use-imgbg{
+                        display: none;
+                    }
                 }
             }
         }

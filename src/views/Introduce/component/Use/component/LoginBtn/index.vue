@@ -5,8 +5,6 @@
 </script>
 <style lang='scss' scoped>
 .login{
-    width: 280px;
-    // text-align: right;
     display: flex;
     flex-direction: row-reverse;
     &>div{
@@ -22,7 +20,7 @@
         color: #fff;
         font-size: 16px;
         transition: all .5s;
-        transform: translateX(-20px);
+        transform: translateX(35px);
     }
     &>div:hover{
         box-shadow: 1px 6px 51px 0px rgba(19,20,21,0.7000);
