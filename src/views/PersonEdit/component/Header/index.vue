@@ -58,11 +58,11 @@ axios({
   }
 );
 // 封装了请求,不需要再自己手动添加token 和 /api 前缀了
-// onMounted(()=>{
-//   getAdvator('/UserInfo/getAdvator').then(res=>{
-//     console.log(res);
-//   })
-// })
+onMounted(()=>{
+  getAdvator('/UserInfo/getAdvator').then(res=>{
+    console.log(res);
+  })
+})
 
 
 </script>
@@ -73,6 +73,7 @@ img {
   height: 22px;
 }
 .LC-design {
+  font-family: 'BerlinSansFBDemi-Bold';
   display: inline-block;
   width: 155px;
   height: 28px;
@@ -83,7 +84,6 @@ img {
   text-align: center;
 }
 .LC {
-  font-family: Berlin Sans FB Demi;
   color: #17191a;
 }
 .design {

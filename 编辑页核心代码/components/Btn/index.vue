@@ -13,6 +13,8 @@
             <option value="mouseover">鼠标经过</option>
             <option value="mouseup">鼠标弹起</option>
         </select>
+        <textarea v-model="funcStr" cols="30" rows="10"></textarea>
+        <button @click="sureCodeBtn">编辑完成</button>
     </div>
     <div class="showBox">
         <div class="showHtml">
@@ -27,13 +29,16 @@
             </div>
         </div>
         <div class="showJs">
+            <!-- 代码预览 -->
             <div v-if="control.className===''">
                 <pre><code>let btn = document.querySelector('button')</code></pre>
-                <pre><code>btn.addEventListener('{{control.Listener}}',{{control.func}})</code></pre> 
+                <pre v-if="funcName===''"><code>btn.addEventListener('{{control.Listener}}',{{control.func}})</code></pre>
+                <pre v-else><code>{{control.func}}</code><br/><code>btn.addEventListener('{{control.Listener}}',{{funcName}})</code></pre> 
             </div>
             <div v-else>
                 <pre><code>let btn = document.querySelector('.{{control.className}}')</code></pre>
-                <pre><code>btn.addEventListener('{{control.Listener}}',{{control.func}})</code></pre>
+                <pre><code>{{control.func}}</code></pre>
+                <pre><code>btn.addEventListener('{{control.Listener}}',{{funcName}})</code></pre>
             </div>
         </div>
     </div>
@@ -61,7 +66,7 @@ let control = reactive({
 })
 let editBtnRef = ref(null)
 let editBtn = null;
-let nodeStr = ref(`<button class="${control.className}">${control.text}</button>`);
+
 // 不通过手动在 button 标签添加事件
 onMounted(() => {
     // 在该组件挂载的时候,添加事件
@@ -75,15 +80,43 @@ watch(()=>control.Listener,(newVal,oldVal)=>{
     editBtn.addEventListener(newVal,control.func);
 })
 
+
+// 在页面展示该节点
+let nodeStr = ref(`<button class="${control.className}">${control.text}</button>`);
 watch(()=>control.className,(newVal)=>{
     // 监听类名是否变化,变化了就把新的类名赋给按钮
     nodeStr.value = `<button class="${newVal}">${control.text}</button>`;
 })
-
 watch(()=>control.text,(newVal)=>{
     // 监听文本内容是否变化,变化了就把文本内容赋给按钮
     nodeStr.value = `<button class="${control.className}">${newVal}</button>`;
 })
+
+let funcStr = ref('') // 用于保存 函数字符串
+let funcName = ref('');
+function sureCodeBtn(){
+    if(funcStr.value!==''){
+        let newfunc = new Function('return '+funcStr.value); // 通过new Function来构建一个函数
+        let func = newfunc()  // 由于上面构造的函数需要通过return才能得到,所以需要调用一下才能获得函数
+        if(typeof func==='function'){  // 判断返回的是否是function类型
+            control.func = func
+            funcName.value = fun_name(func)
+        }
+        else{    // 不是则提醒输入的不是一个函数
+            alert("输入的不是一个函数")
+        }    
+    }
+}
+// 获取函数名
+function fun_name(func){
+    return func.toString().match(/function\s*([^(]*)\(/)[1]
+}
+
+watch(()=>control.func,(newVal,oldVal)=>{
+    editBtn.removeEventListener(control.Listener,oldVal)
+    editBtn.addEventListener(control.Listener,newVal);
+})
+
 
 
 </script>
