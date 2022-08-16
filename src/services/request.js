@@ -102,32 +102,6 @@ function saveAs(n) {
         }
     );
 }
-// async function getAdvatar(val){
-//     await axios(
-//         common("get", "api/UserInfo/getAdvator", "multipart/form-data") 
-//         // {
-//     //     method: "get",
-//     //     url: "api/UserInfo/getAdvator",
-//     //     headers: {
-//     //         "Content-Type": "multipart/form-data",
-//     //         'token':
-//     //             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsaWQiOjIwMjIwODAzMSwiaXNzIjoiUml2ZW5ubiIsInVzZXJuYW1lIjoiUml2ZW42NiJ9.aadsQxU6mxk2gE3ivfDLW7EXuDJVODUgd0b-4gd3AMk",
-//     //     },
-//     // }
-//     ).then(
-//         (res) => {
-//             // console.log(res.data);
-//             if (res.data.code == 200) {
-//                 val= "http://" + res.data.advator;
-//             }
-//         },
-//         (err) => {
-//             console.log(err.message);
-//         }
-//     );
-//     console.log(val);
-//     return val;
-// }
 export {
     createPro,
     deletePro,
@@ -137,19 +111,3 @@ export {
     // getAdvatar
 }
 
-// let blob = new Blob([res.data]);
-// let downloadElement = document.createElement("a");
-// let href = window.URL.createObjectURL(blob); //创建下载的链接
-// downloadElement.href = href;
-// var temp = res.headers["content-disposition"]
-// var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-// var matches = filenameRegex.exec(temp);
-// var filename = '';
-// if (matches != null && matches[1]) {
-//     filename = matches[1].replace(/['"]/g, '');
-// }
-// downloadElement.download = filename;
-// document.body.appendChild(downloadElement);
-// downloadElement.click(); //点击下载
-// document.body.removeChild(downloadElement); //下载完成移除元素
-// window.URL.revokeObjectURL(href);
