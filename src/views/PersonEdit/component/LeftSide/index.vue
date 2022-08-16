@@ -23,6 +23,7 @@ const arr = ref([
     imgAlt: "我的素材",
   },
 ]);
+const imgavatar = ref("");
 //获取头像
 onMounted(() => {
   getAdvator("/UserInfo/getAdvator").then((res) => {
