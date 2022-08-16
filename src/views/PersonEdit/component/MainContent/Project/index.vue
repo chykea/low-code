@@ -53,15 +53,7 @@ import Item from "./Item";
 import axios from "axios";
 import { createPro, deletePro, behavePro} from "@/services/request";
 const store = useStore();
-function save(){
-  // saveAs(4);
-  // var ele=document.createElement('iframe');
-  // ele.src='http://182.61.3.24/page_code/Riven66_page_4.html';
-  // ele.style.display='none';
-  // document.body.appendChild(ele);
-  // window.open('@/assets/css/PersonEdit/project_item.css')
-  // window.open('http://182.61.3.24/page_code/Riven66_page_4.html');
-}
+
 // 接受父组件传来的参数
 const prop = defineProps({
   imgSrc: String,
@@ -99,17 +91,6 @@ function remove(n, id) {
   plus.counter.splice(n, 1);
   deletePro(id);
 }
-// axios('http://182.61.3.24/page_code/Riven66_page_4.html').then(red=>{
-//   res.blob().then(blob=>{
-//     const b=window.URL.createObjectURL(blob);
-//     const name='xx.html'
-//     const a=document.createElement('a');
-//     a.href=b;
-//     a.download=name;
-//     a.click();
-//     window.URL.revokeObjectURL(b);
-//   })
-// })
 </script>
 
 <style scoped>
