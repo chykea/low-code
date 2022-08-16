@@ -1,7 +1,7 @@
 <template>
-
-  <Modle :imgSrc="mod.imgSrc" :imgContent="mod.imgContent"/>
   <Project :imgSrc="pro.imgSrc" :imgContent="pro.imgContent"/>
+  <Modle :imgSrc="mod.imgSrc" :imgContent="mod.imgContent"/>
+  
 
 </template>
 
