@@ -1,0 +1,82 @@
+.creation,
+.project-main-wrap,
+.creation_name {
+  width: 266px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.project-main-wrap {
+  position: relative;
+  height: 163px;
+  margin-bottom: 76px;
+  margin-right: 66px;
+}
+
+.creation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 163px;
+  background: #f1f1f1;
+}
+
+.creation div {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: 65px;
+  height: 70px;
+  text-align: center;
+}
+
+.creation img {
+  width: 26px;
+  height: 26px;
+}
+
+.creation p,
+h3 {
+  height: 35px;
+  font-size: 16px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  line-height: 35px;
+}
+
+.creation p {
+  color: #17191a;
+}
+
+h3 {
+  height: 55px;
+  line-height: 66px;
+  color: #111;
+}
+
+.creation_name {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 163px;
+  background: #f8e07e;
+  text-align: center;
+  cursor: default;
+}
+
+.pro_name {
+  width: 192px;
+  height: 2.2em;
+  padding: 1px 10px;
+  margin: 10px auto;
+  background: #f1f1f1;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+.button{
+  display: block;
+  padding: 4px;
+  margin-top: 10px;
+  margin-left: 200px;
+}
