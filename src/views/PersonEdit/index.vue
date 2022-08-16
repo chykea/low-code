@@ -24,6 +24,14 @@ import LeftSide from "@/views/PersonEdit/component/LeftSide";
 import Header from "@/views/PersonEdit/component/Header/index.vue";
 import MainContent from'@/views/PersonEdit/component/MainContent/index.vue';
 
+// import service from '@/api/request.js';
+
+// service.get("/UserInfo/getAdvator").then(res=>{
+//   console.log("请求成功");
+//   console.log(res.data);
+// },err=>{
+
+// })
 </script>
 
 <style scoped>

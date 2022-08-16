@@ -19,34 +19,35 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios'
+import { useRouter} from 'vue-router'
 import { ElMessage } from 'element-plus';
+import {RegisterRequest} from '@/api/register'
+const router = useRouter()
 
 let username = ref('')
 let password = ref('')
 function register(){
-    axios({
-        method:'post',
-        url:'/api/user/register',
-        data:{
+    let data = {
             name:username.value,
             password:password.value
-        },
-        headers:{"Content-type":"multipart/form-data"}
-    }).then(res=>{
+        }
+    RegisterRequest('/user/register',data).then(res=>{
         const {data} = res;
-        console.log(data);
-        console.log(data.code);
-        if(data.code===200){
+        if(data.code!==200){
             ElMessage({
-                message:"注册成功",
-                type:"success"
+                message:data.msg,
+                type:"error",
+                duration:1000
             })
         }else{
             ElMessage({
-                message:data.msg,
-                type:"error"
+                message:"注册成功",
+                type:"success",
+                duration:1000
             })
+            setTimeout(()=>{
+                router.push('/toForm/login')
+            },1500)
         }
     },err=>{
         console.log(err.message);

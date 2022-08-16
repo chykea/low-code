@@ -22,7 +22,7 @@
 import { ref } from 'vue';
 import {useStore} from 'vuex';
 import {useRouter} from 'vue-router'
-import axios from 'axios';
+import {loginRequest} from '@/api/login'
 import { ElMessage } from 'element-plus'
 
 
@@ -37,26 +37,20 @@ function login(){
             name:username.value,
             password:password.value
         };
-    axios({
-        method:'post',
-        url:'/api/user/login',
-        data:data,
-        headers:{"Content-Type":"multipart/form-data"}
-    }).then(res=>{
+    loginRequest('/user/login',data).then(res=>{
         const {data} = res;
-        console.log(data);
         if(data.code===200){  // 登录成功,将 token存到store和localStorage中
             store.commit('setToken',{token:data.token})
             sessionStorage.setItem("token",data.token);
-            router.push('/personedit')  // 跳转到个人首页
+            setTimeout(()=>{
+                router.push('/personedit')  // 1秒跳转到个人首页
+            },1000)
         }else{
             ElMessage({  // 登录失败,提示
                 message:data.msg,
                 type:'error'
             })
         }
-    },err=>{
-        console.log(err.message);
     })
 }
 </script>
