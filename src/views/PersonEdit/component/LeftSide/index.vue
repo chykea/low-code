@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import {getAdvator} from '@/api/getAdvator'
 const arr = ref([
   {
