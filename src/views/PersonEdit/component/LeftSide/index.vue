@@ -28,10 +28,9 @@ const imgavatar = ref("");
 onMounted(() => {
   getAdvator("/UserInfo/getAdvator").then((res) => {
     console.log(res);
-    // const{data}=res;
-    // if(data.code==200){
-    //   imgavatar.value = "http://" + res.data.advator;
-    // }
+     if(res.code==200){
+         imgavatar.value = "http://" + res.advator;
+     }
     
   });
 });
