@@ -45,8 +45,9 @@ onMounted(() => {
     if(res.code==200){
       imgavatar.value = "http://" + res.advator;
     }
-    
   });
+  });
+
 
 
 </script>
