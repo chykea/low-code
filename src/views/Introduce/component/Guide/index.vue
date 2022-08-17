@@ -15,15 +15,17 @@
 </script>
 <style lang='scss' scoped>
     .introduce-guide{
-        height: 580px;
+        height: auto !important;
+        min-height: 580px;
         background-color: #000000;
+        display: flex;
+        justify-content: center;
         .introduce-guide-box{
-            width: 1536px;
+            width: 100%;
             height: 580px;
-            margin: 0 auto;
             display: flex;
+            justify-content: space-evenly;
             .introduce-guide-title{
-                width: 275px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -40,9 +42,16 @@
                 }
             }
             .introduce-guide-video{
-                width: 1259px;
+                // width: 1259px;
+                max-width: 650px;
+                width: 100%;
                 border-left: 1px #7C7C7C solid;
                 border-right: 1px #7C7C7C solid;
+            }
+            @media (max-width:960px) {
+                .introduce-guide-title{
+                    display: none;
+                }
             }
         }
     }

@@ -19,5 +19,8 @@ import Footer from './component/Footer/index.vue';
 import IntroduceContainer from './component/Use/component/IntroduceContainer.vue';
 </script>
 <style lang='scss' scoped>
-    
+    .introduce-container{
+        // display: flex;
+        // flex-direction: column;
+    }
 </style>

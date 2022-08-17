@@ -28,9 +28,6 @@
         background: #fff;
         box-shadow: 0px 2px 46px 0px rgba(186,186,186,0.3300);
         border-radius: 50px;
-        position: absolute;
-        top: 50px;
-        left: 50px;
         .form-box{
             display: flex;
             flex-direction: column;

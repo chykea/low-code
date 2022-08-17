@@ -34,11 +34,15 @@ let arr = ref(
 }])
 </script>
 <style lang='scss' scoped>
+    
     .introduce-module{
-        height: 450px;
+        display: flex;
+        justify-content: center;
         .introduce-module-box{
-            width: 1536px;
-            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
             .introduce-module-header{
                 padding: 54px 0;
                 text-align: center;
@@ -49,7 +53,12 @@ let arr = ref(
             }
             .introduce-module-list{
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-evenly;
+            }
+            @media (max-width:640px) {
+                .introduce-module-list{
+                    flex-wrap: wrap;
+                }
             }
         }
     }

@@ -16,5 +16,6 @@ import FormContainer from './component/FormContainer/index.vue'
 <style lang='scss' scoped>
     .form-container{
         font-family: 'BerlinSansFBDemi-Bold';
+        min-height: 936px;
     }
 </style>
