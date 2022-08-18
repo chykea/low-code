@@ -3,6 +3,11 @@
   <!-- 
     引入了 vuedraggable@next 插件
     用于实现拖拽组件功能
+
+    :list  绑定数据列表
+    item-key  相当于 :key=""
+    :group   分组, name 相同的一组的才可以进行拖拽
+    pull 拖拽的功能  有三个取值  true(开启拖拽)  false(关闭拖拽)  clone(拖拽到name相同的一种就复制数据,实现拖拽组件的核心) 
    -->
   <div>
     <!-- 拖拽按钮 -->
