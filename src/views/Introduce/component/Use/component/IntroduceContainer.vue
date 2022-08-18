@@ -27,12 +27,8 @@
     }
 }
 .introduce-use-go{
-    position: absolute;
-    left: 168px;
-    top: 142px;
     height: 340px;
     width: 293px;
-    // background-color: #bfa;
     .introduce-use-title{
         &>p{
             font-size: 72px;
