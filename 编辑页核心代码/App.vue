@@ -152,7 +152,7 @@ import {useStore} from 'vuex';
       id:5,
       type:'img',
       prop:{
-        src:'https://t1.picb.cc/uploads/2021/07/09/wCQHxF.md.jpg',
+        src:'',
         alt:"图片加载失败时显示",
         style:{"width":"300px","height":""},
         func:null,
