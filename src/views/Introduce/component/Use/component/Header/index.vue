@@ -56,7 +56,7 @@
             .introduce-use-nav-list{
                 display: flex;
                 width: 456px;
-                justify-content: space-between;
+                justify-content: space-around;
                 align-items: center;
                 &>li{
                     font-family: 'Microsoft YaHei';
