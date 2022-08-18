@@ -4,11 +4,13 @@
         <div class="register-form-box">
             <div>
                 <h3>用户名</h3>
-                <input type="text" v-model="username" placeholder="请输入8-20位以内的数字或字母" />
+                <input type="text" v-model="username" @input="checkUsername" placeholder="请输入8-16位以内的数字和字母" />
+                <span :class="[!UsernameCheck?'danger':'hide']">用户名不符合</span>
             </div>
             <div>
                 <h3>密码</h3>
-                <input type="password" v-model="password" placeholder='请输入您的密码'/>
+                <input type="password" v-model="password" @input="checkPassword" placeholder='请输入8-16位以内的数字和字母'/>
+                <span :class="[!PasswordCheck?'danger':'hide']">密码不符合</span>
             </div>
             <div class="register-form-btn">
                 <button type="button" @click="register">注册</button>
@@ -26,35 +28,61 @@ const router = useRouter()
 
 let username = ref('')
 let password = ref('')
+let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+let UsernameCheck = ref(true)
+let PasswordCheck = ref(true)
+
+function checkUsername(){
+    UsernameCheck.value = reg.test(username.value);
+}
+function checkPassword(){
+    PasswordCheck.value = reg.test(password.value);
+}
+
 function register(){
-    let data = {
+    if(UsernameCheck&&PasswordCheck&&(username.value!==''&&password.value!=='')){
+        let data = {
             name:username.value,
             password:password.value
         }
-    RegisterRequest('/user/register',data).then(res=>{
-        const {data} = res;
-        if(data.code!==200){
-            ElMessage({
-                message:data.msg,
-                type:"error",
-                duration:1000
-            })
-        }else{
-            ElMessage({
-                message:"注册成功",
-                type:"success",
-                duration:1000
-            })
-            setTimeout(()=>{
-                router.push('/toForm/login')
-            },1500)
-        }
-    },err=>{
-        console.log(err.message);
-    })
+        RegisterRequest('/user/register',data).then(res=>{
+            const {data} = res;
+            if(data.code!==200){
+                ElMessage({
+                    message:data.msg,
+                    type:"error",
+                    duration:1000
+                })
+            }else{
+                ElMessage({
+                    message:"注册成功",
+                    type:"success",
+                    duration:1000
+                })
+                setTimeout(()=>{
+                    router.push('/toForm/login')
+                },1500)
+            }
+        },err=>{
+            console.log(err.message);
+        })
+    }else{
+        ElMessage({
+            type:'error',
+            message:'您注册使用的账户不符合'
+        })
+    }
 }
 </script>
 <style lang='scss' scoped>
+.danger{
+    display: inline-block;
+    color: red;
+    font-size: 12px;
+}
+.hide{
+    display: none;
+}
 .register-form {
     width: 350px;
     display: flex;
