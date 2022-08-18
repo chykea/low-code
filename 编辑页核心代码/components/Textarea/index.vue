@@ -1,21 +1,21 @@
 <template>
 <div>
-    <textarea :style="control.style">{{control.text}}</textarea>
+    <textarea :style="control.prop.style">{{control.prop.text}}</textarea>
     <div>
-        <span>文本框文本</span><input type="text" v-model="control.text">
-        <span>文本框文本颜色</span><input type="text" v-model="control.style.color" />
+        <span>文本框文本</span><input type="text" v-model="control.prop.text">
+        <span>文本框文本颜色</span><input type="text" v-model="control.prop.style.color" />
     </div>
 </div>
 </template>
 <script setup>
 import {defineProps, ref} from 'vue'
 const props = defineProps({
-    text:String,
-    style:Object,
+    prop:Object,
+    childArray:Array
 })
 let control = ref({
-    text:props.text,
-    style:props.style
+    prop:props.prop,
+    childArray:props.childArray
 })
 </script>
 <style lang='scss' scoped>

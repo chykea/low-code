@@ -1,19 +1,20 @@
 <template>
 <div>
-    <button ref="editBtnRef" :class="control.className"  :style="[control.style]">{{control.text}}</button>
+    <button ref="editBtnRef" :class="control.prop.className"  :style="[control.prop.style]">{{control.prop.text}}</button>
     <div>
-        <span>按钮宽度</span><input type="text" v-model="control.style.width" />
-        <span>按钮高度</span><input type="text" v-model="control.style.height" />
-        <span>按钮文本</span><input type="text" v-model="control.text">
-        <span>按钮文本颜色</span><input type="text" v-model="control.style.color" />
-        <span>按钮类名</span><input type="text" v-model="control.className" />
+        <span>按钮宽度</span><input type="text" v-model="control.prop.style.width" />
+        <span>按钮高度</span><input type="text" v-model="control.prop.style.height" />
+        <span>按钮文本</span><input type="text" v-model="control.prop.text">
+        <span>按钮文本颜色</span><input type="text" v-model="control.prop.style.color" />
+        <span>按钮类名</span><input type="text" v-model="control.prop.className" />
         <!-- 添加事件 -->
-        <select v-model="control.Listener">
+        <select v-model="control.prop.Listener">
+            <option value="">无</option>
             <option value="click">鼠标点击</option>
             <option value="mouseover">鼠标经过</option>
             <option value="mouseup">鼠标弹起</option>
         </select>
-        <textarea v-model="funcStr" cols="30" rows="10"></textarea>
+        <textarea v-model="control.prop.funcStr" cols="30" rows="10"></textarea>
         <button @click="sureCodeBtn">编辑完成</button>
     </div>
     <div class="showBox">
@@ -21,48 +22,46 @@
             <pre><code>{{nodeStr}}</code></pre>
         </div>
         <div class="showCss">
-            <div v-if="control.className===''">
-                <pre><code>button{{control.style}}</code></pre>
+            <div v-if="control.prop.className===''">
+                <pre><code>button{{control.prop.style}}</code></pre>
             </div>
             <div v-else>
-                <pre><code>.{{control.className}}{{control.style}}</code></pre>
+                <pre><code>.{{control.prop.className}}{{control.prop.style}}</code></pre>
             </div>
         </div>
         <div class="showJs">
             <!-- 代码预览 -->
-            <div v-if="control.className===''">
+            <div v-if="control.prop.className===''">
                 <pre><code>let btn = document.querySelector('button')</code></pre>
-                <pre v-if="funcName===''"><code>btn.addEventListener('{{control.Listener}}',{{control.func}})</code></pre>
-                <pre v-else><code>{{control.func}}</code><br/><code>btn.addEventListener('{{control.Listener}}',{{funcName}})</code></pre> 
+                <div v-if="control.prop.func!==null">
+                    <pre><code>{{control.prop.func}}</code><br/><code>btn.addEventListener('{{control.prop.Listener}}',{{funcName}})</code></pre>
+                </div>
             </div>
             <div v-else>
-                <pre><code>let btn = document.querySelector('.{{control.className}}')</code></pre>
-                <pre><code>{{control.func}}</code></pre>
-                <pre><code>btn.addEventListener('{{control.Listener}}',{{funcName}})</code></pre>
+                <pre><code>let btn = document.querySelector('.{{control.prop.className}}')</code></pre>
+                <div v-if="control.prop.func!==null">
+                    <pre><code>{{control.prop.func}}</code><br/><code>btn.addEventListener('{{control.prop.Listener}}',{{funcName}})</code></pre>
+                </div>        
             </div>
         </div>
     </div>
+    <!-- <button @click="submitComponent">组件编辑完成</button> -->
 </div>
 </template>
 <script setup>
-import {defineProps,onMounted, reactive, ref,watch,watchEffect} from 'vue'
+import {defineProps,onMounted, reactive, ref,watch} from 'vue'
+// import {useStore} from 'vuex'
 
 // 限定父组件传值
 const props = defineProps({
-    text:String,
-    style:Object,
-    func:Function,
-    Listener:String,
-    className:String
+    prop:Object,
+    childArray:Array
 })
 
 // 接收props中的值, 用于双向绑定,实时修改组件的属性
 let control = reactive({
-    style: props.style,
-    text: props.text,
-    Listener:props.Listener,
-    func:props.func,
-    className:props.className
+    prop:props.prop,
+    childArray:props.childArray
 })
 let editBtnRef = ref(null)
 let editBtn = null;
@@ -71,51 +70,75 @@ let editBtn = null;
 onMounted(() => {
     // 在该组件挂载的时候,添加事件
     editBtn = editBtnRef._value;
-    editBtn.addEventListener(control.Listener,control.func);
+    if(control.prop.funcStr!==''){
+        let newfunc = new Function('return '+control.prop.funcStr); 
+        let func = newfunc()
+        control.prop.func = func;
+        funcName.value = fun_name(func)
+    }
 })
 
-watch(()=>control.Listener,(newVal,oldVal)=>{
+watch(()=>control.prop.Listener,(newVal,oldVal)=>{
     // 监听 Listener 的变化,如果变化,就移除旧事件,添加新事件
-    editBtn.removeEventListener(oldVal,control.func)
-    editBtn.addEventListener(newVal,control.func);
+    editBtn.removeEventListener(oldVal,control.prop.func)
+    editBtn.addEventListener(newVal,control.prop.func);
 })
 
 
 // 在页面展示该节点
-let nodeStr = ref(`<button class="${control.className}">${control.text}</button>`);
-watch(()=>control.className,(newVal)=>{
+let nodeStr = ref(`<button class="${control.prop.className}">${control.prop.text}</button>`);
+watch(()=>control.prop.className,(newVal)=>{
     // 监听类名是否变化,变化了就把新的类名赋给按钮
-    nodeStr.value = `<button class="${newVal}">${control.text}</button>`;
+    nodeStr.value = `<button class="${newVal}">${control.prop.text}</button>`;
 })
-watch(()=>control.text,(newVal)=>{
+watch(()=>control.prop.text,(newVal)=>{
     // 监听文本内容是否变化,变化了就把文本内容赋给按钮
-    nodeStr.value = `<button class="${control.className}">${newVal}</button>`;
+    nodeStr.value = `<button class="${control.prop.className}">${newVal}</button>`;
 })
 
-let funcStr = ref('') // 用于保存 函数字符串
-let funcName = ref('');
+watch(()=>control.prop.func,(newVal,oldVal)=>{
+    // 按钮函数为null时,将监听器设为空字符串
+    if(newVal===null){
+        control.prop.Listener='';
+    }
+    editBtn.removeEventListener(control.prop.Listener,oldVal); // 监听函数变化
+    editBtn.addEventListener(control.prop.Listener,newVal);
+})
+
+let funcName = ref('');  // 用于保存函数名字
+
+// 将页面编辑的函数进行创建,然后给
 function sureCodeBtn(){
-    if(funcStr.value!==''){
-        let newfunc = new Function('return '+funcStr.value); // 通过new Function来构建一个函数
-        let func = newfunc()  // 由于上面构造的函数需要通过return才能得到,所以需要调用一下才能获得函数
-        if(typeof func==='function'){  // 判断返回的是否是function类型
-            control.func = func
+    if(control.prop.funcStr!==''){
+        try {
+            let newfunc = new Function('return '+control.prop.funcStr); // 通过new Function来构建一个函数
+            let func = newfunc()  // 由于上面构造的函数需要通过return才能得到,所以需要调用一下才能获得函数
+            // if(typeof func==='function'){  // 判断返回的是否是function类型
+            control.prop.func = func
             funcName.value = fun_name(func)
+            // }
+        } catch (error) {
+            console.log('您输入的并不是一个函数');
+        }  
+    }else{
+        if(control.prop.func!==null){
+            editBtn.removeEventListener(control.prop.Listener,control.prop.func)
+            control.prop.func = null;
         }
-        else{    // 不是则提醒输入的不是一个函数
-            alert("输入的不是一个函数")
-        }    
     }
 }
+
 // 获取函数名
 function fun_name(func){
     return func.toString().match(/function\s*([^(]*)\(/)[1]
 }
 
-watch(()=>control.func,(newVal,oldVal)=>{
-    editBtn.removeEventListener(control.Listener,oldVal)
-    editBtn.addEventListener(control.Listener,newVal);
-})
+
+// 将编辑后的组件放到store中,通过App组件发送给后端
+// const store = useStore();
+// function submitComponent(){
+//     store.commit('setNodeArray',{Node:JSON.parse(JSON.stringify(control))})
+// }
 
 
 

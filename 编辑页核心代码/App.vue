@@ -1,88 +1,164 @@
 <template>
-  <div>
-    <div class="select">
-      <ul>
-        <li><button @click="addBtn">按钮</button></li>
-        <li><button @click="addTextarea">文本框</button></li>
-        <li><button @click="addLink">超链接</button></li>
-        <li><button @click="addImg">图片</button></li>
-      </ul>
-    </div>
-    <div class="show">
-      <!-- 渲染数组  -->
-      <div v-for="item in childArr" :key="item">
-        <!-- 判断 type,如果type为按钮,就渲染封装的按钮组件,并把默认的文本和样式等, 传给该组件 -->
-        <Btn v-if="item.type==='button'" :text="item.text" :style="item.style" :func="item.func" :Listener="item.Listener" />
 
-        <Link v-if="item.type==='a'" :text="item.text" :style="item.style"/>
-        <Textarea v-if="item.type==='textarea'" :text="item.text" :style="item.style" />
-        <Img v-if="item.type==='img'" :src="item.src" :style="item.style" :alt="item.alt" />
-      </div>
-    </div>
+  <!-- 
+    引入了 vuedraggable@next 插件
+    用于实现拖拽组件功能
+   -->
+  <div>
+    <!-- 拖拽按钮 -->
+    <Draggable
+      :list="list"
+      item-key="id"
+      :group="{name:'component',pull:'clone',put:false}"
+    >
+      <template #item="{element}">
+        <button style="margin:25px">{{element.type}}组件</button>
+      </template>
+    </Draggable>
+    
+    <!-- 显示区, -->
+    <Draggable
+      v-model="childArr"
+      :group="{name:'component',pull:true}"
+      item-key="id"
+      class="show"
+    >
+      <template #item="{element}">
+        <component 
+        :is="element.type==='a'?Link:
+        element.type==='button'?Btn:
+        element.type==='p'?P:
+        element.type==='img'?Img:
+        element.type==='textarea'?Textarea:''
+        "
+        :childArray="element.childNode"
+        :prop="element.prop"
+        ></component>
+      </template>
+
+    </Draggable>
   </div>
 </template>
 
 <script setup>
-import { ref,reactive } from 'vue';
+import { ref,reactive,toRaw, onMounted } from 'vue';
+import Draggable from 'vuedraggable';
+import axios from 'axios'
+
 import Btn from './components/Btn/index.vue';
 import Link from './components/Link/index.vue';
 import Textarea from './components/Textarea/index.vue';
 import Img from './components/Img/index.vue';
+import P from './components/P/index.vue';
+import {useStore} from 'vuex';
 
+  const store = useStore()
+  let childArr = ref([]); // 存放节点的一些信息的数组
 
-  let childArr = ref([]); // 渲染数组,存放节点的一些信息
-  
-
-  function addBtn(){  //  添加按钮
-    let childObj = reactive({
+  // 组件拖拽按钮的数组
+  let list = ref([
+    {
+      id:1,
       type:'button',  // 指明组件类型,之后可以通过该属性进行判断,然后渲染
-      text:'默认文本',  // 默认文本,
-      style:{"color":"red","width":'100px',"height":"35px"},  // 默认样式
-      func:()=>{  // 按钮的默认函数
-        console.log("hello");  
+      prop:{
+        text:'默认文本',  // 默认文本,
+        style:{color:"red",width:'100px',height:"35px"},  // 默认样式
+        func:null,
+        Listener:'',
+        className:'',
+        funcStr:'',
+        boxStyle:{},
       },
-      Listener:'click'
-    })
-    childArr.value.push(childObj);  // 存放到数组中
-  }
-
-  // 优化代码
-  function addObj(obj={}){
-    let childObj = reactive({
-      ...obj
-    })
-    childArr.value.push(childObj)
-  }
-
-
-
-
-  function addLink(){
-    let childObj = reactive({
-      type:'a',
-      text:'默认文本',
-      style:{"color":"orange"},
-    })
-    childArr.value.push(childObj);
-  }
-
-  function addTextarea(){
-    let childObj = reactive({
+      childNode:[],
+    },
+    {
+      id:2,
       type:'textarea',
-      text:'默认文本',
-      style:{"color":"orange"},
-    })
-    childArr.value.push(childObj);
-  }
+      prop:{
+        text:'默认文本',
+        style:{"color":"orange"},
+        func:null,
+        Listener:'',
+        className:'',
+        funcStr:'',
+        boxStyle:{},
+      },
+      childNode:[]
+    },
+    {
+      id:3,
+      type:'a',
+      prop:{
+        text:'默认文本',
+        style:{"color":"orange"},
+        func:null,
+        Listener:'',
+        className:'',
+        funcStr:'',
+        boxStyle:{},
+        // href:''
+      },
+      childNode:[]
+    },
+    {
+      id:4,
+      type:'p',
+      prop:{
+        text:'',
+        style:{},
+        func:null,
+        Listener:'',
+        className:'',
+        funcStr:'',
+        boxStyle:{'display':'block','text-align':'center'},
+      },
+      childNode:[
+        {
+          type:'span',
+          prop:{
+            text:'段落的子组件2',
+            style:{"color":"orange"},
+            func:null,
+            Listener:'',
+            className:'',
+            funcStr:'',
+            boxStyle:{},
+          },
+          childNode:[]
+        },
+        {
+          type:'a',
+          prop:{
+            text:'段落的子组件1',
+            style:{"color":"#bfa"},
+            href:'',
+            func:null,
+            Listener:'',
+            className:'',
+            funcStr:'',
+            boxStyle:{},
+          },
+          childNode:[]
+        }
+      ],
 
-  function addImg(){
-    addObj({
+    },
+    {
+      id:5,
       type:'img',
-      src:require("@/asset/girls.jpg"),
-      alt:"图片加载失败时显示",
-      style:{"width":"300px","height":"200px"},
-    })
-  }
+      prop:{
+        src:'https://t1.picb.cc/uploads/2021/07/09/wCQHxF.md.jpg',
+        alt:"图片加载失败时显示",
+        style:{"width":"300px","height":""},
+        func:null,
+        Listener:'',
+        className:'',
+        funcStr:'',
+        boxStyle:{},
+      },
+      childNode:[]
+    }
+  ]);
 </script>
 
 <style lang="scss">

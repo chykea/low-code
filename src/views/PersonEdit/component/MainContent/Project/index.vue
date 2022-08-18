@@ -47,7 +47,7 @@
 
 <script setup>
 import { reactive, defineProps, ref, computed, watch } from "vue";
-import "animate.css";
+// import "animate.css";
 import { useStore } from "vuex";
 import Item from "./Item";
 import axios from "axios";

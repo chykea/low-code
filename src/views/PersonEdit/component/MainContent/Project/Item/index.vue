@@ -39,7 +39,7 @@
 
 <script setup>
 import { ref } from "vue";
-import "animate.css";
+// import "animate.css";
 import axios from "axios";
 import { saveAs } from "@/services/request";
 
