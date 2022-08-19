@@ -1,0 +1,72 @@
+.whole-header{
+    position: relative;
+}
+.LC-design {
+    font-family: "BerlinSansFBDemi-Bold";
+    display: inline-block;
+    width: 155px;
+    height: 28px;
+    margin-left: 21px;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 21px;
+    text-align: center;
+}
+
+.LC {
+    color: #17191a;
+}
+
+.design {
+    margin-left: 10px;
+    color: #aaa;
+}
+
+.header-list {
+    display: inline-block;
+    width: 500px;
+    height: inherit;
+    margin-left: 627px;
+    vertical-align: bottom;
+}
+
+.header-list ul {
+    /* padding: 0; */
+    list-style: none;
+    margin: 0;
+}
+
+.head-image {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.disappear {
+    position: absolute;
+    top: 45px;
+    right: -17px;
+    width: 90px;
+    height: 80px;
+    background: #fffdff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px rgb(0 0 0 / 6%);
+    text-align: center;
+    z-index: 3;
+}
+
+.disappear li {
+    height: 40px;
+    line-height: 40px;
+    color: #333;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.disappear li:hover {
+    background: #f1f1f1;
+}

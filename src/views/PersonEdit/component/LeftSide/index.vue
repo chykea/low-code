@@ -1,7 +1,7 @@
 <template>
   <div class="content-inner">
     <div class="head">
-      <el-avatar :src="imgavatar"  :size="45"></el-avatar>
+      <el-avatar :src="store.state.imgadvatar"  :size="45"></el-avatar>
     </div>
     <p></p>
     <div class="left-side" v-for="(item, index) in arr" :key="index">
@@ -12,7 +12,9 @@
 
 <script setup>
 import { ref,onMounted } from "vue";
-import {getAdvator} from '@/api/getAdvator'
+import {useStore} from 'vuex';
+import {getAdvator} from '@/api/getAdvator';
+const store=useStore();
 const arr = ref([
   {
     imgSrc: require("@/assets/images/PersonEdit/project.png"),
@@ -23,17 +25,7 @@ const arr = ref([
     imgAlt: "我的素材",
   },
 ]);
-const imgavatar = ref("");
-//获取头像
-onMounted(() => {
-  getAdvator("/UserInfo/getAdvator").then((res) => {
-    console.log(res);
-     if(res.code==200){
-         imgavatar.value = "http://" + res.advator;
-     }
-    
-  });
-});
+
 </script>
 
 <style scoped>

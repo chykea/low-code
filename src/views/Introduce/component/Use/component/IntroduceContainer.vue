@@ -10,11 +10,29 @@
         <h3>方便快捷</h3>
     </div>
     <div class="introduce-use-gotouse">
-        <button><span>开始使用</span><span class="arrow">→</span></button>
+        <button @click="start"><span>开始使用</span><span class="arrow">→</span></button>
     </div>
 </div>
 </template>
 <script setup>
+import { ElMessage } from 'element-plus';
+import {useRouter} from 'vue-router'
+const router = useRouter()
+
+function start(){
+    let token = sessionStorage.getItem('token')
+    if(token){
+        router.push('/personedit')
+    }else{
+        ElMessage({
+          type:'error',
+          message:"请先登录" ,
+          duration:1000
+        })
+        router.push('/toForm/login')
+    }
+    
+}
 </script>
 <style lang='scss' scoped>
 @keyframes arrowSlide{
@@ -37,6 +55,13 @@
     }
     .introduce-use-intro{
         margin-top: 10px;
+        h3{
+            height: 35px;
+            font-size: 16px;
+            // font-family: Microsoft YaHei;
+            // font-weight: 400;
+            line-height: 35px;
+        }
     }
     .introduce-use-gotouse{
         margin-top: 30px;

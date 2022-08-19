@@ -26,11 +26,6 @@ service.interceptors.request.use(config=>{
 service.interceptors.response.use(res=>{
     // 加载条隐藏
     nprogress.done()
-    // 提示用户操作成功
-    // ElMessage({
-    //     type:"success",
-    //     message:res.data.msg,
-    // })
     return res;
 },err=>{
     return err.message
