@@ -3,21 +3,43 @@
         <div class="head">
             <Header></Header>
         </div>
+
         <div class="content">
-            <div class="nav">
-                <div class="serch">
-                    <input type="text" placeholder="请输入关键词进行搜索" />
-                    <button></button>
-                </div>
+            <div class="second">
+                <div class="nav">
+                    <div class="serch">
+                        <input type="text" placeholder="请输入关键词进行搜索" />
+                        <button></button>
+                    </div>
 
-                <div class="cards">
-                    <div class="card" v-for="item in cards" :key="item.id">{{item}}</div>
+                    <div class="cards">
+                        <!-- <div class="card" v-for="item in cards" :key="item.id">{{item}}</div> -->
+                        <div class="card" @click="cur=0" :class="{active:cur==0}">模板</div>
+                        <div class="card" @click="cur=1" :class="{active:cur==1}">组件</div>
+                        <div class="card" @click="cur=2" :class="{active:cur==2}">全部</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="libraries">
-                <div class="library" v-for="item in libraries" :key="item.id">{{item.id}}</div>
+            <div class="allLibrary">
+                <div class="libraries">
+                    <div v-show="cur==0" class="libraryItem" v-for="item in mould" :key="item.id">
+                        <div class="library"></div>
+                        <p>{{item.id}}</p>
+                    </div>
+
+                    <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
+                        <div class="library"></div>
+                        <p>{{item.id}}</p>
+                    </div>
+
+                    <div v-show="cur==2" class="libraryItem" v-for="item in all" :key="item.id">
+                        <div class="library"></div>
+                        <p>{{item.id}}</p>
+                    </div>
+                </div>
             </div>
+
             <div class="pages">
                 <div class="block">
                     <el-pagination layout="prev, pager, next" :total="100"></el-pagination>
@@ -28,14 +50,16 @@
 </template>
 
 <script>
+// volar安装不了 先写vue2
+
 import Header from '@/views/PersonEdit/component/Header/index.vue';
 
 export default {
     components: { Header },
     data() {
         return {
-            cards: ["模板", "组件", "全部"],
-            libraries: [
+            cur: 0, //默认选中第一个tab 
+            mould: [
                 {
                     id: 1,
                 },
@@ -61,7 +85,22 @@ export default {
                     id: 8,
                 },
             ],
+            com: [
+                {
+                    id: "好困"
+                }
+            ],
+            all: [
+                {
+                    id: "晚安"
+                }
+            ],
         }
+    },
+
+    methods: {
+        // 点击切换板块
+
     }
 }
 </script>
@@ -74,40 +113,48 @@ export default {
 .all {
     width: 100%;
     height: 100vh;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; */
     /* background-color: blueviolet; */
 }
 
 .head {
-    /* height: 15%; */
-    background-color: brown;
-    line-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 27px 0;
+    /* background-color: brown; */
 }
 
 .content {
     flex: auto;
-    background-color: burlywood;
+    /* background-color: burlywood; */
+}
+
+.second {
+    display: flex;
+    align-items: center;
+    padding: 0 100px;
+    /* background-color: blue; */
 }
 
 .nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    /* background-color: aquamarine; */
 }
 
 .serch {
-    /* flex: 1; */
     position: relative;
-    margin: 60px;
-    background-color: cadetblue;
+    /* background-color: cadetblue; */
 }
 
 .serch input {
-    width: 410px;
-    height: 30px;
-    padding: 10px 20px;
-    border: 1px #000 solid;
+    width: 451px;
+    height: 52px;
+    border: 1px solid #17191a;
     border-radius: 10px;
 }
 
@@ -115,7 +162,7 @@ export default {
     position: absolute;
     width: 55px;
     height: 50px;
-    top: 1px;
+    top: 2px;
     right: 2px;
     background-color: #f5d94e;
     /* background-image: url(); */
@@ -127,35 +174,59 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex: 1; */
-    background-color: chartreuse;
+    /* background-color: chartreuse; */
 }
 
 .card {
     width: 95px;
-    height: 50px;
-    line-height: 50px;
+    height: 51px;
+    line-height: 51px;
     margin-left: 20px;
     background-color: #f3f0f3;
     border: none;
     text-align: center;
-    border-radius: 15px;
+    /* background: #16191E; */
+    border-radius: 10px;
+}
+
+.allLibrary {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 0 100px;
 }
 
 .libraries {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 45px;
+}
+
+.libraryItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 31px 40px 31px;
 }
 
 .library {
-    width: 270px;
-    height: 165px;
-    margin: 20px 30px;
-    background-color: coral;
+    width: 266px;
+    height: 163px;
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
-.pages{
+.libraryItem p {
+    height: 13px;
+    font-size: 16px;
+    color: #17191a;
+    line-height: 13px;
+    margin: 15px auto 0 auto;
+}
+
+.pages {
     display: flex;
+    margin-bottom: 30px;
     justify-content: center;
 }
 </style>
