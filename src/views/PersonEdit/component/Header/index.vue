@@ -13,15 +13,55 @@
         :url="item.url"
       ></Item>
     </ul>
-    <el-avatar :size="45" :src="imgavatar" class="user" />
+    <div
+      class="head-image"
+      @mouseenter="showHead = true"
+      @mouseleave="showHead = false"
+    >
+      <el-avatar :size="45" :src="store.state.imgadvatar" />
+      <transition
+        name="animate__animated animate__bounce"
+        enter-active-class="animate__fadeIn"
+        leave-active-class="animate__fadeOut"
+      >
+        <div class="disappear" v-if="showHead">
+          <ul>
+            <li
+              v-for="(item, index) in liContent"
+              :key="index"
+              @click="item.clickContent"
+            >
+              {{ item.title }}
+            </li>
+          </ul>
+        </div>
+      </transition>
+    </div>
+  </div>
+  <div style="opacity: 0">
+    <input
+      v-if="fileInput"
+      ref="fileUpload"
+      type="file"
+      @change="addFile($event)"
+    />
   </div>
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { nextTick, onMounted, reactive, ref } from "vue";
 import Item from "./Item";
 import axios from "axios";
-import {getAdvator} from '@/api/getAdvator'
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { upload } from "@/api/upload";
+import "animate.css";
+import { Elmessage } from "element-plus";
+import { getAdvator } from "@/api/getAdvator";
+const store = useStore();
+console.log(store.state.imgadvatar + "lalal");
+store.dispatch("advatar");
+const router = useRouter();
 const arr = ref([
   {
     url: "/introduce",
@@ -36,58 +76,50 @@ const arr = ref([
     title: "素材库",
   },
 ]);
-
-const imgavatar = ref("");
-// 封装了请求,不需要再自己手动添加token 和 /api 前缀了
-onMounted(() => {
-  getAdvator("/UserInfo/getAdvator").then((res) => {
-    console.log(res);
-    if(res.code==200){
-      imgavatar.value = "http://" + res.advator;
+const showHead = ref(false);
+const fileInput = ref(false);
+const fileUpload = ref(null);
+const liContent = ref([
+  {
+    title: "更换头像",
+    clickContent: () => {
+      fileInput.value = true;
+      nextTick(() => {
+        fileUpload.value.click();
+      });
+    },
+  },
+  {
+    title: "退出登录",
+    clickContent: () => {
+      if (confirm("确定退出吗？")) {
+        router.push("/toForm");
+        sessionStorage.clear();
+      }
+    },
+  },
+]);
+async function addFile(file) {
+  const files = file.target.files[0];
+  if (!files) {
+    return;
+  }
+  const formData = new FormData();
+  formData.append("file", files);
+  await upload("/UserInfo/uploadTouXiang", formData).then((res) => {
+    if (res.code !== 200) {
+      Elmessage({
+        message: res.msg,
+        type: "error",
+        duration: 1000,
+      });
     }
+    fileUpload.value = null;
   });
-  });
-
-
-
+  store.dispatch("advatar");
+}
 </script>
 
 <style scoped>
-img {
-  width: 22px;
-  height: 22px;
-}
-.LC-design {
-  font-family: 'BerlinSansFBDemi-Bold';
-  display: inline-block;
-  width: 155px;
-  height: 28px;
-  margin-left: 21px;
-  font-size: 32px;
-  font-weight: bold;
-  line-height: 21px;
-  text-align: center;
-}
-.LC {
-  color: #17191a;
-}
-.design {
-  margin-left: 10px;
-  color: #aaa;
-}
-.header-list {
-  display: inline-block;
-  width: 500px;
-  height: inherit;
-  margin-left: 627px;
-  vertical-align: bottom;
-}
-.header-list ul {
-  /* padding: 0; */
-  list-style: none;
-  margin: 0;
-}
-.user {
-  vertical-align: middle;
-}
+@import "@/assets/css/PersonEdit/header.css";
 </style>
