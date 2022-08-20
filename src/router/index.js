@@ -25,8 +25,12 @@ const routes = [
   {
       path: '/personedit',
       component: () => import('../views/PersonEdit/index.vue'),
-  }
-  
+  },
+  {
+      path: '/library',
+      component: () => import('../views/Library/index.vue'),
+  },
+ 
 ]
 
 

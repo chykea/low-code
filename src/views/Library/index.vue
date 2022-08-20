@@ -1,0 +1,232 @@
+<template>
+    <div class="all">
+        <div class="head">
+            <Header></Header>
+        </div>
+
+        <div class="content">
+            <div class="second">
+                <div class="nav">
+                    <div class="serch">
+                        <input type="text" placeholder="请输入关键词进行搜索" />
+                        <button></button>
+                    </div>
+
+                    <div class="cards">
+                        <!-- <div class="card" v-for="item in cards" :key="item.id">{{item}}</div> -->
+                        <div class="card" @click="cur=0" :class="{active:cur==0}">模板</div>
+                        <div class="card" @click="cur=1" :class="{active:cur==1}">组件</div>
+                        <div class="card" @click="cur=2" :class="{active:cur==2}">全部</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="allLibrary">
+                <div class="libraries">
+                    <div v-show="cur==0" class="libraryItem" v-for="item in mould" :key="item.id">
+                        <div class="library"></div>
+                        <p>{{item.id}}</p>
+                    </div>
+
+                    <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
+                        <div class="library"></div>
+                        <p>{{item.id}}</p>
+                    </div>
+
+                    <div v-show="cur==2" class="libraryItem" v-for="item in all" :key="item.id">
+                        <div class="library"></div>
+                        <p>{{item.id}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pages">
+                <div class="block">
+                    <el-pagination layout="prev, pager, next" :total="100"></el-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+// volar安装不了 先写vue2
+
+import Header from '@/views/PersonEdit/component/Header/index.vue';
+
+export default {
+    components: { Header },
+    data() {
+        return {
+            cur: 0, //默认选中第一个tab 
+            mould: [
+                {
+                    id: 1,
+                },
+                {
+                    id: 2,
+                },
+                {
+                    id: 3,
+                },
+                {
+                    id: 4,
+                },
+                {
+                    id: 5,
+                },
+                {
+                    id: 6,
+                },
+                {
+                    id: 7,
+                },
+                {
+                    id: 8,
+                },
+            ],
+            com: [
+                {
+                    id: "好困"
+                }
+            ],
+            all: [
+                {
+                    id: "晚安"
+                }
+            ],
+        }
+    },
+
+    methods: {
+        // 点击切换板块
+
+    }
+}
+</script>
+
+<style>
+* {
+    margin: 0;
+}
+
+.all {
+    width: 100%;
+    height: 100vh;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    /* background-color: blueviolet; */
+}
+
+.head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 27px 0;
+    /* background-color: brown; */
+}
+
+.content {
+    flex: auto;
+    /* background-color: burlywood; */
+}
+
+.second {
+    display: flex;
+    align-items: center;
+    padding: 0 100px;
+    /* background-color: blue; */
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: aquamarine; */
+}
+
+.serch {
+    position: relative;
+    /* background-color: cadetblue; */
+}
+
+.serch input {
+    width: 451px;
+    height: 52px;
+    border: 1px solid #17191a;
+    border-radius: 10px;
+}
+
+.serch button {
+    position: absolute;
+    width: 55px;
+    height: 50px;
+    top: 2px;
+    right: 2px;
+    background-color: #f5d94e;
+    /* background-image: url(); */
+    border-radius: 10px;
+    border: none;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: chartreuse; */
+}
+
+.card {
+    width: 95px;
+    height: 51px;
+    line-height: 51px;
+    margin-left: 20px;
+    background-color: #f3f0f3;
+    border: none;
+    text-align: center;
+    /* background: #16191E; */
+    border-radius: 10px;
+}
+
+.allLibrary {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 0 100px;
+}
+
+.libraries {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 45px;
+}
+
+.libraryItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 31px 40px 31px;
+}
+
+.library {
+    width: 266px;
+    height: 163px;
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.libraryItem p {
+    height: 13px;
+    font-size: 16px;
+    color: #17191a;
+    line-height: 13px;
+    margin: 15px auto 0 auto;
+}
+
+.pages {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+</style>
