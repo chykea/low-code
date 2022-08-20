@@ -48,6 +48,25 @@ import MainContent from'@/views/PersonEdit/component/MainContent/index.vue';
 }
 .content-right {
   margin-top: 10px;
+   scrollbar-color: rgba(144, 147, 153, 0.3) transparent;
+  scrollbar-width: thin;
 }
-
+.content-right::-webkit-scrollbar{
+  width: 6px;
+  /* height: 6px; */
+}
+.content-right::-webkit-scrollbar-button{
+  display: none;
+}
+.content-right::-webkit-scrollbar-track{
+  background: transparent;
+}
+.content-right::-webkit-scrollbar-track-piece{
+  background-color: transparent;
+}
+.content-right::-webkit-scrollbar-thumb{
+  background: rgba(144, 147, 153, 0.3);
+  
+  border-radius: 4px;
+}
 </style>
