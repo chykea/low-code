@@ -22,10 +22,9 @@ const prop = defineProps({
  onMounted(()=>{
   const data={id:prop.id}
   myModlePre('/con/getPreview',data).then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data.code==200){
             preview.value=res.data.preview;
-            console.log(preview.value);
         }
     },err=>{
         console.log(err.message);

@@ -1,41 +1,45 @@
 <template>
-  <img src="@/assets/images/PersonEdit/sun.png" />
-  <div class="LC-design">
-    <span class="LC">LC</span>
-    <span class="design">design</span>
-  </div>
-  <div class="header-list">
-    <ul>
-      <Item
-        v-for="(item, index) in arr"
-        :key="index"
-        :title="item.title"
-        :url="item.url"
-      ></Item>
-    </ul>
-    <div
-      class="head-image"
-      @mouseenter="showHead = true"
-      @mouseleave="showHead = false"
-    >
-      <el-avatar :size="45" :src="store.state.imgadvatar" />
-      <transition
-        name="animate__animated animate__bounce"
-        enter-active-class="animate__fadeIn"
-        leave-active-class="animate__fadeOut"
+  <div class="whole-header">
+    <div class="header-left">
+      <img src="@/assets/images/PersonEdit/sun.png" />
+      <div class="LC-design">
+        <span class="LC">LC</span>
+        <span class="design">design</span>
+      </div>
+    </div>
+    <div class="header-list">
+      <ul>
+        <Item
+          v-for="(item, index) in arr"
+          :key="index"
+          :title="item.title"
+          :url="item.url"
+        ></Item>
+      </ul>
+      <div
+        class="head-image"
+        @mouseenter="showHead = true"
+        @mouseleave="showHead = false"
       >
-        <div class="disappear" v-if="showHead">
-          <ul>
-            <li
-              v-for="(item, index) in liContent"
-              :key="index"
-              @click="item.clickContent"
-            >
-              {{ item.title }}
-            </li>
-          </ul>
-        </div>
-      </transition>
+        <el-avatar :size="45" :src="store.state.imgadvatar" />
+        <transition
+          name="animate__animated animate__bounce"
+          enter-active-class="animate__fadeIn"
+          leave-active-class="animate__fadeOut"
+        >
+          <div class="disappear" v-if="showHead">
+            <ul>
+              <li
+                v-for="(item, index) in liContent"
+                :key="index"
+                @click="item.clickContent"
+              >
+                {{ item.title }}
+              </li>
+            </ul>
+          </div>
+        </transition>
+      </div>
     </div>
   </div>
   <div style="opacity: 0">
@@ -59,7 +63,7 @@ import { upload } from "@/api/upload";
 import { Elmessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
-console.log(store.state.imgadvatar + "lalal");
+
 store.dispatch("advatar");
 const router = useRouter();
 const arr = ref([
