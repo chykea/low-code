@@ -1,31 +1,51 @@
 <template>
   <div class="content-inner">
     <div class="head">
-      <el-avatar :src="store.state.imgadvatar"  :size="45"></el-avatar>
+      <el-avatar :src="store.state.imgadvatar" :size="45"></el-avatar>
     </div>
     <p></p>
-    <div class="left-side" v-for="(item, index) in arr" :key="index">
-      <img :src="item.imgSrc" :alt="item.imgAlt" />
+    <div
+      class="left-side"
+      v-for="(item, index) in arr"
+      :key="index"
+      @click="clickchange(index)"
+      :class="{cur:index==current}"
+    >
+      <img v-if="index==current" :src="item.imgSrc1" :title="item.imgAlt" />
+      <img v-else :src="item.imgSrc2" :title="item.imgAlt"/>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref,onMounted } from "vue";
-import {useStore} from 'vuex';
-import {getAdvator} from '@/api/getAdvator';
-const store=useStore();
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { getAdvator } from "@/api/getAdvator";
+const current=ref(0);
+const store = useStore();
 const arr = ref([
   {
-    imgSrc: require("@/assets/images/PersonEdit/project.png"),
+    imgSrc1: require("@/assets/images/PersonEdit/project1.png"),
+    imgSrc2:require("@/assets/images/PersonEdit/project2.png"),
     imgAlt: "我的项目",
   },
   {
-    imgSrc: require("@/assets/images/PersonEdit/modle.png"),
+    imgSrc1: require("@/assets/images/PersonEdit/modle1.png"),
+    imgSrc2: require("@/assets/images/PersonEdit/modle2.png"),
     imgAlt: "我的素材",
   },
 ]);
-
+const emit = defineEmits(["clickNav"]);
+function clickchange(i) {
+  
+  emit("clickNav", i);
+  setTimeout(() => {
+    current.value=i;
+  }, 500);
+}
+defineExpose({
+  current
+})
 </script>
 
 <style scoped>
@@ -62,6 +82,9 @@ const arr = ref([
   width: 45px;
   height: 45px;
   /* margin-top: 30px; */
+}
+.cur{
+  background: #333;
 }
 </style>
 
