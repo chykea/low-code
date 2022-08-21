@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="project project0">
     <div class="project-title">
       <img :src="prop.imgSrc" />
       <span>{{ prop.imgContent }}</span>
@@ -41,7 +41,6 @@
         @remove="remove"
       ></Item>
     </div>
-    <!-- <button @click="save()">点击下载</button> -->
   </div>
 </template>
 
@@ -51,7 +50,10 @@ import { reactive, defineProps, ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import Item from "./Item";
 import axios from "axios";
-import { createPro, deletePro, behavePro} from "@/services/request";
+import{createPro} from "@/api/createPro";
+import{deleteProject} from "@/api/deletePro";
+import{behaveProject} from "@/api/behavePro";
+// import { createPro, deletePro, behavePro} from "@/services/request";
 const store = useStore();
 
 // 接受父组件传来的参数
@@ -72,12 +74,17 @@ const plus = reactive({
 var showInput = ref(false);
 // 获取input框里的value值
 let val = ref("");
-behavePro(plus.counter,plus.totalNames);
+behaveProject(plus.counter,plus.totalNames);
 //点击创建enter键后会增加一个项目内容
-function addDiv() {
+async function addDiv() {
   showInput.value = false;
-  createPro("post", "/api/page/createPage", "application/json",val.value);
-  behavePro(plus.counter,plus.totalNames);
+  const data={pageName:val.value}
+ await createPro("/page/createPage",data).then(res=>{
+  if(res.code==200){
+    console.log("创建了一个");
+  }
+ })
+  behaveProject(plus.counter,plus.totalNames);
    val.value = "";
 }
 // 点击“取消“时执行的函数
@@ -89,7 +96,7 @@ function changShow() {
 function remove(n, id) {
   plus.totalNames.splice(n, 1);
   plus.counter.splice(n, 1);
-  deletePro(id);
+  deleteProject(id);
 }
 </script>
 

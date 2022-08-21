@@ -25,7 +25,6 @@ export default createStore({
         console.log(res);
         if(res.code==200){
           const result="http://" +res.advator;
-          console.log(result);
          context.commit('setAdvatar',result);
         }
       });

@@ -1,5 +1,7 @@
 .whole-header{
     position: relative;
+    display:flex;
+    justify-content: space-between;
 }
 .LC-design {
     font-family: "BerlinSansFBDemi-Bold";
@@ -26,8 +28,8 @@
     display: inline-block;
     width: 500px;
     height: inherit;
-    margin-left: 627px;
-    vertical-align: bottom;
+    /* margin-left: 571px; */
+    /* vertical-align: bottom; */
 }
 
 .header-list ul {
