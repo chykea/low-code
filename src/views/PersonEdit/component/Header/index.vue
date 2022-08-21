@@ -55,7 +55,7 @@ import axios from "axios";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { upload } from "@/api/upload";
-import "animate.css";
+// import "animate.css";
 import { Elmessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
