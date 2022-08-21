@@ -1,7 +1,8 @@
 <template>
+ <div class="mainContains">
   <Project :imgSrc="pro.imgSrc" :imgContent="pro.imgContent"/>
   <Modle :imgSrc="mod.imgSrc" :imgContent="mod.imgContent"/>
-  
+   </div>
 
 </template>
 
@@ -26,5 +27,7 @@ const mod=reactive({
 </script>
 
 <style>
-
+.mainContains{
+  position: relative;
+}
 </style>
