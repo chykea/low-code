@@ -41,10 +41,12 @@
 import { onMounted, ref } from "vue";
 // import "animate.css";
 import axios from "axios";
+import{useRouter} from 'vue-router';
 // import { saveAs } from "@/services/request";
 import{saveAs} from "@/api/saveAs";
 import{projectPre} from "@/api/projectPre";
 const imgPre=ref('');
+const router=useRouter();
 const prop = defineProps({
   order: Number,
   index: Number,
@@ -58,7 +60,9 @@ const arr = ref([
   {
     imgSrc: require("@/assets/images/PersonEdit/edit.png"),
     imgTitle: "编辑",
-    imgEmotion: "",
+     imgEmotion: ()=>{
+      router.push({path:"/editPage",query:{id:prop.id}});
+    },
   },
   {
     imgSrc: require("@/assets/images/PersonEdit/preserve.png"),
