@@ -30,6 +30,11 @@ const routes = [
       path: '/library',
       component: () => import('../views/Library/index.vue'),
   },
+  {
+      path: '/editPage',
+      component: () =>
+          import ('../views/EditPage/index.vue'),
+  }
  
 ]
 
