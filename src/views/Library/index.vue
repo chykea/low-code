@@ -1,7 +1,7 @@
 <template>
     <div class="all">
         <div class="head">
-            <Header></Header>
+            <Header ></Header>
         </div>
 
         <div class="content">
@@ -13,7 +13,6 @@
                     </div>
 
                     <div class="cards">
-                        <!-- <div class="card" v-for="item in cards" :key="item.id">{{item}}</div> -->
                         <div class="card" @click="cur=0" :class="{active:cur==0}">模板</div>
                         <div class="card" @click="cur=1" :class="{active:cur==1}">组件</div>
                         <div class="card" @click="cur=2" :class="{active:cur==2}">全部</div>
@@ -50,204 +49,210 @@
 </template>
 
 <script>
-    // volar安装不了 先写vue2
-    import Header from '@/views/PersonEdit/component/Header/index.vue';
-    import { getPages } from '@/api/getPages';
-    import { getMoulds } from '@/api/getMould';
-    // console.log(getPages);
-    // console.log(getMoulds);
+// volar安装不了 先写vue2
+import Header from '@/views/PersonEdit/component/Header/index.vue';
+import { getPages } from '@/api/getPages';
+import { getMoulds } from '@/api/getMould';
+// console.log(getPages);
+// console.log(getMoulds);
 
-    export default {
-        components: { Header },
-        data() {
-            return {
-                cur: 0, //默认选中第一个tab 
-                backgroundImg: require('@/assets/images/library/search.png'),
-                mould: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    },
-                    {
-                        id: 3,
-                    },
-                    {
-                        id: 4,
-                    },
-                    {
-                        id: 5,
-                    },
-                    {
-                        id: 6,
-                    },
-                    {
-                        id: 7,
-                    },
-                    {
-                        id: 8,
-                    },
-                ],
-                com: [
-                    {
-                        id: "好困"
-                    }
-                ],
-                all: [
-                    {
-                        id: "晚安"
-                    }
-                ],
-            }
-        },
-
-        methods: {
-            // 获取页面数量
-            async getpage() {
-                // console.log("test");
-                let res = await getPages();
-                console.log(res.total);
-            },
-
-            // 获取模板
-            async getMould(cur) {
-                console.log(cur);
-                let res = await getMoulds(cur);
-                console.log(res);
-            },
-        },
-
-        mounted() {
-            this.getpage();
-            this.getMould(1);
+export default {
+    components: { Header },
+    data() {
+        return {
+            flag: false,
+            cur: 0, //默认选中第一个tab 
+            backgroundImg: require('@/assets/images/library/search.png'),
+            mould: [
+                {
+                    id: 1,
+                },
+                {
+                    id: 2,
+                },
+                {
+                    id: 3,
+                },
+                {
+                    id: 4,
+                },
+                {
+                    id: 5,
+                },
+                {
+                    id: 6,
+                },
+                {
+                    id: 7,
+                },
+                {
+                    id: 8,
+                },
+            ],
+            com: [
+                {
+                    id: "好困"
+                }
+            ],
+            all: [
+                {
+                    id: "晚安"
+                }
+            ],
         }
+    },
+
+    methods: {
+        // 获取页面数量
+        async getpage() {
+            // console.log("test");
+            let res = await getPages();
+            console.log(res.total);
+        },
+
+        // 获取模板
+        async getMould(cur) {
+            console.log(cur);
+            let res = await getMoulds(cur);
+            console.log(res);
+        },
+    },
+
+    mounted() {
+        this.getpage();
+        this.getMould(1);
     }
+}
 </script>
 
 <style>
-    .all {
-        width: 100%;
-        height: 100vh;
-        /* display: flex;
+.all {
+    width: 100%;
+    height: 100vh;
+    /* margin: auto; */
+    /* display: flex;
         flex-direction: column;
-        justify-content: center;
-        background-color: blueviolet; */
-    }
+        justify-content: center; */
+    /* background-color: blueviolet; */
+}
 
-    .head {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 27px 0;
-        /* background-color: brown; */
-    }
+.head {
+    padding: 27px 0;
+    width: 85%;
+    margin: auto;
+}
 
-    .content {
-        flex: auto;
-        /* background-color: burlywood; */
-    }
+.head .Header {
+    background-color: aquamarine;
+}
 
-    .second {
-        display: flex;
-        align-items: center;
-        padding: 0 100px;
-        /* background-color: blue; */
-    }
+.content {
+    /* flex: auto; */
+    width: 85%;
+    margin: auto;
+    /* background-color: burlywood; */
+}
 
-    .nav {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        /* background-color: aquamarine; */
-    }
+.second {
+    display: flex;
+    align-items: center;
+    /* padding: 0 100px; */
+    /* background-color: blue; */
+}
 
-    .serch {
-        position: relative;
-        /* background-color: cadetblue; */
-    }
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: aquamarine; */
+}
 
-    .serch input {
-        width: 431px;
-        height: 52px;
-        padding-left: 20px;
-        border: 1px solid #17191a;
-        border-radius: 10px;
-    }
+.serch {
+    position: relative;
+    /* background-color: cadetblue; */
+}
 
-    .serch button {
-        position: absolute;
-        width: 55px;
-        height: 50px;
-        top: 2px;
-        right: 2px;
-        background-color: #f5d94e;
-        border-radius: 10px;
-        border: none;
-    }
+.serch input {
+    width: 431px;
+    height: 52px;
+    padding-left: 20px;
+    border: 1px solid #17191a;
+    border-radius: 10px;
+}
 
-    .cards {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* background-color: chartreuse; */
-    }
+.serch button {
+    position: absolute;
+    width: 55px;
+    height: 50px;
+    top: 2px;
+    right: 2px;
+    background-color: #f5d94e;
+    border-radius: 10px;
+    border: none;
+}
 
-    .card {
-        width: 95px;
-        height: 51px;
-        line-height: 51px;
-        margin-left: 20px;
-        background-color: #f3f0f3;
-        border: none;
-        text-align: center;
-        /* background: #16191E; */
-        border-radius: 10px;
-    }
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: chartreuse; */
+}
 
-    .active {
-        background-color: #17181f;
-        color: white;
-    }
+.card {
+    width: 95px;
+    height: 51px;
+    line-height: 51px;
+    margin-left: 20px;
+    background-color: #f3f0f3;
+    border: none;
+    text-align: center;
+    /* background: #16191E; */
+    border-radius: 10px;
+}
 
-    .allLibrary {
-        display: flex;
-        /* justify-content: center; */
-        align-items: center;
-        padding: 0 100px;
-    }
+.active {
+    background-color: #17181f;
+    color: white;
+}
 
-    .libraries {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 45px;
-    }
+.allLibrary {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* padding: 0 100px; */
+}
 
-    .libraryItem {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 31px 40px 31px;
-    }
+.libraries {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 45px;
+}
 
-    .library {
-        width: 266px;
-        height: 163px;
-        background: #f1f1f1;
-        border-radius: 10px;
-    }
+.libraryItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 28px 40px 28px;
+}
 
-    .libraryItem p {
-        height: 13px;
-        font-size: 16px;
-        color: #17191a;
-        line-height: 13px;
-        margin: 15px auto 0 auto;
-    }
+.library {
+    width: 266px;
+    height: 163px;
+    background: #f1f1f1;
+    border-radius: 10px;
+}
 
-    .pages {
-        display: flex;
-        margin-bottom: 30px;
-        justify-content: center;
-    }
+.libraryItem p {
+    height: 13px;
+    font-size: 16px;
+    color: #17191a;
+    line-height: 13px;
+    margin: 15px auto 0 auto;
+}
+
+.pages {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+}
 </style>
