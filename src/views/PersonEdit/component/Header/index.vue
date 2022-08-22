@@ -59,8 +59,8 @@ import axios from "axios";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { upload } from "@/api/upload";
-// import "animate.css";
-import { Elmessage } from "element-plus";
+import "animate.css";
+import { ElMessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
 
@@ -112,7 +112,7 @@ async function addFile(file) {
   formData.append("file", files);
   await upload("/UserInfo/uploadTouXiang", formData).then((res) => {
     if (res.code !== 200) {
-      Elmessage({
+      ElMessage({
         message: res.msg,
         type: "error",
         duration: 1000,
