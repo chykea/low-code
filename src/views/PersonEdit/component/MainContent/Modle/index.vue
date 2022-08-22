@@ -1,5 +1,5 @@
-、<template>
-  <div class="project">
+<template>
+  <div class="project project1">
     <div class="project-title">
       <img :src="prop.imgSrc" />
       <span>{{ prop.imgContent }}</span>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Item from "./Item";
 import { Modle } from "@/api/myModle";
 const counter = ref([]);
@@ -25,7 +25,9 @@ const prop = defineProps({
   imgSrc: String,
   imgContent: String,
 });
-Modle(counter.value, componentName.value);
+onMounted(()=>{
+  Modle(counter.value, componentName.value);
+})
 </script>
 
 <style scoped>

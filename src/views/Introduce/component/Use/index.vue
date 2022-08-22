@@ -4,7 +4,7 @@
         <Header>
         <template v-slot:user_login>
             <LoginBtn v-if="!token"/>
-            <el-avatar :size="45" :src="imgUser"  />
+            <el-avatar v-else :size="45" :src="imgUser"  />
         </template>
     </Header>
     </div>

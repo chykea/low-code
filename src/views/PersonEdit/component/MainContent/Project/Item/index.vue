@@ -8,7 +8,7 @@
       <!-- src\assets\images\PersonEdit\test.png -->
       <div class="new-content cur">
         <div class="new-content-wrap">
-          <img src="@/assets/images/PersonEdit/test.png" />
+          <img :src="imgPre" />
         </div>
       </div>
       <transition
@@ -38,11 +38,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 // import "animate.css";
 import axios from "axios";
-import { saveAs } from "@/services/request";
-
+import{useRouter} from 'vue-router';
+// import { saveAs } from "@/services/request";
+import{saveAs} from "@/api/saveAs";
+import{projectPre} from "@/api/projectPre";
+const imgPre=ref('');
+const router=useRouter();
 const prop = defineProps({
   order: Number,
   index: Number,
@@ -56,13 +60,13 @@ const arr = ref([
   {
     imgSrc: require("@/assets/images/PersonEdit/edit.png"),
     imgTitle: "编辑",
-    imgEmotion: "",
+     imgEmotion: ()=>{
+      router.push({path:"/editPage",query:{id:prop.id}});
+    },
   },
   {
     imgSrc: require("@/assets/images/PersonEdit/preserve.png"),
     imgTitle: "另存为",
-    // imgHref:,
-    // imgName:,
     imgEmotion: () => {
        saveAs(prop.id);
     },
@@ -81,6 +85,15 @@ const arr = ref([
 function del(n, id) {
   emit("remove", n, id);
 }
+onMounted(()=>{
+  const data={id:prop.id}
+  projectPre("/page/getPreview",data).then(res=>{
+    console.log(res.data.data);
+    if(res.data.code==200){
+      imgPre.value=res.data.data.preview;
+    }
+  })
+})
 </script>
 
 <style>

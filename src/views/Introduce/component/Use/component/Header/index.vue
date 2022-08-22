@@ -6,8 +6,8 @@
     <div class="introduce-use-nav">
         <div class="introduce-use-nav-box">
             <ul class="introduce-use-nav-list">
-                <li><router-link to="">新手教程</router-link> </li>
-                <li><router-link to="">项目管理</router-link> </li>
+                <li><router-link to="/introduce">新手教程</router-link> </li>
+                <li><router-link to="/personedit">项目管理</router-link> </li>
                 <li><router-link to="">素材库</router-link> </li>
             </ul>
             <slot name="user_login"></slot>

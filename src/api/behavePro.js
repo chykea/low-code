@@ -8,7 +8,7 @@ function behavePro(url) {
 //渲染项目个数
 export function behaveProject(ans, names) {
     behavePro('/page/getAllPage').then(res => {
-        console.log(res);
+        console.log(res.data);
         if (res.code == 200) {
             const arr = res.data;
             for (let i = 0; i < arr.length; i++) {
