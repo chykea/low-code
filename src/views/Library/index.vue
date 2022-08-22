@@ -55,7 +55,7 @@
     import { getPages } from '@/api/getPages';
     import { getMoulds } from '@/api/getMould';
     // console.log(getPages);
-    console.log(getMoulds);
+    // console.log(getMoulds);
 
     export default {
         components: { Header },
@@ -107,12 +107,12 @@
             async getpage() {
                 // console.log("test");
                 let res = await getPages();
-                console.log(res);
+                console.log(res.total);
             },
 
             // 获取模板
             async getMould(cur) {
-                // console.log("test");
+                console.log(cur);
                 let res = await getMoulds(cur);
                 console.log(res);
             },
@@ -120,7 +120,7 @@
 
         mounted() {
             this.getpage();
-            this.getMould('1');
+            this.getMould(1);
         }
     }
 </script>
