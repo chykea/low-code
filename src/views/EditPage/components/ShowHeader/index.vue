@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="show_header">
       <form action="">
         <div class="left">
@@ -13,7 +12,6 @@
         </div>
       </form>
     </div>
-  </div>
 </template>
 
 <script>
