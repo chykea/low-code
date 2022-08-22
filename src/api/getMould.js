@@ -1,9 +1,11 @@
 import request from "@/utils/request";
 
-export function getMoulds(cur){
+export function getMoulds(params){
     return request({
         method: 'post',
         url: '/public/getPage',
-        data: cur,
+        data: {
+            params
+        },
     })
 }

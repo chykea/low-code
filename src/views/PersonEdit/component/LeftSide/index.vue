@@ -1,6 +1,6 @@
 <template>
   <div class="content-inner">
-    <div class="head">
+    <div class="left-head">
       <el-avatar :src="store.state.imgadvatar" :size="45"></el-avatar>
     </div>
     <p></p>
@@ -78,7 +78,7 @@ defineExpose({
   line-height: 21px;
   text-align: center;
 }
-.head {
+.left-head {
   width: 45px;
   height: 45px;
   /* margin-top: 30px; */
