@@ -32,18 +32,17 @@
     <p class="new-text">
       <a href="">{{ val }}</a>
     </p>
-
-    <!-- <span>{{prop.order}}</span> -->
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
-// import "animate.css";
+import "animate.css";
+import{useRouter} from 'vue-router';
 import axios from "axios";
-// import { saveAs } from "@/services/request";
 import{saveAs} from "@/api/saveAs";
 import{projectPre} from "@/api/projectPre";
+const router=useRouter();
 const imgPre=ref('');
 const prop = defineProps({
   order: Number,
@@ -58,7 +57,9 @@ const arr = ref([
   {
     imgSrc: require("@/assets/images/PersonEdit/edit.png"),
     imgTitle: "编辑",
-    imgEmotion: "",
+    imgEmotion: ()=>{
+      router.push({path:"/editPage",query:{id:prop.id}});
+    },
   },
   {
     imgSrc: require("@/assets/images/PersonEdit/preserve.png"),

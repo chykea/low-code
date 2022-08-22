@@ -63,7 +63,6 @@ import "animate.css";
 import { ElMessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
-
 store.dispatch("advatar");
 const router = useRouter();
 const arr = ref([
