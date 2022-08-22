@@ -62,7 +62,7 @@ watch(()=>props.parentChecked,(newVal)=>{
 
 function dragIn(e){
     const {target} = e;
-    const {target:{parentNode}} = e;
+    const {target:{parentNode}} = e; 
     if(isChecked.value){
         if(parentNode.className!=='show'){
             control.value.prop.boxStyle.position = 'relative';
@@ -70,8 +70,15 @@ function dragIn(e){
             control.value.prop.boxStyle.left = 0;
         }else{
             control.value.prop.boxStyle.position = 'absolute';
-            control.value.prop.boxStyle.top = e.clientY - parentNode.offsetTop-(Math.floor(target.offsetHeight/2))+'px';
-            control.value.prop.boxStyle.left = e.clientX - parentNode.offsetLeft-(Math.floor(target.offsetWidth/2))+'px';
+            let left = e.clientX - parentNode.offsetLeft-(Math.floor(target.offsetWidth/2));
+            let top =  e.clientY - parentNode.offsetTop-(Math.floor(target.offsetHeight/2));
+            // 拖拽区域限制
+            if((left>=-1 && top>=-1)&&(left<=(parentNode.offsetWidth-target.offsetWidth)&&top<=(parentNode.offsetHeight-target.offsetHeight))){ 
+                control.value.prop.boxStyle.top = top+'px';
+                control.value.prop.boxStyle.left = left+'px';
+            }else{
+                return
+            }
         }
     }
 }

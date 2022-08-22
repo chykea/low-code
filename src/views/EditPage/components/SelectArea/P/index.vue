@@ -79,8 +79,13 @@ function dragIn(e){
     if(isChecked.value){
         let left = e.clientX - parentNode.offsetLeft-(Math.floor(target.offsetWidth/5));
         let top =  e.clientY - parentNode.offsetTop-(Math.floor(target.offsetHeight/4));
-        control.value.prop.boxStyle.top = top+'px';
-        control.value.prop.boxStyle.left = left+'px';
+        // 拖拽区域限制
+        if((left>=-1 && top>=-1)&&(left<=(parentNode.offsetWidth-target.offsetWidth-1)&&top<=(parentNode.offsetHeight-target.offsetHeight))){ 
+            control.value.prop.boxStyle.top = top+'px';
+            control.value.prop.boxStyle.left = left+'px';
+        }else{
+            return
+        }
     }
 }
 
