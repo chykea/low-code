@@ -40,6 +40,7 @@ import { onMounted, ref } from "vue";
 import "animate.css";
 import{useRouter} from 'vue-router';
 import axios from "axios";
+
 import{saveAs} from "@/api/saveAs";
 import{projectPre} from "@/api/projectPre";
 const router=useRouter();
@@ -57,7 +58,7 @@ const arr = ref([
   {
     imgSrc: require("@/assets/images/PersonEdit/edit.png"),
     imgTitle: "编辑",
-    imgEmotion: ()=>{
+     imgEmotion: ()=>{
       router.push({path:"/editPage",query:{id:prop.id}});
     },
   },

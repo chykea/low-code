@@ -75,7 +75,7 @@ const arr = ref([
     title: "项目管理",
   },
   {
-    url: "",
+    url: "/library",
     title: "素材库",
   },
 ]);
