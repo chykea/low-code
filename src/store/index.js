@@ -21,6 +21,7 @@ export default createStore({
                             "position": 'absolute',
                             "top": '0',
                             "left": '0',
+                            'z-index': '0',
                             "color": "orange", // 字体颜色
                             "background-color": "", // 背景颜色
                             'font-size': '14px', // 字体大小
@@ -34,7 +35,6 @@ export default createStore({
                         className: '',
                         funcStr: '',
                         boxStyle: {
-                            'z-index': '0'
                         },
                     },
                     childNode: [],
@@ -57,9 +57,9 @@ export default createStore({
                         className: '',
                         funcStr: '',
                         boxStyle: {
-                            position: 'absolute',
-                            top: '0',
-                            left: '0',
+                            'position': 'absolute',
+                            'top': '0',
+                            'left': '0',
                             'z-index': '0'
                         },
                     },
