@@ -1,8 +1,9 @@
-.whole-header{
+.whole-header {
     position: relative;
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
+
 .LC-design {
     font-family: "BerlinSansFBDemi-Bold";
     display: inline-block;

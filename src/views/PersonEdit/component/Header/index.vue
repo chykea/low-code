@@ -18,7 +18,7 @@
       </ul>
       <div
         class="head-image"
-        @mouseenter="showHead = true"
+        @mouseenter="showHead = true;test()"
         @mouseleave="showHead = false"
       >
         <el-avatar :size="45" :src="store.state.imgadvatar" />
@@ -27,7 +27,7 @@
           enter-active-class="animate__fadeIn"
           leave-active-class="animate__fadeOut"
         >
-          <div class="disappear" v-if="showHead">
+          <div class="disappear" v-if="showHead && select" >
             <ul>
               <li
                 v-for="(item, index) in liContent"
@@ -63,6 +63,18 @@ import "animate.css";
 import { ElMessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
+
+
+let select = ref(true);
+const test = () => {
+  // console.log(123213);
+  // console.log(select.value);
+  select.value=false;
+}
+defineExpose({
+  test,
+  select,
+})
 
 store.dispatch("advatar");
 const router = useRouter();
