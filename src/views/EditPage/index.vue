@@ -12,11 +12,14 @@
 </template>
 
 <script setup>
-// import { ref,reactive,toRaw, onMounted } from 'vue';
-
 import Header from "@/views/PersonEdit/component/Header/index.vue";
 import SelectArea from "./components/SelectArea/index.vue";
-// import {useStore} from 'vuex';
+import{useRoute} from "vue-router";
+import { onMounted, provide } from "vue";
+const route=useRoute();
+const queryId=route.query.id;//用于接收路由传过来的参数
+provide("queryId",queryId);
+
 </script>
 
 <style lang="scss">
