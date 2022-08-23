@@ -30,19 +30,21 @@
     </Draggable>
     <teleport to='#editBox' v-if="isChecked">
         <div>
-            <h2>段落设置</h2>
+            <h4>段落设置</h4>
             <div>
-                <span>文字排版</span>
-                <select v-model="control.prop.boxStyle['text-align']">
-                    <option value="">默认</option>
-                    <option value="left">居左</option>
-                    <option value="center">居中</option>
-                    <option value="right">居右</option>
-                </select><br/>
-                <span>段落宽度</span><input type="text" v-model="control.prop.style.width"><br/>
-                <span>段落高度</span><input type="text" v-model="control.prop.style.height"><br/>
-                <span>层叠性</span><input type="text" v-model="control.prop.boxStyle['z-index']"><br/>
-                <button @click="deleteComponent">移除组件</button>
+                <div class="handleSelect">
+                    <span>文字排版</span>
+                    <select v-model="control.prop.boxStyle['text-align']">
+                        <option value="">默认</option>
+                        <option value="left">居左</option>
+                        <option value="center">居中</option>
+                        <option value="right">居右</option>
+                    </select>
+                </div>
+                <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width"><br/>
+                <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height"><br/>
+                <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
+                <button class="btnStyle deleteDom" @click="deleteComponent">移除组件</button>
             </div>
         </div>
     </teleport>
@@ -97,6 +99,13 @@ function deleteComponent(){
 }
 </script>
 <style lang='scss' scoped>
+#editBox {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
 .pBox{
     padding: 10px 5px;
     background-color: #bfa;
@@ -106,5 +115,8 @@ function deleteComponent(){
 }
 .ghost{
     opacity: 0;
+}
+#editBox .zIndex {
+    width: 142px;
 }
 </style>

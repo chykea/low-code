@@ -21,7 +21,7 @@ import SelectArea from "./components/SelectArea/index.vue";
 
 <style lang="scss">
   .PageOut {
-    width: 1366px;
+    width: 1920px;
     height: 100vh;
     margin: 0 auto;
   }
@@ -40,7 +40,7 @@ import SelectArea from "./components/SelectArea/index.vue";
     height: var(--el-header-height);
   }
   .header {
-    width: 1366px;
+    width: 1636px;
     line-height: 60px;
     margin: 0 auto;
   }

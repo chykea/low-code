@@ -36,7 +36,7 @@ function clickNav(index) {
     behavior: "smooth",
   });
 }
-//滚动事件
+
 function handleScroll() {
   // const mainContain = document.querySelector(".mainContains");
   const contain = document.querySelector("#contain");
@@ -58,7 +58,7 @@ function handleScroll() {
 }
 .header {
   width: 1366px;
-  height: 100px;
+  /* height: 70px; */
   /* margin: 0 auto; */
   line-height: 60px;
 }
