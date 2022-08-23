@@ -1,6 +1,6 @@
 <template>
   <div class="adjustment">
-
+      <div id="editBox"></div>
   </div>
 </template>
 

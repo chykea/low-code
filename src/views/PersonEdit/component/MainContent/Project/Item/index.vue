@@ -32,21 +32,19 @@
     <p class="new-text">
       <a href="">{{ val }}</a>
     </p>
-
-    <!-- <span>{{prop.order}}</span> -->
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
-// import "animate.css";
-import axios from "axios";
+import "animate.css";
 import{useRouter} from 'vue-router';
-// import { saveAs } from "@/services/request";
+import axios from "axios";
+
 import{saveAs} from "@/api/saveAs";
 import{projectPre} from "@/api/projectPre";
-const imgPre=ref('');
 const router=useRouter();
+const imgPre=ref('');
 const prop = defineProps({
   order: Number,
   index: Number,

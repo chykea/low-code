@@ -63,7 +63,6 @@ import "animate.css";
 import { ElMessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
-
 store.dispatch("advatar");
 const router = useRouter();
 const arr = ref([
@@ -76,7 +75,7 @@ const arr = ref([
     title: "项目管理",
   },
   {
-    url: "",
+    url: "/library",
     title: "素材库",
   },
 ]);
