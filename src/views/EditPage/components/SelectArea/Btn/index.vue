@@ -46,7 +46,6 @@ import {useStore} from 'vuex'
 
 const store = useStore();
 
-let color = ref('');
 // 限定父组件传值
 const props = defineProps({
     id:String,

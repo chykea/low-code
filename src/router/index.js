@@ -34,8 +34,11 @@ const routes = [
       path: '/editPage',
       component: () =>
           import ('../views/EditPage/index.vue'),
-  }
- 
+  },
+  {
+    path: '/preview',
+    component: () => import('../views/Preview/index.vue'),
+  },
 ]
 
 
@@ -63,6 +66,11 @@ router.beforeEach((to,from,next)=>{
       next()
       return
     }else{ // 没有就跳到登录
+      ElMessage({
+        type:'error',
+        message:'请先登录',
+        duration:1000
+      })
       next('/toForm/login')
       return
     }

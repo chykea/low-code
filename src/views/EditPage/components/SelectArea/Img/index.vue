@@ -40,6 +40,7 @@
 <script setup>
 import {defineProps,ref,watch} from 'vue'
 import {useStore} from 'vuex'
+import service  from '@/utils/request'
 const store = useStore();
 const props = defineProps({
     id:String,
@@ -57,6 +58,9 @@ let isChecked = ref(false)
 // 实时预览图片
 function changeImg(e){
     const {target:obj} = e;
+    service.post('/page/uploadImg',{file:obj.files[0]}).then((res)=>{
+        console.log(res);
+    }).catch(()=>{})
     control.value.prop.src= getObjectURL(obj.files[0]);
 }
 
