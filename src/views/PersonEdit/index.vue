@@ -58,7 +58,7 @@ function handleScroll() {
 }
 .header {
   width: 1366px;
-  /* height: 70px; */
+  height: 100px;
   /* margin: 0 auto; */
   line-height: 60px;
 }

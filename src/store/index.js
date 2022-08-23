@@ -5,7 +5,6 @@ export default createStore({
         return {
             token: '', // 用于保存后端返回的token
             imgadvatar: '', //获取头像地址
-
             dragInitList: [ // 拖拽组件列表  初始化数组
                 {
                     id: 1,
@@ -21,7 +20,8 @@ export default createStore({
                             "position": 'absolute',
                             "top": '0',
                             "left": '0',
-                            "color": "orange", // 字体颜色
+                            'z-index': '0',
+                            "color": "", // 字体颜色
                             "background-color": "", // 背景颜色
                             'font-size': '14px', // 字体大小
                             "font-weight": '', // 字体权重
@@ -33,9 +33,7 @@ export default createStore({
                         Listener: '',
                         className: '',
                         funcStr: '',
-                        boxStyle: {
-                            'z-index': '0'
-                        },
+                        boxStyle: {},
                     },
                     childNode: [],
                 },
@@ -47,6 +45,8 @@ export default createStore({
                     prop: {
                         text: '默认文本',
                         style: {
+                            "width": '300px', // 宽度
+                            "height": "150px", // 高度
                             "color": "orange",
                             'font-size': '14px', // 字体大小
                             "font-weight": '', // 字体权重
@@ -57,9 +57,9 @@ export default createStore({
                         className: '',
                         funcStr: '',
                         boxStyle: {
-                            position: 'absolute',
-                            top: '0',
-                            left: '0',
+                            'position': 'absolute',
+                            'top': '0',
+                            'left': '0',
                             'z-index': '0'
                         },
                     },
@@ -76,7 +76,6 @@ export default createStore({
                             "color": "orange",
                             'vertical-align': '',
                             'text-decoration': '',
-                            "background-color": "",
                             'font-size': '14px',
                             "font-weight": '',
                         },
@@ -103,8 +102,11 @@ export default createStore({
                     prop: {
                         text: '',
                         style: {
+                            "color": "orange",
                             'width': '',
-                            'height': ''
+                            'height': '',
+                            'font-size': '14px',
+                            "font-weight": '',
                         },
                         func: null,
                         Listener: '',
@@ -157,6 +159,7 @@ export default createStore({
                             "width": "300px",
                             "height": "",
                             'vertical-align': '',
+                            "background-color": "",
                         },
                         func: null,
                         Listener: '',

@@ -34,8 +34,11 @@ const routes = [
       path: '/editPage',
       component: () =>
           import ('../views/EditPage/index.vue'),
-  }
- 
+  },
+  {
+    path: '/preview',
+    component: () => import('../views/Preview/index.vue'),
+  },
 ]
 
 
@@ -58,11 +61,16 @@ router.beforeEach((to,from,next)=>{
     next()
     return
   }
-  if(to.path==='/personedit'){ // 跳转到个人主页时判断是否有登陆过
+  if(to.path==='/personedit'||to.path==='/editPage'||to.path==='library'){ // 跳转到个人主页或其他页面时判断是否有登陆过
     if(token){ // token存在就通过
       next()
       return
     }else{ // 没有就跳到登录
+      ElMessage({
+        type:'error',
+        message:'请先登录',
+        duration:1000
+      })
       next('/toForm/login')
       return
     }

@@ -5,14 +5,67 @@
         <button type="reset" class="renameBtn">重命名</button>
       </div>
       <div class="right">
-        <button class="presee">预览</button>
-        <button class="save">保存</button>
-        <button class="release">发布</button>
+        <button class="presee" @click="preview">预览</button>
+        <button class="save" @click="save">保存</button>
+        <button class="release" @click="publishing()">发布</button>
       </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import service from '@/utils/ApplicationJson';
+import {publish} from "@/api/publish";
+import { inject } from "vue";
+import axios from 'axios';
+import { ElMessage } from 'element-plus';
+import { useRoute, useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+const store = useStore()
+const route = useRoute()
+const router = useRouter()
+
+function save(){
+  service({
+    method:'post',
+    url:'/page/modifyPage',
+    data:{
+      id:parseInt(route.query.id),
+      pageContent:JSON.parse(JSON.stringify(store.state.componentList)),
+      htmlStr:'',
+      base64Code:''
+    }
+  }).then(res=>{
+    console.log(res);
+    ElMessage({
+      message:'保存成功',
+      type:'success',
+      duration:1000
+    })
+  }).catch(err=>{
+    console.log(err);
+  })
+
+}
+
+function preview(){
+  router.push(`/preview?id=${route.query.id}`)
+};
+
+const queryId=inject("queryId");
+//“发布”请求接口
+function publishing(){
+  const data={id:queryId};
+  publish("/page/turnToPublic",data).then(res=>{
+    // console.log(res);
+    if(res.data.code==200){
+      ElMessage({
+        message:"发布成功！",
+        type:"success",
+        duration:1000
+      })
+    }
+  })
+}
 </script>
 
 <style lang="scss">
@@ -52,6 +105,7 @@
   }
   .right  {
     button{
+      cursor: pointer;
       border: none;
       width: 93px;
       height: 45px;
