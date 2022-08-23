@@ -14,8 +14,8 @@
         <h4>段落文本编辑</h4>
         <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
         <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
-        <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontSize"><br/>
-        <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontWeight"><br/>
+        <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-size']"><br/>
+        <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-weight']"><br/>
         <div class="handleSelect">
             <span>文字排版</span>
             <select v-model="control.prop.style['vertical-align']">

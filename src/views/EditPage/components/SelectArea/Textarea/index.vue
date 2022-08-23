@@ -18,11 +18,11 @@
                 <div>
                     <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br/>
                     <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br/>
-                    <span>边框宽度</span><input class="inputStyle four" type="text" v-model="control.prop.style.borderWidth"><br/>
+                    <span>边框宽度</span><input class="inputStyle four" type="text" v-model="control.prop.style['border-width']"><br/>
                     <!-- dotted solid double dashed -->
                     <div class="handleSelect">
                         <span>边框样式</span>
-                        <select v-model="control.prop.style['borderStyle']">
+                        <select v-model="control.prop.style['border-style']">
                             <option value="">无</option>
                             <option value="solid">实线</option>
                             <option value="dashed">虚线</option>
@@ -30,10 +30,10 @@
                             <option value="double">双实线</option>
                         </select>
                     </div>
-                    <span>边框颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.borderColor"></el-color-picker><br/>
+                    <span>边框颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style['border-color']"></el-color-picker><br/>
                     <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
-                    <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontSize"><br/>
-                    <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontWeight"><br/>
+                    <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-size']"><br/>
+                    <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-weight']"><br/>
                     <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
                     <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 </div>
