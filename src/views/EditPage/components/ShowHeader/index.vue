@@ -7,12 +7,30 @@
       <div class="right">
         <button class="presee">预览</button>
         <button class="save">保存</button>
-        <button class="release">发布</button>
+        <button class="release" @click="publishing()">发布</button>
       </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import {publish} from "@/api/publish";
+import { inject } from "vue";
+import { ElMessage } from 'element-plus'
+const queryId=inject("queryId");
+//“发布”请求接口
+function publishing(){
+  const data={id:queryId};
+  publish("/page/turnToPublic",data).then(res=>{
+    // console.log(res);
+    if(res.data.code==200){
+      ElMessage({
+        message:"发布成功！",
+        type:"success",
+        duration:1000
+      })
+    }
+  })
+}
 </script>
 
 <style lang="scss">
