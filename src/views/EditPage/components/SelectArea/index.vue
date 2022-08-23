@@ -9,21 +9,23 @@
       pull 拖拽的功能  有三个取值  true(开启拖拽)  false(关闭拖拽)  clone(拖拽到name相同的一种就复制数据,实现拖拽组件的核心) 
     -->
       <!-- 拖拽按钮 -->
+      <div class="left_select">
       <Draggable
-        class="left_select"
+        class="select_box"
         :list="list"
         item-key="id"
         :group="{name:'component',pull:'clone',put:false}"
         :clone="cloneNew"
       >
         <template #item="{element}">
-          <div class="select_item">
-            <button :title="element.title" class="select_button">
-              <img class="select_img" :src="element.imgSrc">
-            </button>
+            <div class="select_item">
+              <button :title="element.title" class="select_button">
+                <img class="select_img" :src="element.imgSrc">
+              </button>
           </div>
         </template>
       </Draggable>
+      </div>
       <!-- 显示区, -->
       <div class="EditArea">
         <ShowHeader></ShowHeader>
@@ -82,6 +84,11 @@ import AdjustArea from '../AdjustArea/index.vue';
   watch(()=>store.state.componentList,(newVal)=>{
     childArr.value = newVal
   })
+  // onMounted(()=>{
+  //   axios({
+
+  //   })  
+  // })
  
   // clone问题的处理函数
   function cloneNew(origin){
@@ -91,7 +98,7 @@ import AdjustArea from '../AdjustArea/index.vue';
   }
 </script>
 
-<style>
+<style lang="scss">
 
   .Edit_select_area{
     display: flex;
@@ -99,15 +106,23 @@ import AdjustArea from '../AdjustArea/index.vue';
 
   .left_select {
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 92px;
-    height: 659px;
-    padding-top: 103px;
+    height: 843px;
     border-right: 1px solid  #D1D1D1;
+    .select_box{
+      height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
   }
   .select_button {
     margin-top: 7px;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     border: none;
     background-color: transparent;
   }
@@ -125,7 +140,7 @@ import AdjustArea from '../AdjustArea/index.vue';
   .show {
     position: relative;
     width: 1017px;
-    height: 556px;
+    height: 740px;
   }
 
   .select ul{
