@@ -52,6 +52,7 @@
   }
   .right  {
     button{
+      cursor: pointer;
       border: none;
       width: 93px;
       height: 45px;

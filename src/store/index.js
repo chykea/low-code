@@ -5,7 +5,6 @@ export default createStore({
         return {
             token: '', // 用于保存后端返回的token
             imgadvatar: '', //获取头像地址
-
             dragInitList: [ // 拖拽组件列表  初始化数组
                 {
                     id: 1,
@@ -22,7 +21,7 @@ export default createStore({
                             "top": '0',
                             "left": '0',
                             'z-index': '0',
-                            "color": "orange", // 字体颜色
+                            "color": "", // 字体颜色
                             "background-color": "", // 背景颜色
                             'font-size': '14px', // 字体大小
                             "font-weight": '', // 字体权重

@@ -42,7 +42,7 @@
 <script setup>
 import {defineProps,onMounted, reactive, ref,watch} from 'vue'
 import {useStore} from 'vuex'
-import ColorSelect from '../ColorSelect/index.vue'
+
 
 const store = useStore();
 

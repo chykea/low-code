@@ -139,7 +139,7 @@ import AdjustArea from '../AdjustArea/index.vue';
 
   .show {
     position: relative;
-    width: 1017px;
+    width: 1536px;
     height: 740px;
   }
 

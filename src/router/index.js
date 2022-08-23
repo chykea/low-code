@@ -58,7 +58,7 @@ router.beforeEach((to,from,next)=>{
     next()
     return
   }
-  if(to.path==='/personedit'){ // 跳转到个人主页时判断是否有登陆过
+  if(to.path==='/personedit'||to.path==='/editPage'||to.path==='library'){ // 跳转到个人主页或其他页面时判断是否有登陆过
     if(token){ // token存在就通过
       next()
       return
