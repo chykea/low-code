@@ -60,6 +60,7 @@ function changeImg(e){
     const {target:obj} = e;
     service.post('/page/uploadImg',{file:obj.files[0]}).then((res)=>{
         console.log(res);
+        control.value.prop.src = res.path
     }).catch(()=>{})
     control.value.prop.src= getObjectURL(obj.files[0]);
 }

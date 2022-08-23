@@ -38,6 +38,7 @@ let content = ref(null)
 onMounted(() => {
     service.post('/page/getContent',{id:route.query.id}).then((res)=>{
         const {data} = res;
+        console.log(data);
         content.value = data.pageContent
     }).catch((err)=>{})
 })
@@ -50,7 +51,7 @@ onMounted(() => {
         position: relative;
         width: 1536px;
         height: 840px;
-        border: 1px solid red;
+        
     }
 }
 </style>

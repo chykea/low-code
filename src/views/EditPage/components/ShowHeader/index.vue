@@ -15,6 +15,7 @@
 <script setup>
 import service from '@/utils/ApplicationJson';
 import axios from 'axios';
+import { ElMessage } from 'element-plus';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 const store = useStore()
@@ -22,25 +23,26 @@ const route = useRoute()
 const router = useRouter()
 
 function save(){
-  // service({
-  //   method:'post',
-  //   url:'/page/modifyPage',
-  //   data:{
-  //     pageContent:JSON.parse(JSON.stringify(store.state.componentList)),
-  //     htmlStr:'',
-  //     base64Code:''
-  //   }
-  // }).then(res=>{
-  //   console.log(res);
-  // })
-  console.log();
-  axios({
-    url:"/api/page/modifyPage",
-    method:"post",
-    data:{id:parseInt(route.query.id),pageContent:JSON.parse(JSON.stringify(store.state.componentList)),htmlStr:'',base64Code:''},headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsaWQiOjIwMjIwODAzMSwiaXNzIjoiUml2ZW5ubiIsInVzZXJuYW1lIjoiUml2ZW42NiJ9.aadsQxU6mxk2gE3ivfDLW7EXuDJVODUgd0b-4gd3AMk'}})
-    .then(res=>{
-      console.log(res);
+  service({
+    method:'post',
+    url:'/page/modifyPage',
+    data:{
+      id:parseInt(route.query.id),
+      pageContent:JSON.parse(JSON.stringify(store.state.componentList)),
+      htmlStr:'',
+      base64Code:''
+    }
+  }).then(res=>{
+    console.log(res);
+    ElMessage({
+      message:'保存成功',
+      type:'success',
+      duration:1000
     })
+  }).catch(err=>{
+    console.log(err);
+  })
+
 }
 
 function preview(){

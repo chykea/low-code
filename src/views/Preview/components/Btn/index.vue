@@ -40,6 +40,9 @@ onMounted(() => {
         let func = newfunc()
         control.prop.func = func;
     }
+    if(control.prop.Listener!==''&&control.prop.func){ // 如果 事件监听 存在
+        editBtn.addEventListener(control.prop.Listener,control.prop.func);
+    }
 })
 
 
