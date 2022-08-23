@@ -11,23 +11,26 @@
 
 <teleport to='#editBox' v-if="isChecked">
     <div>
-        <h2>段落文本编辑</h2>
-        <span>段落文本</span><input type="text" v-model="control.prop.text"><br/>
-        <span>段落文本颜色</span><input type="text" v-model="control.prop.style.color" /><br/>
-        <select v-model="control.prop.style['vertical-align']">
-            <option value="">无</option>
-            <option value="baseline">基线</option>
-            <option value="bottom">底部</option>
-            <option value="middle">居中</option>
-            <option value="text-bottom">文字底部</option>
-            <option value="text-top">文字顶部</option>
-            <option value="top">顶部</option>
-            <!-- <option value="sub"></option> -->
-            <!-- <option value="super"></option> -->
-        </select><br/>
-        <span>层叠性</span><input type="text" v-model="control.prop.boxStyle['z-index']">
+        <h4>段落文本编辑</h4>
+        <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
+        <span>颜色</span><input class="inputStyle" type="text" v-model="control.prop.style.color" /><br/>
+        <div class="handleSelect">
+            <span>文字排版</span>
+            <select v-model="control.prop.style['vertical-align']">
+                <option value="">无</option>
+                <option value="baseline">基线</option>
+                <option value="bottom">底部</option>
+                <option value="middle">居中</option>
+                <option value="text-bottom">文字底部</option>
+                <option value="text-top">文字顶部</option>
+                <option value="top">顶部</option>
+                <!-- <option value="sub"></option> -->
+                <!-- <option value="super"></option> -->
+            </select>
+        </div>
+        <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']">
         <br/>
-        <button @click=" deleteComponent">删除组件</button>
+        <button class="btnStyle deleteDom" @click=" deleteComponent">删除组件</button>
     </div>
 </teleport>
 </div>
@@ -89,10 +92,20 @@ function deleteComponent(){
 }
 </script>
 <style lang='scss' scoped>
+#editBox {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
 .editspan{
     cursor: pointer;
 }
 .SpanChecked{
     border: 1px red solid;
+}
+#editBox .zIndex {
+    width: 142px;
 }
 </style>

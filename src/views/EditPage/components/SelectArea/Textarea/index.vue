@@ -14,12 +14,13 @@
     <teleport to='#editBox' v-if="isChecked" >
         <keep-alive>
             <div>
-                <h2>文本框编辑</h2>
+                <h4>文本框编辑</h4>
                 <div>
-                    <span>文本框文本</span><input type="text" v-model="control.prop.text"><br/>
-                    <span>文本框文本颜色</span><input type="text" v-model="control.prop.style.color" /><br/>
+                    <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
+                    <span>颜色</span><input class="inputStyle" type="text" v-model="control.prop.style.color" /><br/>
+                    <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 </div>
-                <button @click="deleteComponent">删除组件</button>
+                <button class="btnStyle deleteDom" @click="deleteComponent">删除组件</button>
             </div>
         </keep-alive>
     </teleport>
@@ -74,5 +75,8 @@ textarea{
 }
 .default{
     border: 1px solid black;
+}
+#editBox .zIndex {
+    width: 142px;
 }
 </style>

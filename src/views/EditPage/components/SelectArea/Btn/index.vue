@@ -13,25 +13,28 @@
     <!-- 将按钮编辑的部分送到 AdjustArea 组件中的 editBox 去展示 -->
     <teleport to='#editBox' v-if="isChecked" >
         <keep-alive>
-            <div>
-                <h2>按钮编辑</h2>
-                <span>按钮宽度</span><input type="text" v-model="control.prop.style.width" /><br/>
-                <span>按钮高度</span><input type="text" v-model="control.prop.style.height" /><br/>
-                <span>按钮文本</span><input type="text" v-model="control.prop.text"><br/>
-                <span>按钮文本颜色</span><input type="text" v-model="control.prop.style.color" /><br/>
-                <span>按钮类名</span><input type="text" v-model="control.prop.className" /><br/>
+            <div class="outBorder">
+                <h4>按钮编辑</h4>
+                <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br/>
+                <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br/>
+                <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
+                <span>颜色</span><input class="inputStyle" type="text" v-model="control.prop.style.color"><br/>
+                <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
+                <span>类名</span><input class="inputStyle" type="text" v-model="control.prop.className" /><br/>
                 <!-- 添加事件 -->
-                <span>事件选择</span><select v-model="control.prop.Listener">
-                    <option value="">无</option>
-                    <option value="click">鼠标点击</option>
-                    <option value="mouseover">鼠标经过</option>
-                    <option value="mouseup">鼠标弹起</option>
-                </select>
-                <br/>
+                <div class="handleSelect">
+                    <span>事件选择</span>
+                    <select v-model="control.prop.Listener">
+                        <option value="">无</option>
+                        <option value="click">鼠标点击</option>
+                        <option value="mouseover">鼠标经过</option>
+                        <option value="mouseup">鼠标弹起</option>
+                    </select>
+                </div>
                 <textarea v-model="control.prop.funcStr" cols="30" rows="10"></textarea>
                 <br/>
-                <button @click="sureCodeBtn">函数编辑完成</button>
-                <button @click="deleteComponent">删除组件</button>
+                <button class="btnStyle" @click="sureCodeBtn">函数编辑完成</button>
+                <button class="btnStyle deleteDom" @click="deleteComponent">移除组件</button>
             </div>
         </keep-alive>
     </teleport>
@@ -39,6 +42,7 @@
 <script setup>
 import {defineProps,onMounted, reactive, ref,watch} from 'vue'
 import {useStore} from 'vuex'
+import ColorSelect from '../ColorSelect/index.vue'
 
 const store = useStore();
 
@@ -163,6 +167,13 @@ function deleteComponent(){
 }
 </script>
 <style lang='scss'>
+#editBox {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
 .btnEdit{
     position: absolute;
     width: 104%;
@@ -173,5 +184,74 @@ function deleteComponent(){
 }
 .check{    
     border: 2px solid red;
+}
+h4 {
+    font-size: 18px;
+    padding: 20px 0 8px 0;
+}
+.handleSelect {
+    padding: 8px 0;
+    font-weight: 400;
+}
+select {
+    width: 132px;
+    height: 26px;
+    padding-left: 10px;
+    margin-left:8px;
+    background: #F3F3F3;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.inputStyle{
+    width: 154px;
+    height: 26px;
+    padding-left: 10px;
+    margin: 8px 0 8px 8px;
+    background: #F3F3F3;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+textarea{
+    box-sizing: border-box;
+    width: 206px;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid rgb(0, 0, 0, .75);
+    outline: none;
+    text-overflow: ellipsis;
+    resize: none;
+    border-radius: 5px;
+  }
+textarea::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    color: transparent;
+  }
+.btnStyle{
+    display: inline-block;
+    height: 26px;
+    padding: 0 18px;
+    background: #ffffff;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 2px 21px 0px rgb(158 158 158 / 16%);
+}
+.deleteDom {
+    display: block;
+    margin: 25px 0 48px 53px;
+    font-size: 16px;
+    color: #aaaaaa;
+    background-color: transparent;
+    box-shadow: none;
+}
+.deleteDom:hover {
+    text-decoration: underline;
+}
+
+#editBox .zIndex {
+    width: 142px;
 }
 </style>

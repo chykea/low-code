@@ -7,26 +7,31 @@
         <img :src="control.prop.src" :style="control.prop.style" :alt="control.prop.alt" @click="isChecked = !isChecked" />
         <teleport to='#editBox' v-if="isChecked">
             <div class="eidtbox">
-                <h2>图片编辑</h2>
+                <h4>图片编辑</h4>
                 <div>
-                    <span>图片宽度</span><input type="text" v-model="control.prop.style.width" /><br/>
-                    <span>图片高度</span><input type="text" v-model="control.prop.style.height" /><br/>
-                    <span>图片地址</span><input type="file" @change="changeImg"  accept="image/png, image/jpeg, image/gif, image/jpg"  /><br/>
-                    <span>图片无法显示时的提示文本</span><input type="text" v-model="control.prop.alt" /><br/>
-                    <span>对齐方式</span>
-                    <select v-model="control.prop.style['vertical-align']">
-                        <option value="">无</option>
-                        <option value="baseline">基线</option>
-                        <option value="bottom">底部</option>
-                        <option value="middle">居中</option>
-                        <option value="text-bottom">文字底部</option>
-                        <option value="text-top">文字顶部</option>
-                        <option value="top">顶部</option>
-                        <!-- <option value="sub"></option> -->
-                        <!-- <option value="super"></option> -->
-                    </select>
+                    <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br/>
+                    <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br/>
+                    <span>地址</span>
+                    <input class="fileInput" type="file" @change="changeImg"  accept="image/png, image/jpeg, image/gif, image/jpg"  />
+                    <input class="btnStyle subFile" type="button" value="上传文件" @click="clickFile"/>
                     <br/>
-                    <button @click="deleteComponent">移除组件</button>
+                    <span>无法显示时的提示文本</span><input class="inputStyle noMarginLeft" type="text" v-model="control.prop.alt" /><br/>
+                    <div class="handleSelect">
+                        <span>对齐方式</span>
+                        <select v-model="control.prop.style['vertical-align']">
+                            <option value="">无</option>
+                            <option value="baseline">基线</option>
+                            <option value="bottom">底部</option>
+                            <option value="middle">居中</option>
+                            <option value="text-bottom">文字底部</option>
+                            <option value="text-top">文字顶部</option>
+                            <option value="top">顶部</option>
+                            <!-- <option value="sub"></option> -->
+                            <!-- <option value="super"></option> -->
+                        </select>
+                    </div>
+                    <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
+                    <button class="btnStyle deleteDom" @click="deleteComponent">移除组件</button>
                 </div>
             </div>
         </teleport>
@@ -97,12 +102,34 @@ function deleteComponent(){
         id:props.id
     })
 }
+// 点击按钮提交文件
+function clickFile() {
+	const input = document.querySelector('.fileInput')
+	input.click()
+}
+
 </script>
 <style lang='scss' scoped>
 .eidtbox{
-    border-bottom: 2px solid silver;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 20px;
 }
 .checked{
     border: 1px solid red;
+}
+.fileInput {
+    display: none;
+}
+.subFile {
+    margin: 8px 0 8px 10px;
+}
+.noMarginLeft {
+    margin-left: 0;
+}
+#editBox .zIndex {
+    width: 142px;
 }
 </style>
