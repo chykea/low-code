@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <el-color-picker v-model="color1"></el-color-picker>
+    <el-color-picker></el-color-picker>
   </div>
 </template>
 

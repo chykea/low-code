@@ -18,7 +18,7 @@
                 <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br/>
                 <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br/>
                 <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
-                <span>颜色</span><input class="inputStyle" type="text" v-model="control.prop.style.color"><br/>
+                <span>文本颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
                 <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 <span>类名</span><input class="inputStyle" type="text" v-model="control.prop.className" /><br/>
                 <!-- 添加事件 -->
@@ -46,6 +46,7 @@ import ColorSelect from '../ColorSelect/index.vue'
 
 const store = useStore();
 
+let color = ref('');
 // 限定父组件传值
 const props = defineProps({
     id:String,

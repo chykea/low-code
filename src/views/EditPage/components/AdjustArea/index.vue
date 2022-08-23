@@ -9,6 +9,8 @@
 
 <style>
  .adjustment {
+  display: flex;
+  justify-content: center;
   width: 290px;
   height: 843px;
   background: #FFFFFF;
