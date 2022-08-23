@@ -17,8 +17,24 @@
                 <h4>按钮编辑</h4>
                 <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br/>
                 <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br/>
+                <span>背景颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.backgroundColor"></el-color-picker><br/>
+                <span>边框宽度</span><input class="inputStyle four" type="text" v-model="control.prop.style.borderWidth"><br/>
+                <!-- dotted solid double dashed -->
+                <div class="handleSelect">
+                    <span>边框样式</span>
+                    <select v-model="control.prop.style['borderStyle']">
+                        <option value="">无</option>
+                        <option value="solid">实线</option>
+                        <option value="dashed">虚线</option>
+                        <option value="dotted">点状</option>
+                        <option value="double">双实线</option>
+                    </select>
+                </div>
+                <span>边框颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.borderColor"></el-color-picker><br/>
                 <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
-                <span>文本颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
+                <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontSize"><br/>
+                <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontWeight"><br/>
+                <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
                 <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 <span>类名</span><input class="inputStyle" type="text" v-model="control.prop.className" /><br/>
                 <!-- 添加事件 -->
@@ -183,7 +199,7 @@ function deleteComponent(){
     top: -3px;
     left: -4px;
 }
-.check{    
+.checked{
     border: 2px solid red;
 }
 h4 {
@@ -254,5 +270,9 @@ textarea::-webkit-scrollbar {
 
 #editBox .zIndex {
     width: 142px;
+}
+
+.four {
+    width: 135px;
 }
 </style>

@@ -33,8 +33,7 @@ export default createStore({
                         Listener: '',
                         className: '',
                         funcStr: '',
-                        boxStyle: {
-                        },
+                        boxStyle: {},
                     },
                     childNode: [],
                 },
@@ -46,6 +45,8 @@ export default createStore({
                     prop: {
                         text: '默认文本',
                         style: {
+                            "width": '300px', // 宽度
+                            "height": "150px", // 高度
                             "color": "orange",
                             'font-size': '14px', // 字体大小
                             "font-weight": '', // 字体权重
@@ -75,7 +76,6 @@ export default createStore({
                             "color": "orange",
                             'vertical-align': '',
                             'text-decoration': '',
-                            "background-color": "",
                             'font-size': '14px',
                             "font-weight": '',
                         },
@@ -102,8 +102,9 @@ export default createStore({
                     prop: {
                         text: '',
                         style: {
+                            "color": "orange",
                             'width': '',
-                            'height': ''
+                            'height': '',
                         },
                         func: null,
                         Listener: '',
@@ -156,6 +157,7 @@ export default createStore({
                             "width": "300px",
                             "height": "",
                             'vertical-align': '',
+                            "background-color": "",
                         },
                         func: null,
                         Listener: '',

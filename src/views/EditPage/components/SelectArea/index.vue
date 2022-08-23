@@ -138,11 +138,16 @@ import AdjustArea from '../AdjustArea/index.vue';
   }
 
   .show {
+    box-sizing: border-box;
     position: relative;
     width: 1536px;
     height: 740px;
+    padding-right: 20px; // 防止滚动条遮挡内容
+    overflow-y: hidden;
   }
-
+  .show:hover {
+      overflow-y: auto;
+  }
   .select ul{
     display: flex;
   }

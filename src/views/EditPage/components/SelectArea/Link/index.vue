@@ -15,8 +15,10 @@
         <h4>超链接编辑</h4>
         <div>
             <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
-            <span>颜色</span><input class="inputStyle" type="text" v-model="control.prop.style.color" /><br/>
             <span>路径</span><input class="inputStyle" type="text" v-model="control.prop.href"><br/>
+            <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
+            <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontSize"><br/>
+            <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style.fontWeight"><br/>
             <div class="handleSelect">
                 <span>对齐方式</span>
                 <select v-model="control.prop.style['vertical-align']">
