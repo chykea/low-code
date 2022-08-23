@@ -88,7 +88,7 @@ function del(n, id) {
 onMounted(()=>{
   const data={id:prop.id}
   projectPre("/page/getPreview",data).then(res=>{
-    console.log(res.data.data);
+    // console.log(res.data.data);
     if(res.data.code==200){
       imgPre.value=res.data.data.preview;
     }

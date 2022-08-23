@@ -16,6 +16,7 @@
                     <input class="btnStyle subFile" type="button" value="上传文件" @click="clickFile"/>
                     <br/>
                     <span>无法显示时的提示文本</span><input class="inputStyle noMarginLeft" type="text" v-model="control.prop.alt" /><br/>
+                    <span>背景颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.backgroundColor"></el-color-picker><br/>
                     <div class="handleSelect">
                         <span>对齐方式</span>
                         <select v-model="control.prop.style['vertical-align']">
@@ -115,13 +116,7 @@ function clickFile() {
 
 </script>
 <style lang='scss' scoped>
-.eidtbox{
-    font-size: 14px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0 20px;
-}
+
 .checked{
     border: 1px solid red;
 }
