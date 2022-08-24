@@ -33,7 +33,7 @@
                 <span>边框颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style['border-color']"></el-color-picker><br/>
                 <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
                 <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-size']"><br/>
-                <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style.style['font-weight']"><br/>
+                <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-weight']"><br/>
                 <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
                 <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 <span>类名</span><input class="inputStyle" type="text" v-model="control.prop.className" /><br/>

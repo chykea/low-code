@@ -41,6 +41,7 @@
 <script setup>
 import {defineProps,ref,watch} from 'vue'
 import {useStore} from 'vuex'
+import service from '@/utils/request'
 const store = useStore();
 const props = defineProps({
     id:String,
@@ -58,7 +59,17 @@ let isChecked = ref(false)
 // 实时预览图片
 function changeImg(e){
     const {target:obj} = e;
-    control.value.prop.src= getObjectURL(obj.files[0]);
+    // control.value.prop.src= getObjectURL(obj.files[0]);
+    service({
+        url:'/page/uploadImg',
+        method:'post',
+        data:{file:obj.files[0]}
+    }).then(res=>{
+        console.log()
+        control.value.prop.src = res.path;
+    }).catch(err=>{
+
+    })
 }
 
 // 通过拼接处图片的url地址实现预览
