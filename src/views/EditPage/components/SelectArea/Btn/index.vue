@@ -56,6 +56,7 @@
     </teleport>
 </template>
 <script setup>
+import { ElMessage } from 'element-plus';
 import {defineProps,onMounted, reactive, ref,watch} from 'vue'
 import {useStore} from 'vuex'
 
@@ -113,8 +114,16 @@ function sureCodeBtn(){
             let newfunc = new Function('return '+control.prop.funcStr); // 通过new Function来构建一个函数
             let func = newfunc()  // 由于上面构造的函数需要通过return才能得到,所以需要调用一下才能获得函数
             control.prop.func = func
+            ElMessage({
+                message:'编辑成功',
+                type:'success'
+            })
         } catch (error) {
-            console.log('您输入的并不是一个函数');
+            console.log('');
+            ElMessage({
+                message:'您输入的并不是一个函数',
+                type:'error'
+            })
             control.prop.funcStr=''
         }  
     }else{ // 函数字符串为空时,表示不想添加事件
@@ -254,6 +263,7 @@ textarea::-webkit-scrollbar {
     border-radius: 7px;
     border: none;
     outline: none;
+    cursor: pointer;
     box-shadow: 0px 2px 21px 0px rgb(158 158 158 / 16%);
 }
 .deleteDom {

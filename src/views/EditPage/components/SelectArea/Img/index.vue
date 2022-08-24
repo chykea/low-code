@@ -59,7 +59,6 @@ let isChecked = ref(false)
 // 实时预览图片
 function changeImg(e){
     const {target:obj} = e;
-    // control.value.prop.src= getObjectURL(obj.files[0]);
     service({
         url:'/page/uploadImg',
         method:'post',
