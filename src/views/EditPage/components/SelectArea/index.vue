@@ -67,54 +67,58 @@
 
 
 <script setup>
+import { ref,reactive,toRaw, onMounted,watch } from 'vue';
+import service from '@/utils/ApplicationJson';
+import Draggable from 'vuedraggable';
+import axios from 'axios'
+import { useStore } from 'vuex';
 
 
-import { ref, reactive, toRaw, onMounted, watch } from "vue";
-import Draggable from "vuedraggable";
-import axios from "axios";
+import Btn from './Btn/index.vue';
+import Link from './Link/index.vue';
+import Textarea from './Textarea/index.vue';
+import Img from './Img/index.vue';
+import P from './P/index.vue';
+import Span from './Span/index.vue'
 
-import Btn from "./Btn/index.vue";
-import Link from "./Link/index.vue";
-import Textarea from "./Textarea/index.vue";
-import Img from "./Img/index.vue";
-import P from "./P/index.vue";
-import Span from "./Span/index.vue";
-import { useStore } from "vuex";
-import ShowHeader from "../ShowHeader/index.vue";
-import AdjustArea from "../AdjustArea/index.vue";
-const store = useStore();
-// 初始化组件拖拽按钮的数组
-let list = store.state.dragInitList;
+import ShowHeader from '../ShowHeader/index.vue';
+import AdjustArea from '../AdjustArea/index.vue';
+import { useRoute } from 'vue-router';
 
-let childArr = ref([]); // 存放节点的一些信息的数组
-watch(
-  () => childArr.value,
-  (newVal) => {
-    store.commit("setComponentList", { list: childArr.value }); // 监视存放数组的变化,变化了就存到store中
+   const store = useStore()
+   const route = useRoute()
+   // 初始化组件拖拽按钮的数组
+  let list = store.state.dragInitList;
+
+  
+  let childArr = ref([]); // 存放节点的一些信息的数组
+
+  onMounted(()=>{
+    service.post('/page/getContent',{id:route.query.id}).then((res)=>{
+        const {data} = res;
+        console.log(data);
+        if(data.pageContent!==null)
+          store.commit('setComponentList',{list:data.pageContent})
+    }).catch((err)=>{})
+  })
+  watch(()=>childArr.value,(newVal)=>{
+    store.commit('setComponentList',{list:childArr.value}) // 监视存放数组的变化,变化了就存到store中
+  })
+  
+  watch(()=>store.state.componentList,(newVal)=>{
+    childArr.value = newVal
+  })
+  
+ 
+  // clone问题的处理函数
+  function cloneNew(origin){
+    const data = JSON.parse(JSON.stringify(origin))
+    data.id = parseInt(new Date().getMilliseconds() + "" + Math.ceil(Math.random() * 100000)).toString(16);
+    return data
   }
-);
-
-watch(
-  () => store.state.componentList,
-  (newVal) => {
-    childArr.value = newVal;
-  }
-);
-// onMounted(()=>{
-//   axios({
-
-//   })
-// })
-
-// clone问题的处理函数
-function cloneNew(origin) {
-  const data = JSON.parse(JSON.stringify(origin));
-  data.id = parseInt(
-    new Date().getMilliseconds() + "" + Math.ceil(Math.random() * 100000)
-  ).toString(16);
-  return data;
-}
 </script>
+
+
 
 <style lang="scss">
 .Edit_select_area {
@@ -149,16 +153,17 @@ function cloneNew(origin) {
   height: 18px;
 }
 
-.EditArea {
-  display: flex;
-  flex-direction: column;
-}
-
-.show {
-  position: relative;
-  width: 1536px;
-  height: 740px;
-}
+  .show {
+    box-sizing: border-box;
+    position: relative;
+    width: 1536px;
+    height: 740px;
+    padding-right: 20px; // 防止滚动条遮挡内容
+    overflow-y: hidden;
+  }
+  .show:hover {
+      overflow-y: auto;
+  }
 
 .select ul {
   display: flex;
@@ -167,10 +172,6 @@ function cloneNew(origin) {
   width: 100px;
   height: 35px;
   list-style: none;
-}
-.Leftanimation {
-  width: 100px;
-  height: 100px;
 }
 
 /* 隐藏拖拽 */

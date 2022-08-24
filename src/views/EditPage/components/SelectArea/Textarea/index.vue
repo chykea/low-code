@@ -16,8 +16,25 @@
             <div>
                 <h4>文本框编辑</h4>
                 <div>
+                    <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br/>
+                    <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br/>
+                    <span>边框宽度</span><input class="inputStyle four" type="text" v-model="control.prop.style['border-width']"><br/>
+                    <!-- dotted solid double dashed -->
+                    <div class="handleSelect">
+                        <span>边框样式</span>
+                        <select v-model="control.prop.style['border-style']">
+                            <option value="">无</option>
+                            <option value="solid">实线</option>
+                            <option value="dashed">虚线</option>
+                            <option value="dotted">点状</option>
+                            <option value="double">双实线</option>
+                        </select>
+                    </div>
+                    <span>边框颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style['border-color']"></el-color-picker><br/>
                     <span>文本</span><input class="inputStyle" type="text" v-model="control.prop.text"><br/>
-                    <span>颜色</span><input class="inputStyle" type="text" v-model="control.prop.style.color" /><br/>
+                    <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-size']"><br/>
+                    <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-weight']"><br/>
+                    <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
                     <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 </div>
                 <button class="btnStyle deleteDom" @click="deleteComponent">删除组件</button>
@@ -66,12 +83,12 @@ function deleteComponent(){
 
 </script>
 <style lang='scss' scoped>
-.checked{
-    border: 2px solid red;
-}
+// .checked{
+//     border: 2px solid red;
+// }
 textarea{
-    border: none;
-    // resize: none;
+    // border: none;
+    resize: none;
 }
 .default{
     border: 1px solid black;
