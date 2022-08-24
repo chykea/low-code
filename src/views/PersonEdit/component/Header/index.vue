@@ -49,6 +49,7 @@
       ref="fileUpload"
       type="file"
       @change="addFile($event)"
+      accept="image/jpeg,image/jpg,image/png"
     />
   </div>
 </template>
@@ -116,9 +117,27 @@ const liContent = ref([
 ]);
 async function addFile(file) {
   const files = file.target.files[0];
+  const size=5*1024*1024;
+  // const type=files.type.split('/')[1];
   if (!files) {
     return;
   }
+  if(files.size>size){
+    ElMessage({
+        message: "大小不能超出5M！",
+        type: "error",
+        duration: 1000,
+      });
+      return;
+  }
+  // if(type!='png'&&type!='jpeg'&&type!='jpg'){
+  //   ElMessage({
+  //       message: "只能上传图片类型",
+  //       type: "error",
+  //       duration: 1000,
+  //     });
+  //     return;
+  // }
   const formData = new FormData();
   formData.append("file", files);
   await upload("/UserInfo/uploadTouXiang", formData).then((res) => {
