@@ -60,8 +60,7 @@ import Draggable from  'vuedraggable'
 
 import Link from '../Link/index.vue';
 import Span from '../Span/index.vue';
-import Img from '../Img/index.vue'
-import Btn from '../Btn/index.vue'
+
 
 
 const store = useStore()
@@ -69,14 +68,14 @@ const props = defineProps({
     id:String,
     prop:Object,
     childArray:Array,
-
 })
+console.log(JSON.parse(JSON.stringify(props.prop)));
+console.log(JSON.parse(JSON.stringify(props.childArray)));
 
 let control = ref({
     prop:props.prop,
     childArray:props.childArray
 })
-
 
 function dragIn(e){
     const {target} = e;

@@ -39,6 +39,8 @@ const readonly = ref(true);
 const proNames = ref("");
 // const queryId = inject("queryId");
 const originname = ref("");//存储原先的项目名字
+
+
 function save(){
   service({
     method:'post',
@@ -119,6 +121,17 @@ onMounted(() => {
       }
     }
   });
+  
+  service({
+    url:'/page/getContent',
+    method:'post',
+    data:{id:route.query.id}
+  }).then(res=>{
+    const {data} = res
+    if(data.pageContent!==null)
+      store.commit('setComponentList',{list:data.pageContent})
+
+  }).catch(err=>{})
 });
 </script>
 

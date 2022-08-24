@@ -76,7 +76,6 @@ let token = ref("");
 let imgUser = ref("");
 onMounted(() => {
   token.value = sessionStorage.getItem("token");
-  console.log(token.value);
   // 用户登录过了
   if (token.value) {
     getAdvator("/UserInfo/getAdvator").then((res) => {
