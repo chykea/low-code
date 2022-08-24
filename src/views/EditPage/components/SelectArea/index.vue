@@ -90,17 +90,17 @@ import { useRoute } from 'vue-router';
    // 初始化组件拖拽按钮的数组
   let list = store.state.dragInitList;
 
-  
   let childArr = ref([]); // 存放节点的一些信息的数组
 
   onMounted(()=>{
-    service.post('/page/getContent',{id:route.query.id}).then((res)=>{
-        const {data} = res;
-        console.log(data);
-        if(data.pageContent!==null)
-          store.commit('setComponentList',{list:data.pageContent})
-    }).catch((err)=>{})
+    // service.post('/page/getContent',{id:route.query.id}).then((res)=>{
+    //     const {data} = res;
+    //     console.log(data);
+    //     if(data.pageContent!==null)
+    //       store.commit('setComponentList',{list:data.pageContent})
+    // }).catch((err)=>{})
   })
+
   watch(()=>childArr.value,(newVal)=>{
     store.commit('setComponentList',{list:childArr.value}) // 监视存放数组的变化,变化了就存到store中
   })

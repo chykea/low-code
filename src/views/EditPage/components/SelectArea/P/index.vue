@@ -44,8 +44,8 @@
                 <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width"><br/>
                 <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height"><br/>
                 <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
-                <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.style.prop.fontSize"><br/>
-                <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.style.prop.fontWeight"><br/>
+                <!-- <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.style.prop.fontSize"><br/> -->
+                <!-- <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.style.prop.fontWeight"><br/> -->
                 <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 <button class="btnStyle deleteDom" @click="deleteComponent">移除组件</button>
             </div>
@@ -60,8 +60,7 @@ import Draggable from  'vuedraggable'
 
 import Link from '../Link/index.vue';
 import Span from '../Span/index.vue';
-import Img from '../Img/index.vue'
-import Btn from '../Btn/index.vue'
+
 
 
 const store = useStore()
@@ -69,14 +68,14 @@ const props = defineProps({
     id:String,
     prop:Object,
     childArray:Array,
-
 })
+console.log(JSON.parse(JSON.stringify(props.prop)));
+console.log(JSON.parse(JSON.stringify(props.childArray)));
 
 let control = ref({
     prop:props.prop,
     childArray:props.childArray
 })
-
 
 function dragIn(e){
     const {target} = e;

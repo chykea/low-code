@@ -83,16 +83,12 @@ function deleteComponent(){
 
 </script>
 <style lang='scss' scoped>
-// .checked{
-//     border: 2px solid red;
-// }
+
 textarea{
     // border: none;
     resize: none;
 }
-.default{
-    border: 1px solid black;
-}
+
 #editBox .zIndex {
     width: 142px;
 }
