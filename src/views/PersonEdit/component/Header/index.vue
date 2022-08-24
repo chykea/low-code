@@ -117,7 +117,7 @@ const liContent = ref([
 ]);
 async function addFile(file) {
   const files = file.target.files[0];
-  const size=5*1024;
+  const size=5*1024*1024;
   // const type=files.type.split('/')[1];
   if (!files) {
     return;
