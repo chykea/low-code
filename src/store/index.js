@@ -105,6 +105,8 @@ export default createStore({
                             "color": "orange",
                             'width': '',
                             'height': '',
+                            'font-size': '14px',
+                            "font-weight": '',
                         },
                         func: null,
                         Listener: '',

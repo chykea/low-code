@@ -27,7 +27,8 @@
           enter-active-class="animate__fadeIn"
           leave-active-class="animate__fadeOut"
         >
-          <div class="disappear" v-if="showHead">
+          <!-- <div class="disappear" v-if="showHead" > -->
+          <div class="disappear" v-if="showHead && select" >
             <ul>
               <li
                 v-for="(item, index) in liContent"
@@ -63,6 +64,16 @@ import "animate.css";
 import { ElMessage } from "element-plus";
 import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
+
+
+const select = ref(true);
+const test = () => {
+  select.value=false;
+}
+defineExpose({
+  test,
+  select,
+})
 
 store.dispatch("advatar");
 const router = useRouter();

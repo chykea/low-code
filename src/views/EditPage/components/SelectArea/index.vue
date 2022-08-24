@@ -164,18 +164,6 @@ import { useRoute } from 'vue-router';
   .show:hover {
       overflow-y: auto;
   }
-  .select ul{
-    display: flex;
-  }
-  .select ul li{
-    width: 100px;
-    height: 35px;
-    list-style: none;
-  }
-  .Leftanimation {
-    width: 100px;
-    height: 100px;
-  }
 
 .select ul {
   display: flex;
@@ -184,10 +172,6 @@ import { useRoute } from 'vue-router';
   width: 100px;
   height: 35px;
   list-style: none;
-}
-.Leftanimation {
-  width: 100px;
-  height: 100px;
 }
 
 /* 隐藏拖拽 */

@@ -44,8 +44,8 @@
                 <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width"><br/>
                 <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height"><br/>
                 <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
-                <!-- <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.style.prop.fontSize"><br/> -->
-                <!-- <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.style.prop.fontWeight"><br/> -->
+                <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-size']"><br/>
+                <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-weight']"><br/>
                 <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 <button class="btnStyle deleteDom" @click="deleteComponent">移除组件</button>
             </div>

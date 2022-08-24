@@ -1,24 +1,26 @@
 <template>
     <div class="all">
         <div class="head">
-            <Header></Header>
+            <Header ref="headerRef"></Header>
         </div>
 
         <div class="content">
             <div class="second">
-                <div class="nav">
-                    <div class="serch">
-                        <input type="text" placeholder="请输入关键词进行搜索" />
-                        <button :style="{'background-image': `url(${backgroundImg})`}"></button>
+                <!-- <div class="nav"> -->
+                <div class="serch">
+                    <input type="text" placeholder="请输入关键词进行搜索" />
+                    <div class="toSerch">
+                        <img src="@/assets/images/library/search.png" />
                     </div>
 
-                    <div class="cards">
-                        <!-- <div class="card" v-for="item in cards" :key="item.id">{{item}}</div> -->
+                </div>
+
+                <!-- <div class="cards">
                         <div class="card" @click="cur=0" :class="{active:cur==0}">模板</div>
                         <div class="card" @click="cur=1" :class="{active:cur==1}">组件</div>
                         <div class="card" @click="cur=2" :class="{active:cur==2}">全部</div>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div> -->
             </div>
 
             <div class="allLibrary">
@@ -28,7 +30,7 @@
                         <p>{{item.id}}</p>
                     </div>
 
-                    <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
+                    <!-- <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
                         <div class="library"></div>
                         <p>{{item.id}}</p>
                     </div>
@@ -36,7 +38,7 @@
                     <div v-show="cur==2" class="libraryItem" v-for="item in all" :key="item.id">
                         <div class="library"></div>
                         <p>{{item.id}}</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -49,109 +51,98 @@
     </div>
 </template>
 
-<script>
-    // volar安装不了 先写vue2
+<script setup>
+    import { nextTick, onMounted, onBeforeMount, reactive, ref } from "vue";
     import Header from '@/views/PersonEdit/component/Header/index.vue';
     import { getPages } from '@/api/getPages';
     import { getMoulds } from '@/api/getMould';
-    // console.log(getPages);
-    // console.log(getMoulds);
 
-    export default {
-        components: { Header },
-        data() {
-            return {
-                cur: 0, //默认选中第一个tab 
-                backgroundImg: require('@/assets/images/library/search.png'),
-                mould: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    },
-                    {
-                        id: 3,
-                    },
-                    {
-                        id: 4,
-                    },
-                    {
-                        id: 5,
-                    },
-                    {
-                        id: 6,
-                    },
-                    {
-                        id: 7,
-                    },
-                    {
-                        id: 8,
-                    },
-                ],
-                com: [
-                    {
-                        id: "好困"
-                    }
-                ],
-                all: [
-                    {
-                        id: "晚安"
-                    }
-                ],
-            }
+    let flag = ref(false);
+
+    let mould = ref([
+        {
+            id: 1,
         },
-
-        methods: {
-            // 获取页面数量
-            async getpage() {
-                // console.log("test");
-                let res = await getPages();
-                console.log(res.total);
-            },
-
-            // 获取模板
-            async getMould(cur) {
-                console.log(cur);
-                let res = await getMoulds(cur);
-                console.log(res);
-            },
+        {
+            id: 2,
         },
+        {
+            id: 3,
+        },
+        {
+            id: 4,
+        },
+        {
+            id: 5,
+        },
+        {
+            id: 6,
+        },
+        {
+            id: 7,
+        },
+        {
+            id: 8,
+        },
+    ]);
 
-        mounted() {
-            this.getpage();
-            this.getMould(1);
+    // 拦截头部鼠标滑过效果
+    const headerRef = ref(null);
+    const cut = () => {
+        // console.log(headerRef);
+        headerRef.value.test();
+    };
+
+    // 获取页面数量
+    async function getpage() {
+        // console.log("test");
+        let res = await getPages();
+        console.log(res.total);
+    };
+
+    // 获取模板
+    async function getMould() {
+        let cur = {
+            cur: 1
         }
-    }
+        let res = await getMoulds(cur);
+        console.log(res);
+    };
+
+    onMounted(() => {
+        cut();
+        getpage();
+        // getMould();
+    })
+
 </script>
 
-<style>
+<style scoped>
     .all {
         width: 100%;
         height: 100vh;
-        /* display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background-color: blueviolet; */
+        /* background-color: blueviolet; */
     }
 
     .head {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         padding: 27px 0;
-        /* background-color: brown; */
+        width: 85%;
+        margin: auto;
+    }
+
+    .head .Header {
+        background-color: aquamarine;
     }
 
     .content {
-        flex: auto;
+        width: 85%;
+        margin: auto;
         /* background-color: burlywood; */
     }
 
     .second {
         display: flex;
         align-items: center;
-        padding: 0 100px;
         /* background-color: blue; */
     }
 
@@ -175,22 +166,29 @@
         border-radius: 10px;
     }
 
-    .serch button {
+    .serch .toSerch {
         position: absolute;
         width: 55px;
         height: 50px;
         top: 2px;
         right: 2px;
-        background-color: #f5d94e;
+        cursor: pointer;
         border-radius: 10px;
         border: none;
+        background-color: #f5d94e;
     }
 
-    .cards {
+    .serch .toSerch img {
+        width: 30px;
+        height: 30px;
+        margin: 10px 14px;
+    }
+
+    /* .cards {
         display: flex;
         justify-content: center;
         align-items: center;
-        /* background-color: chartreuse; */
+        background-color: chartreuse;
     }
 
     .card {
@@ -201,20 +199,19 @@
         background-color: #f3f0f3;
         border: none;
         text-align: center;
-        /* background: #16191E; */
+        background: #16191E;
         border-radius: 10px;
-    }
+    } */
 
-    .active {
+    /* .active {
         background-color: #17181f;
         color: white;
-    }
+    } */
 
     .allLibrary {
         display: flex;
         /* justify-content: center; */
         align-items: center;
-        padding: 0 100px;
     }
 
     .libraries {
@@ -227,7 +224,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin: 0 31px 40px 31px;
+        margin: 0 28px 40px 28px;
     }
 
     .library {

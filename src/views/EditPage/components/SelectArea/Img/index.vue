@@ -16,7 +16,7 @@
                     <input class="btnStyle subFile" type="button" value="上传文件" @click="clickFile"/>
                     <br/>
                     <span>无法显示时的提示文本</span><input class="inputStyle noMarginLeft" type="text" v-model="control.prop.alt" /><br/>
-                    <span>背景颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.backgroundColor"></el-color-picker><br/>
+                    <span>背景颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style['background-color']"></el-color-picker><br/>
                     <div class="handleSelect">
                         <span>对齐方式</span>
                         <select v-model="control.prop.style['vertical-align']">
@@ -41,7 +41,6 @@
 <script setup>
 import {defineProps,ref,watch} from 'vue'
 import {useStore} from 'vuex'
-import service  from '@/utils/request'
 const store = useStore();
 const props = defineProps({
     id:String,
@@ -59,10 +58,6 @@ let isChecked = ref(false)
 // 实时预览图片
 function changeImg(e){
     const {target:obj} = e;
-    service.post('/page/uploadImg',{file:obj.files[0]}).then((res)=>{
-        console.log(res);
-        control.value.prop.src = res.path
-    }).catch(()=>{})
     control.value.prop.src= getObjectURL(obj.files[0]);
 }
 
