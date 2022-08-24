@@ -81,7 +81,7 @@ async function addDiv() {
   const data={pageName:val.value}
  await createPro("/page/createPage",data).then(res=>{
   if(res.code==200){
-    console.log("创建了一个");
+    // console.log("创建了一个");
   }
  })
   behaveProject(plus.counter,plus.totalNames);
