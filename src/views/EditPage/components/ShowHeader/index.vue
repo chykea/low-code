@@ -128,7 +128,8 @@ onMounted(() => {
     data:{id:route.query.id}
   }).then(res=>{
     const {data} = res
-    store.commit('setComponentList',{list:data.pageContent})
+    if(data.pageContent!==null)
+      store.commit('setComponentList',{list:data.pageContent})
 
   }).catch(err=>{})
 });
