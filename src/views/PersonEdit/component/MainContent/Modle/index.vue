@@ -5,12 +5,15 @@
       <span>{{ prop.imgContent }}</span>
     </div>
     <div class="project-main">
-      <Item
+      <!-- <Item
         v-for="(item, index) in counter"
         :key="index"
         :id="item"
         :val="componentName[index]"
-      ></Item>
+      ></Item> -->
+      <div class="waiting">
+        敬请期待!
+      </div>
     </div>
   </div>
 </template>
@@ -32,5 +35,20 @@ onMounted(()=>{
 
 <style scoped>
 @import "@/assets/css/PersonEdit/project_modle.css";
+.project-main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+.waiting{
+  width: 400px;
+  height: 100px;
+  font-size: 80px;
+  color: purple;
+  font-family: 华文琥珀;
+  letter-spacing: 7px;
+  text-shadow: 6px 6px rgb(197 223 148 / 80%), 7px 7px rgb(197 223 148 / 80%), 8px 8px rgb(197 223 148 / 80%), 9px 9px rgb(197 223 148 / 80%), 10px 10px rgb(197 223 148 / 80%), 11px 11px rgb(197 223 148 / 80%);
+}
 </style>
 
