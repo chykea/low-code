@@ -4,31 +4,31 @@
             <Header ref="headerRef"></Header>
         </div>
 
-        <div class="content">
+        <div class="content">敬请期待</div>
+
+        <!-- <div class="content">
             <div class="second">
-                <!-- <div class="nav"> -->
                 <div class="serch">
                     <input type="text" placeholder="请输入关键词进行搜索" />
                     <div class="toSerch">
                         <img src="@/assets/images/library/search.png" />
                     </div>
 
-                </div>
+                </div> -->
 
                 <!-- <div class="cards">
                         <div class="card" @click="cur=0" :class="{active:cur==0}">模板</div>
                         <div class="card" @click="cur=1" :class="{active:cur==1}">组件</div>
                         <div class="card" @click="cur=2" :class="{active:cur==2}">全部</div>
                     </div> -->
-                <!-- </div> -->
-            </div>
+            <!-- </div> -->
 
-            <div class="allLibrary">
+            <!-- <div class="allLibrary">
                 <div class="libraries">
                     <div v-show="cur==0" class="libraryItem" v-for="item in mould" :key="item.id">
                         <div class="library"></div>
                         <p>{{item.id}}</p>
-                    </div>
+                    </div> -->
 
                     <!-- <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
                         <div class="library"></div>
@@ -39,15 +39,15 @@
                         <div class="library"></div>
                         <p>{{item.id}}</p>
                     </div> -->
-                </div>
+                <!-- </div>
             </div>
 
             <div class="pages">
                 <div class="block">
-                    <el-pagination layout="prev, pager, next" :total="100"></el-pagination>
+                    <el-pagination layout="prev, pager, next" :total="total" current-page="1"></el-pagination>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
     </div>
 </template>
 
@@ -58,6 +58,8 @@
     import { getMoulds } from '@/api/getMould';
 
     let flag = ref(false);
+
+    let total = ref(50);
 
     let mould = ref([
         {
@@ -98,21 +100,22 @@
         // console.log("test");
         let res = await getPages();
         console.log(res.total);
+        // total = (res.total) * 10;
     };
 
     // 获取模板
+    const current = ref(1);
+    // console.log(typeof(current.value));
     async function getMould() {
-        let cur = {
-            cur: 1
-        }
-        let res = await getMoulds(cur);
+        const data = { cur: current.value };
+        let res = await getMoulds('/public/getPage', data);
         console.log(res);
     };
 
     onMounted(() => {
         cut();
         getpage();
-        // getMould();
+        getMould();
     })
 
 </script>
@@ -246,5 +249,9 @@
         display: flex;
         margin-bottom: 30px;
         justify-content: center;
+    }
+
+    .el-pagination {
+        color: #6e6c6c;
     }
 </style>
