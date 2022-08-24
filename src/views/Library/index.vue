@@ -112,7 +112,7 @@
     onMounted(() => {
         cut();
         getpage();
-        getMould();
+        // getMould();
     })
 
 </script>

@@ -67,8 +67,6 @@ const store = useStore();
 
 let select = ref(true);
 const test = () => {
-  // console.log(123213);
-  // console.log(select.value);
   select.value=false;
 }
 defineExpose({
