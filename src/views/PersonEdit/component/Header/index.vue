@@ -18,7 +18,7 @@
       </ul>
       <div
         class="head-image"
-        @mouseenter="showHead = true;test()"
+        @mouseenter="showHead = true"
         @mouseleave="showHead = false"
       >
         <el-avatar :size="45" :src="store.state.imgadvatar" />

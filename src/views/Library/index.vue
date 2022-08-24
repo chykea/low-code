@@ -1,7 +1,6 @@
 <template>
     <div class="all">
         <div class="head">
-            <!-- <Header :flag="flag"></Header> -->
             <Header ref="headerRef"></Header>
         </div>
 
@@ -10,7 +9,10 @@
                 <!-- <div class="nav"> -->
                 <div class="serch">
                     <input type="text" placeholder="请输入关键词进行搜索" />
-                    <button :style="{'background-image': `url(${backgroundImg})`}"></button>
+                    <div class="toSerch">
+                        <img src="@/assets/images/library/search.png" />
+                    </div>
+
                 </div>
 
                 <!-- <div class="cards">
@@ -84,7 +86,7 @@
         },
     ]);
 
-    // 拦截头部
+    // 拦截头部鼠标滑过效果
     const headerRef = ref(null);
     const cut = () => {
         // console.log(headerRef);
@@ -99,8 +101,10 @@
     };
 
     // 获取模板
-    async function getMould(cur) {
-        console.log(cur);
+    async function getMould() {
+        let cur = {
+            cur: 1
+        }
         let res = await getMoulds(cur);
         console.log(res);
     };
@@ -108,85 +112,15 @@
     onMounted(() => {
         cut();
         getpage();
+        getMould();
     })
 
-// export default {
-//     components: { Header },
-//     data() {
-//         return {
-//             flag: false,
-//             cur: 0, //默认选中第一个tab 
-//             backgroundImg: require('@/assets/images/library/search.png'),
-//             mould: [
-//                 {
-//                     id: 1,
-//                 },
-//                 {
-//                     id: 2,
-//                 },
-//                 {
-//                     id: 3,
-//                 },
-//                 {
-//                     id: 4,
-//                 },
-//                 {
-//                     id: 5,
-//                 },
-//                 {
-//                     id: 6,
-//                 },
-//                 {
-//                     id: 7,
-//                 },
-//                 {
-//                     id: 8,
-//                 },
-//             ],
-//             com: [
-//                 {
-//                     id: "好困"
-//                 }
-//             ],
-//             all: [
-//                 {
-//                     id: "晚安"
-//                 }
-//             ],
-//         }
-//     },
-
-//     methods: {
-//         // 获取页面数量
-//         async getpage() {
-//             // console.log("test");
-//             let res = await getPages();
-//             console.log(res.total);
-//         },
-
-//         // 获取模板
-//         async getMould(cur) {
-//             console.log(cur);
-//             let res = await getMoulds(cur);
-//             console.log(res);
-//         },
-//     },
-
-//     mounted() {
-//         this.getpage();
-//         this.getMould(1);
-//     }
-// }
 </script>
 
 <style>
     .all {
         width: 100%;
         height: 100vh;
-        /* margin: auto; */
-        /* display: flex;
-        flex-direction: column;
-        justify-content: center; */
         /* background-color: blueviolet; */
     }
 
@@ -201,7 +135,6 @@
     }
 
     .content {
-        /* flex: auto; */
         width: 85%;
         margin: auto;
         /* background-color: burlywood; */
@@ -210,7 +143,6 @@
     .second {
         display: flex;
         align-items: center;
-        /* padding: 0 100px; */
         /* background-color: blue; */
     }
 
@@ -234,15 +166,22 @@
         border-radius: 10px;
     }
 
-    .serch button {
+    .serch .toSerch {
         position: absolute;
         width: 55px;
         height: 50px;
         top: 2px;
         right: 2px;
-        background-color: #f5d94e;
+        cursor: pointer;
         border-radius: 10px;
         border: none;
+        background-color: #f5d94e;
+    }
+
+    .serch .toSerch img {
+        width: 30px;
+        height: 30px;
+        margin: 10px 14px;
     }
 
     /* .cards {
@@ -273,7 +212,6 @@
         display: flex;
         /* justify-content: center; */
         align-items: center;
-        /* padding: 0 100px; */
     }
 
     .libraries {
