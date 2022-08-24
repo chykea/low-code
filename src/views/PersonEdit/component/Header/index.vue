@@ -27,6 +27,7 @@
           enter-active-class="animate__fadeIn"
           leave-active-class="animate__fadeOut"
         >
+          <!-- <div class="disappear" v-if="showHead" > -->
           <div class="disappear" v-if="showHead && select" >
             <ul>
               <li
@@ -65,7 +66,7 @@ import { getAdvator } from "@/api/getAdvator";
 const store = useStore();
 
 
-let select = ref(true);
+const select = ref(true);
 const test = () => {
   select.value=false;
 }
