@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="introduce-guide-video">
-                <VueVideo :options="options"></VueVideo>
+                <!-- <VueVideo :options="options"></VueVideo> -->
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 import { ElMessage } from 'element-plus'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory,createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/introduce', redirect: '/' },
@@ -43,7 +43,8 @@ const routes = [
 
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  // history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 // 全局拦截,用户跳转到除登录和介绍页外的其他页面时,都要判断是否登录
