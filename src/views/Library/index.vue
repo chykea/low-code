@@ -1,36 +1,42 @@
 <template>
     <div class="all">
         <div class="head">
-            <Header ref="headerRef"></Header>
+            <Header></Header>
+            <!-- <Header ref="headerRef"></Header> -->
         </div>
 
         <div class="content">
+            <div class="waiting">
+                敬请期待!
+            </div>
+        </div>
+
+
+        <!-- <div class="content">
             <div class="second">
-                <!-- <div class="nav"> -->
                 <div class="serch">
                     <input type="text" placeholder="请输入关键词进行搜索" />
                     <div class="toSerch">
                         <img src="@/assets/images/library/search.png" />
                     </div>
 
-                </div>
+                </div> -->
 
-                <!-- <div class="cards">
+        <!-- <div class="cards">
                         <div class="card" @click="cur=0" :class="{active:cur==0}">模板</div>
                         <div class="card" @click="cur=1" :class="{active:cur==1}">组件</div>
                         <div class="card" @click="cur=2" :class="{active:cur==2}">全部</div>
                     </div> -->
-                <!-- </div> -->
-            </div>
+        <!-- </div> -->
 
-            <div class="allLibrary">
+        <!-- <div class="allLibrary">
                 <div class="libraries">
                     <div v-show="cur==0" class="libraryItem" v-for="item in mould" :key="item.id">
                         <div class="library"></div>
                         <p>{{item.id}}</p>
-                    </div>
+                    </div> -->
 
-                    <!-- <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
+        <!-- <div v-show="cur==1" class="libraryItem" v-for="item in com" :key="item.id">
                         <div class="library"></div>
                         <p>{{item.id}}</p>
                     </div>
@@ -39,81 +45,83 @@
                         <div class="library"></div>
                         <p>{{item.id}}</p>
                     </div> -->
-                </div>
+        <!-- </div>
             </div>
 
             <div class="pages">
                 <div class="block">
-                    <el-pagination layout="prev, pager, next" :total="100"></el-pagination>
+                    <el-pagination layout="prev, pager, next" :total="total" current-page="1"></el-pagination>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
     </div>
 </template>
 
 <script setup>
     import { nextTick, onMounted, onBeforeMount, reactive, ref } from "vue";
     import Header from '@/views/PersonEdit/component/Header/index.vue';
-    import { getPages } from '@/api/getPages';
-    import { getMoulds } from '@/api/getMould';
+    // import { getPages } from '@/api/getPages';
+    // import { getMoulds } from '@/api/getMould';
 
-    let flag = ref(false);
+    // let flag = ref(false);
 
-    let mould = ref([
-        {
-            id: 1,
-        },
-        {
-            id: 2,
-        },
-        {
-            id: 3,
-        },
-        {
-            id: 4,
-        },
-        {
-            id: 5,
-        },
-        {
-            id: 6,
-        },
-        {
-            id: 7,
-        },
-        {
-            id: 8,
-        },
-    ]);
+    // let total = ref(50);
+
+    // let mould = ref([
+    //     {
+    //         id: 1,
+    //     },
+    //     {
+    //         id: 2,
+    //     },
+    //     {
+    //         id: 3,
+    //     },
+    //     {
+    //         id: 4,
+    //     },
+    //     {
+    //         id: 5,
+    //     },
+    //     {
+    //         id: 6,
+    //     },
+    //     {
+    //         id: 7,
+    //     },
+    //     {
+    //         id: 8,
+    //     },
+    // ]);
 
     // 拦截头部鼠标滑过效果
-    const headerRef = ref(null);
-    const cut = () => {
-        // console.log(headerRef);
-        headerRef.value.test();
-    };
+    // const headerRef = ref(null);
+    // const cut = () => {
+    //     // console.log(headerRef);
+    //     headerRef.value.test();
+    // };
 
     // 获取页面数量
-    async function getpage() {
-        // console.log("test");
-        let res = await getPages();
-        console.log(res.total);
-    };
+    // async function getpage() {
+    //     // console.log("test");
+    //     let res = await getPages();
+    //     console.log(res.total);
+    //     // total = (res.total) * 10;
+    // };
 
     // 获取模板
-    async function getMould() {
-        let cur = {
-            cur: 1
-        }
-        let res = await getMoulds(cur);
-        console.log(res);
-    };
+    // const current = ref(1);
+    // async function getMould() {
+    //     const data = { cur: current.value };
+    //     let res = await getMoulds('/public/getPage', data);
+    //     console.log(res);
+    // };
 
-    onMounted(() => {
-        cut();
-        getpage();
-        // getMould();
-    })
+    // onMounted(() => {
+    //     cut();
+    //     getpage();
+    //     getMould();
+    // })
 
 </script>
 
@@ -246,5 +254,20 @@
         display: flex;
         margin-bottom: 30px;
         justify-content: center;
+    }
+
+    .el-pagination {
+        color: #6e6c6c;
+    }
+
+    .waiting {
+        margin: 180px 450px;
+        width: 400px;
+        height: 100px;
+        font-size: 80px;
+        color: purple;
+        font-family: 华文琥珀;
+        letter-spacing: 7px;
+        text-shadow: 6px 6px rgb(197 223 148 / 80%), 7px 7px rgb(197 223 148 / 80%), 8px 8px rgb(197 223 148 / 80%), 9px 9px rgb(197 223 148 / 80%), 10px 10px rgb(197 223 148 / 80%), 11px 11px rgb(197 223 148 / 80%);
     }
 </style>
