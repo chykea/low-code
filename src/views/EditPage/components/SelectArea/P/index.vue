@@ -2,6 +2,8 @@
 <div 
 @drag="dragIn"
 :style="[control.prop.boxStyle,control.prop.style]"
+:class="[isChecked?'checked':'']"
+class="bg-#bfa"
 >
     <Draggable
         :list="control.childArray"
@@ -9,7 +11,6 @@
         :group="{name:'component',pull:!isChecked,put:!isChecked}" 
         :disabled="isChecked"
         class="pBox"
-        :class="[isChecked?'checked':'']"
         @click="isChecked = !isChecked"
         >
         <template #item="{element}">
@@ -43,9 +44,7 @@
                 </div>
                 <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width"><br/>
                 <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height"><br/>
-                <span>字体颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style.color"></el-color-picker><br/>
-                <span>字体大小</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-size']"><br/>
-                <span>字体权重</span><input class="inputStyle four" type="text" v-model="control.prop.style['font-weight']"><br/>
+                <span>背景颜色</span><el-color-picker v-model="control.prop.boxStyle['background-color']"></el-color-picker><br/>
                 <span>层叠性</span><input class="inputStyle zIndex" type="text" v-model="control.prop.boxStyle['z-index']"><br/>
                 <button class="btnStyle deleteDom" @click="deleteComponent">移除组件</button>
             </div>
@@ -110,7 +109,6 @@ function deleteComponent(){
 }
 .pBox{
     padding: 10px 5px;
-    background-color: #bfa;
 }
 .checked{
     border: 1px solid red;

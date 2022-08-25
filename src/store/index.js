@@ -102,11 +102,8 @@ export default createStore({
                     prop: {
                         text: '',
                         style: {
-                            "color": "orange",
                             'width': '',
                             'height': '',
-                            'font-size': '14px',
-                            "font-weight": '',
                         },
                         func: null,
                         Listener: '',
@@ -118,7 +115,8 @@ export default createStore({
                             'position': 'absolute',
                             'top': '0',
                             'left': '0',
-                            'z-index': '0'
+                            'z-index': '0',
+                            'background-color':'#bfa'
                         },
                     },
                     childNode: [{
