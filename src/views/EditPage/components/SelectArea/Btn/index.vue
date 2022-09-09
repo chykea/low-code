@@ -3,9 +3,11 @@
         ref="editBtnRef" 
         :class="[control.prop.className]"  
         :style="[control.prop.style]" 
-        @click="isCheckedFunc"
-        @mousedown="startMove"
-        @mouseup="endMove"
+        
+        @dragstart="dragstart"
+        @drag="dragIn"
+        @dragend="dragend"
+        draggable="true"
         >
         {{control.prop.text}}
         <div v-if="isChecked" :class="[isChecked?'check':'','btnEdit']" ></div>
@@ -143,49 +145,37 @@ window.onerror=(msg,url,line)=>{
 
 // 表示是否选中按钮
 let isChecked = ref(false)
-// 用于区分点击事件和鼠标事件
-let startTime,endTime;
-let startMoveFlag = false;
+
 function isCheckedFunc(){
-    // 鼠标按下和弹起事件小于150毫秒,为点击事件
-    if(endTime-startTime<=150){
-        isChecked.value = !isChecked.value;
-    }
+    isChecked.value = !isChecked.value;    
 }
 
-// 移动按钮
-function startMove(e){
-    startTime = new Date().getTime()
-    if(isChecked.value){ // 选中了按钮之后才能操作 
-        startMoveFlag = true;
-        editBtn.addEventListener('mousemove',Moving);
-    }
-}
-function Moving(e){
-    if(startMoveFlag){
-        const {target} = e;
-        const {target:{parentNode}} = e
-        let left = e.clientX - parentNode.offsetLeft -(Math.floor(target.offsetWidth/2))
-        let top = e.clientY - parentNode.offsetTop -(Math.floor(target.offsetHeight/2))
-        // 限定组件只能在展示区中拖拽
-        if((left>=-1 && top>=-1)&&(left<=(parentNode.offsetWidth-target.offsetWidth)&&top<=(parentNode.offsetHeight-target.offsetHeight))){
-            control.prop.style.left = (left) +'px'
-            control.prop.style.top = (top) +'px'
-        }
-        else{
-            return
-        }
-    }
-}
-function endMove(e){
-    endTime = new Date().getTime()
+
+
+let initX = ref(null)
+let initY = ref(null)
+function dragstart(e){
     if(isChecked.value){
-        startMoveFlag = false;
-        editBtn.removeEventListener('mousemove',Moving)
+        const {target:{parentNode}} = e
+
+        initX = e.offsetX + parentNode.offsetLeft
+        initY = e.offsetY + parentNode.offsetTop
     }
 }
 
+function dragIn(e){
+    if(isChecked.value){
+        control.prop.style.left = e.clientX -initX  +'px'
+        control.prop.style.top = e.clientY -initY +'px'
+    }
+}
 
+function dragend(e){
+    if(isChecked.value){
+        control.prop.style.left = e.clientX - initX+'px'
+        control.prop.style.top = e.clientY - initY+'px'
+    }
+}
 function deleteComponent(){
     store.commit('deleteComponent',{
         id:props.id
@@ -285,4 +275,5 @@ textarea::-webkit-scrollbar {
 .four {
     width: 135px;
 }
+
 </style>
