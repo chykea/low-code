@@ -3,7 +3,8 @@
         ref="editBtnRef" 
         :class="[control.prop.className]"  
         :style="[control.prop.style]" 
-        
+        @click="isChecked = !isChecked"
+
         @dragstart="dragstart"
         @drag="dragIn"
         @dragend="dragend"
@@ -146,11 +147,8 @@ window.onerror=(msg,url,line)=>{
 // 表示是否选中按钮
 let isChecked = ref(false)
 
-function isCheckedFunc(){
-    isChecked.value = !isChecked.value;    
-}
 
-
+// 拖拽优化
 
 let initX = ref(null)
 let initY = ref(null)
