@@ -1,16 +1,30 @@
 <template>
     <button ref="editBtnRef" :class="[control.prop.className]" :style="[control.prop.style]"
         @click="isChecked = !isChecked" @dragstart="dragstart" @drag="dragIn" @dragend="dragend" draggable="true">
-        {{control.prop.text}}
-        <div v-if="isChecked" :class="[isChecked?'check':'','btnEdit']"></div>
+        {{ control.prop.text }}
+        <div v-if="isChecked" :class="[isChecked ? 'check' : '', 'btnEdit']"></div>
     </button>
     <!-- 将按钮编辑的部分送到 AdjustArea 组件中的 editBox 去展示 -->
     <teleport to='#editBox' v-if="isChecked">
         <keep-alive>
             <div class="outBorder">
                 <h4>按钮编辑</h4>
-                <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br />
-                <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br />
+                <span>宽度</span><input class="inputStyle" type="text" v-model.number="width" /><br />
+                <span>宽度单位</span><select v-model="cssWidthUnit">
+                    <option value="px">px</option>
+                    <option value="em">em</option>
+                    <option value="rem">rem</option>
+                    <option value="vw">vw</option>
+                    <option value="vh">vh</option>
+                </select><br />
+                <span>高度</span><input class="inputStyle" type="text" v-model="height" /><br />
+                <span>宽度单位</span><select v-model="cssHeightUnit">
+                    <option value="px">px</option>
+                    <option value="em">em</option>
+                    <option value="rem">rem</option>
+                    <option value="vw">vw</option>
+                    <option value="vh">vh</option>
+                </select><br />
                 <span>背景颜色</span>&nbsp;&nbsp;<el-color-picker v-model="control.prop.style['background-color']">
                 </el-color-picker><br />
                 <span>边框宽度</span><input class="inputStyle four" type="text"
@@ -58,13 +72,12 @@
 </template>
 <script setup>
 import { ElMessage } from 'element-plus';
-import { defineProps, onMounted, reactive, ref, watch } from 'vue'
+import { defineProps, onMounted, reactive, ref, watch, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 
 
 const store = useStore();
 
-let color = ref('');
 // 限定父组件传值
 const props = defineProps({
     id: String,
@@ -78,6 +91,18 @@ let control = reactive({
     prop: props.prop,
     childArray: props.childArray
 })
+let width = ref('100');
+let height = ref('50')
+let cssWidthUnit = ref('px')
+let cssHeightUnit = ref('px')
+watchEffect(() => {
+    control.prop.style.width = width.value + cssWidthUnit.value;
+    control.prop.style.height = height.value + cssHeightUnit.value;
+
+    // control.value.prop.text = control.value.prop.text.replace(/</g, "&lt;")
+    // control.value.prop.text = control.value.prop.text.replace(/>/g, "&gt;")
+})
+
 let editBtnRef = ref(null)
 let editBtn = null;
 

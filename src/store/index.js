@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { getAdvator } from '@/api/getAdvator';
+import { undoRecord } from '@/store/module/undo'
 export default createStore({
     state() {
         return {
@@ -45,12 +46,16 @@ export default createStore({
                     prop: {
                         text: '默认文本',
                         style: {
-                            "width": '300px', // 宽度
-                            "height": "150px", // 高度
+                            "width": '', // 宽度
+                            "height": '', // 高度
                             "color": "orange",
                             'font-size': '14px', // 字体大小
                             "font-weight": '', // 字体权重
                             'outline': 'none', // 文本框边框
+                            "cssWidthNum": "100",
+                            "cssHeightNum": "100",
+                            "cssWidthUnit": 'px',
+                            "cssHeightUnit": 'px',
                         },
                         func: null,
                         Listener: '',
@@ -116,7 +121,7 @@ export default createStore({
                             'top': '0',
                             'left': '0',
                             'z-index': '0',
-                            'background-color':'#bfa'
+                            'background-color': '#bfa'
                         },
                     },
                     childNode: [{
@@ -154,10 +159,14 @@ export default createStore({
                         src: 'https://pic4.zhimg.com/v2-0858a53c94b5d77cad4dd8889a3d5bb6_r.jpg',
                         alt: "图片加载失败时显示",
                         style: {
-                            "width": "300px",
+                            "width": "",
                             "height": "",
                             'vertical-align': '',
                             "background-color": "",
+                            "cssWidthNum": "100",
+                            "cssHeightNum": "100",
+                            "cssWidthUnit": 'px',
+                            "cssHeightUnit": 'px',
                         },
                         func: null,
                         Listener: '',
@@ -201,6 +210,7 @@ export default createStore({
                 },
             ],
             componentList: [], // 用于存放拖拽组件后的数组,将数据发送给后端
+
         }
     },
     getters: {},
@@ -210,7 +220,6 @@ export default createStore({
         },
         setAdvatar(state, result) { // 存放头像
             state.imgadvatar = result;
-            console.log(state.imgadvatar);
         },
 
 
@@ -221,14 +230,14 @@ export default createStore({
         },
         setComponentList(state, content) { // 添加组件
             state.componentList = content.list
-        }
+        },
+
 
     },
     actions: {
         // 获取头像
         advatar(context) {
             getAdvator("/UserInfo/getAdvator").then((res) => {
-                console.log(res);
                 if (res.code == 200) {
                     const result = "http://" + res.advator;
                     context.commit('setAdvatar', result);
@@ -236,5 +245,7 @@ export default createStore({
             });
         }
     },
-    modules: {}
+    modules: {
+        undoRecord
+    }
 })

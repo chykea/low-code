@@ -1,13 +1,29 @@
 <template>
-    <div :style="control.prop.boxStyle" @dragstart="dragStart" @drag="dragIn" :class="[isChecked?'checked':'']">
+    <div :style="control.prop.boxStyle" @dragstart="dragStart" @drag="dragIn" :class="[isChecked ? 'checked' : '']">
         <img :src="control.prop.src" :style="control.prop.style" :alt="control.prop.alt"
             @click="isChecked = !isChecked" />
         <teleport to='#editBox' v-if="isChecked">
             <div class="eidtbox">
                 <h4>图片编辑</h4>
                 <div>
-                    <span>宽度</span><input class="inputStyle" type="text" v-model="control.prop.style.width" /><br />
-                    <span>高度</span><input class="inputStyle" type="text" v-model="control.prop.style.height" /><br />
+                    <span>宽度</span><input class="inputStyle" type="text"
+                        v-model.number="control.prop.style.cssWidthNum" /><br />
+                    <span>宽度单位</span><select v-model="control.prop.style.cssWidthUnit">
+                        <option value="px">px</option>
+                        <option value="em">em</option>
+                        <option value="rem">rem</option>
+                        <option value="vw">vw</option>
+                        <option value="vh">vh</option>
+                    </select><br />
+                    <span>高度</span><input class="inputStyle" type="text"
+                        v-model.number="control.prop.style.cssHeightNum" /><br />
+                    <span>宽度单位</span><select v-model="control.prop.style.cssHeightUnit">
+                        <option value="px">px</option>
+                        <option value="em">em</option>
+                        <option value="rem">rem</option>
+                        <option value="vw">vw</option>
+                        <option value="vh">vh</option>
+                    </select><br />
                     <span>地址</span>
                     <input class="fileInput" type="file" @change="changeImg"
                         accept="image/png, image/jpeg, image/gif, image/jpg" />
@@ -27,8 +43,6 @@
                             <option value="text-bottom">文字底部</option>
                             <option value="text-top">文字顶部</option>
                             <option value="top">顶部</option>
-                            <!-- <option value="sub"></option> -->
-                            <!-- <option value="super"></option> -->
                         </select>
                     </div>
                     <span>层叠性</span><input class="inputStyle zIndex" type="text"
@@ -40,7 +54,7 @@
     </div>
 </template>
 <script setup>
-import { defineProps, ref, watch } from 'vue'
+import { defineProps, ref, watch, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import service from '@/utils/request'
 const store = useStore();
@@ -53,7 +67,12 @@ let control = ref({
     prop: props.prop,
     childArray: props.childArray,
 })
-console.log(props.id);
+watchEffect(() => {
+    control.value.prop.style.width = control.value.prop.style.cssWidthNum + control.value.prop.style.cssWidthUnit;
+    control.value.prop.style.height = control.value.prop.style.cssHeightNum + control.value.prop.style.cssHeightUnit;
+
+})
+
 
 let isChecked = ref(false)
 
@@ -109,11 +128,9 @@ function dragIn(e) {
             let left = e.clientX - initX;
             let top = e.clientY - initY;
             // 拖拽区域限制
-            if ((left >= -1 && top >= -1) && (left <= (parentNode.offsetWidth - target.offsetWidth) && top <= (parentNode.offsetHeight - target.offsetHeight))) {
+            if ((left >= 0 && top >= 0) && (left <= (parentNode.offsetWidth - target.offsetWidth) && top <= (parentNode.offsetHeight - target.offsetHeight))) {
                 control.value.prop.boxStyle.top = top + 'px';
                 control.value.prop.boxStyle.left = left + 'px';
-            } else {
-                return
             }
         }
     }

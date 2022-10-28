@@ -10,13 +10,8 @@
     -->
     <!-- 拖拽按钮 -->
     <div class="left_select">
-      <Draggable
-        class="select_box"
-        :list="list"
-        item-key="id"
-        :group="{ name: 'component', pull: 'clone', put: false }"
-        :clone="cloneNew"
-      >
+      <Draggable class="select_box" :list="list" item-key="id" :group="{ name: 'component', pull: 'clone', put: false }"
+        :clone="cloneNew">
         <template #item="{ element }">
           <div class="select_item">
             <button :title="element.title" class="select_button">
@@ -28,35 +23,31 @@
     </div>
     <!-- 显示区, -->
     <div class="EditArea">
-      <ShowHeader></ShowHeader>
-      <Draggable
-        v-model="childArr"
-        :group="{ name: 'component', pull: true, put: true }"
-        item-key="id"
-        class="show"
-        dragClass="ghost"
-      >
+      <ShowHeader>
+        <template v-slot:undo_box>
+          <div class="undo_box">
+            <div class="undo" title="撤销" @click="undo">&lt;-</div>
+          </div>
+        </template>
+      </ShowHeader>
+      <Draggable v-model="childArr" :group="{ name: 'component', pull: true, put: true }" item-key="id" class="show"
+        dragClass="ghost">
         <template #item="{ element }">
-          <component
-            :is="
-              element.type === 'a'
-                ? Link
-                : element.type === 'button'
+          <component :is="
+            element.type === 'a'
+              ? Link
+              : element.type === 'button'
                 ? Btn
                 : element.type === 'p'
-                ? P
-                : element.type === 'img'
-                ? Img
-                : element.type === 'span'
-                ? Span
-                : element.type === 'textarea'
-                ? Textarea
-                : ''
-            "
-            :id="element.id"
-            :childArray="element.childNode"
-            :prop="element.prop"
-          ></component>
+                  ? P
+                  : element.type === 'img'
+                    ? Img
+                    : element.type === 'span'
+                      ? Span
+                      : element.type === 'textarea'
+                        ? Textarea
+                        : ''
+          " :id="element.id" :childArray="element.childNode" :prop="element.prop"></component>
         </template>
       </Draggable>
     </div>
@@ -67,7 +58,7 @@
 
 
 <script setup>
-import { ref,reactive,toRaw, onMounted,watch } from 'vue';
+import { ref, onMounted, watch, getCurrentInstance } from 'vue';
 import service from '@/utils/ApplicationJson';
 import Draggable from 'vuedraggable';
 import axios from 'axios'
@@ -84,38 +75,59 @@ import Span from './Span/index.vue'
 import ShowHeader from '../ShowHeader/index.vue';
 import AdjustArea from '../AdjustArea/index.vue';
 import { useRoute } from 'vue-router';
+import debounce from '@/utils/debounce'
 
-   const store = useStore()
-   const route = useRoute()
-   // 初始化组件拖拽按钮的数组
-  let list = store.state.dragInitList;
+const store = useStore()
+const route = useRoute()
+// 初始化组件拖拽按钮的数组
+let list = store.state.dragInitList;
 
-  let childArr = ref([]); // 存放节点的一些信息的数组
+let childArr = ref([]); // 存放节点的一些信息的数组
 
-  onMounted(()=>{
-    // service.post('/page/getContent',{id:route.query.id}).then((res)=>{
-    //     const {data} = res;
-    //     console.log(data);
-    //     if(data.pageContent!==null)
-    //       store.commit('setComponentList',{list:data.pageContent})
-    // }).catch((err)=>{})
-  })
 
-  watch(()=>childArr.value,(newVal)=>{
-    store.commit('setComponentList',{list:childArr.value}) // 监视存放数组的变化,变化了就存到store中
-  })
-  
-  watch(()=>store.state.componentList,(newVal)=>{
-    childArr.value = newVal
-  })
-  
- 
-  // clone问题的处理函数
-  function cloneNew(origin){
-    const data = JSON.parse(JSON.stringify(origin))
-    data.id = parseInt(new Date().getMilliseconds() + "" + Math.ceil(Math.random() * 100000)).toString(16);
-    return data
+onMounted(async () => {
+  let res = (await service({ url: '/page/getContent', method: 'post', data: { id: route.query.id } }))
+  const { data } = res
+  if (data.pageContent !== null) {
+    store.commit('setComponentList', { list: data.pageContent })
+    childArr.value = store.state.componentList;
+
+    watch(() => JSON.parse(JSON.stringify(childArr.value)), (newVal, oldVal) => {
+      store.commit('setComponentList', { list: childArr.value }) // 监视存放数组的变化,变化了就存到store中
+      store.dispatch("pushRecord", newVal)
+      instance.proxy.$forceUpdate()
+
+    }, { deep: true, immediate: false })
+
   }
+})
+// let record = null
+// let stepRecord = (data) => {
+//   if (!record) {
+//     record = debounce((val) => {
+//       store.dispatch("pushRecord", val)
+//     }, 500)
+//   }
+//   return record(data)
+// }
+let instance = getCurrentInstance()
+
+async function undo() {
+  let res = await store.dispatch('undoRecord')
+  store.commit('setComponentList', { list: res })
+  childArr.value = store.state.componentList;
+  console.log(childArr.value);
+
+  // store.dispatch('redoRecord').then(res => { })
+}
+
+
+// clone问题的处理函数
+function cloneNew(origin) {
+  const data = JSON.parse(JSON.stringify(origin))
+  data.id = parseInt(new Date().getMilliseconds() + "" + Math.ceil(Math.random() * 100000)).toString(16);
+  return data
+}
 </script>
 
 
@@ -133,6 +145,7 @@ import { useRoute } from 'vue-router';
   width: 92px;
   height: 843px;
   border-right: 1px solid #d1d1d1;
+
   .select_box {
     height: 360px;
     display: flex;
@@ -140,6 +153,7 @@ import { useRoute } from 'vue-router';
     justify-content: space-around;
   }
 }
+
 .select_button {
   margin-top: 7px;
   width: 30px;
@@ -147,27 +161,31 @@ import { useRoute } from 'vue-router';
   border: none;
   background-color: transparent;
 }
+
 .select_img {
   cursor: pointer;
   width: 18px;
   height: 18px;
 }
 
-  .show {
-    box-sizing: border-box;
-    position: relative;
-    width: 1536px;
-    height: 740px;
-    padding-right: 20px; // 防止滚动条遮挡内容
-    overflow-y: hidden;
-  }
-  .show:hover {
-      overflow-y: auto;
-  }
+.show {
+  box-sizing: border-box;
+  position: relative;
+  width: 1536px;
+  min-height: 740px;
+  // padding: 20px;
+  padding-right: 20px; // 防止滚动条遮挡内容
+  overflow-y: hidden;
+}
+
+.show:hover {
+  overflow-y: auto;
+}
 
 .select ul {
   display: flex;
 }
+
 .select ul li {
   width: 100px;
   height: 35px;

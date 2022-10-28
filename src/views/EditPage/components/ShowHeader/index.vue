@@ -1,19 +1,13 @@
 <template>
   <div class="show_header">
     <div class="left">
-      <input
-        type="text"
-        v-model="proNames"
-        ref="ipt"
-        :readonly="readonly"
-        class="rename"
-        title="点击enter键完成命名"
-        placeholder="点击enter键完成命名"
-        @keydown.enter="fixName()"
-      />
+      <input type="text" v-model="proNames" ref="ipt" :readonly="readonly" class="rename" title="点击enter键完成命名"
+        placeholder="点击enter键完成命名" @keydown.enter="fixName()" />
       <button class="renameBtn" @click="btn()">重命名</button>
     </div>
     <div class="right">
+      <slot name="undo_box"></slot>
+
       <button class="presee" @click="preview">预览</button>
       <button class="save" @click="save">保存</button>
       <button class="release" @click="publishing()">发布</button>
@@ -23,14 +17,16 @@
 
 <script setup>
 import service from '@/utils/ApplicationJson';
-import {publish} from "@/api/publish";
-import { ref,onMounted} from "vue";
+import { publish } from "@/api/publish";
+import { ref, onMounted, reactive, watch, onUnmounted, defineProps } from "vue";
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { behavePro } from "@/api/behavePro";
 import { fixProname } from "@/api/fixProname";
+
+
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
@@ -40,31 +36,40 @@ const proNames = ref("");
 // const queryId = inject("queryId");
 const originname = ref("");//存储原先的项目名字
 
-
-function save(){
+// 定时保存
+let timer = setInterval(save, 60000);
+function save() {
   service({
-    method:'post',
-    url:'/page/modifyPage',
-    data:{
-      id:parseInt(route.query.id),
-      pageContent:JSON.parse(JSON.stringify(store.state.componentList)),
-      htmlStr:'',
-      base64Code:''
+    method: 'post',
+    url: '/page/modifyPage',
+    data: {
+      id: parseInt(route.query.id),
+      pageContent: JSON.parse(JSON.stringify(store.state.componentList)),
+      htmlStr: '',
+      base64Code: ''
     }
-  }).then(res=>{
-    console.log(res);
+  }).then(res => {
+    if (timer) {
+      clearInterval(timer);
+    }
+    timer = setInterval(save, 60000)
     ElMessage({
-      message:'保存成功',
-      type:'success',
-      duration:1000
+      message: '保存成功',
+      type: 'success',
+      duration: 1000
     })
-  }).catch(err=>{
+  }).catch(err => {
     console.log(err);
   })
-
 }
 
-function preview(){
+onUnmounted(() => {
+  clearInterval(timer)
+});
+
+
+
+function preview() {
   router.push(`/preview?id=${route.query.id}`)
 };
 
@@ -121,17 +126,7 @@ onMounted(() => {
       }
     }
   });
-  
-  service({
-    url:'/page/getContent',
-    method:'post',
-    data:{id:route.query.id}
-  }).then(res=>{
-    const {data} = res
-    if(data.pageContent!==null)
-      store.commit('setComponentList',{list:data.pageContent})
 
-  }).catch(err=>{})
 });
 </script>
 
@@ -145,6 +140,7 @@ onMounted(() => {
   padding: 33px 66px;
   background-color: #f5f5f5;
 }
+
 .left {
   .rename {
     box-sizing: border-box;
@@ -157,6 +153,7 @@ onMounted(() => {
     background-color: #f5f5f5;
     outline: none;
   }
+
   .renameBtn {
     border: none;
     font-size: 16px;
@@ -167,20 +164,44 @@ onMounted(() => {
 }
 
 .right {
-  width: 325px;
+  width: 400px;
   height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .right {
-  button {
+
+
+  & .undo_box {
+    display: inline-block;
+
+    &:hover {
+      background-color: beige;
+      transition: all .5s;
+    }
+
+    .undo {
+      padding: 5px;
+      cursor: pointer;
+
+    }
+
+
+  }
+
+  &>button {
     cursor: pointer;
     border: none;
     width: 93px;
     height: 45px;
-    margin-right: 23px;
+    // margin-right: 23px;
     background: #ffffff;
     border-radius: 15px;
   }
 }
+
 .right .release {
   margin-right: 0;
   background: #f7d94c;
