@@ -95,30 +95,21 @@ onMounted(async () => {
     watch(() => JSON.parse(JSON.stringify(childArr.value)), (newVal, oldVal) => {
       store.commit('setComponentList', { list: childArr.value }) // 监视存放数组的变化,变化了就存到store中
       store.dispatch("pushRecord", newVal)
-      instance.proxy.$forceUpdate()
 
-    }, { deep: true, immediate: false })
+    }, { immediate: false })
 
   }
 })
-// let record = null
-// let stepRecord = (data) => {
-//   if (!record) {
-//     record = debounce((val) => {
-//       store.dispatch("pushRecord", val)
-//     }, 500)
-//   }
-//   return record(data)
-// }
-let instance = getCurrentInstance()
+
+// let instance = getCurrentInstance()
 
 async function undo() {
   let res = await store.dispatch('undoRecord')
+
   store.commit('setComponentList', { list: res })
   childArr.value = store.state.componentList;
+  // 数据已经更新,但视图没有更新,不知道是什么原因
   console.log(childArr.value);
-
-  // store.dispatch('redoRecord').then(res => { })
 }
 
 
