@@ -6,19 +6,11 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  lintOnSave:false,
+  lintOnSave: false,
   configureWebpack: {
-    // resolve: {
-		// 	alias: { // 配置路径别名
-		// 		'@': resolve('src'),
-		// 		// assets: resolve('src/assets'),
-		// 		// common: resolve('src/common'),
-		// 		// components: resolve('src/components'),
-		// 		// network: resolve('src/network'),
-		// 		// plugins: resolve('src/plugins'),
-		// 		// views: resolve('src/views')
-		// 	}
-		// },
+
+
+    // 配置Element按需导入
     plugins: [
       AutoImport({
         resolvers: [ElementPlusResolver()]
@@ -28,16 +20,22 @@ module.exports = defineConfig({
       })
     ]
   },
-  devServer:{
-    host:"0.0.0.0",
-    port:8080,
-    proxy:{
-      "/api":{
-        target:'http://182.61.3.24:8080',
-        secure:true,
-        changeOrigin:true,
-        pathRewrite:{'^/api':''}
+  devServer: {
+    host: "0.0.0.0",
+    port: 8080,
+    proxy: {
+      "/api": {
+        target: 'http://182.61.3.24:8080',
+        secure: true,
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' }
       }
     }
+  },
+  // 配置ts
+  chainWebpack: config => {
+    config.resolve.extensions
+      .add('ts')
+      .add('tsx')
   }
 })

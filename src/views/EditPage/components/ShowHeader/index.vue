@@ -6,7 +6,7 @@
       <button class="renameBtn" @click="btn()">重命名</button>
     </div>
     <div class="right">
-      <slot name="undo_box"></slot>
+      <button @click="nextVersion">前往新版</button>
 
       <button class="presee" @click="preview">预览</button>
       <button class="save" @click="save">保存</button>
@@ -66,6 +66,11 @@ function save() {
 onUnmounted(() => {
   clearInterval(timer)
 });
+
+
+function nextVersion() {
+  router.push('/nextVersion')
+}
 
 
 
