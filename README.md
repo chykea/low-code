@@ -4,4 +4,4 @@
 
 ### test-----  再来玩玩啦~
 
-test
+新增支持 typescript pinia
